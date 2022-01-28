@@ -1,4 +1,4 @@
-package com.pec_acm.moviedroid.MainPage;
+package com.pec_acm.moviedroid.MainPage.List;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.pec_acm.moviedroid.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListFragment#newInstance} factory method to
+ * Use the {@link CompletedListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment {
+public class CompletedListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class ListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ListFragment() {
+    public CompletedListFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class ListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListFragment.
+     * @return A new instance of fragment CompletedListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListFragment newInstance(String param1, String param2) {
-        ListFragment fragment = new ListFragment();
+    public static CompletedListFragment newInstance(String param1, String param2) {
+        CompletedListFragment fragment = new CompletedListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        return inflater.inflate(R.layout.fragment_completed_list, container, false);
     }
 }

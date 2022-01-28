@@ -11,8 +11,11 @@
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_page_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:name="com.pec_acm.moviedroid.MainPage.List.ListFragment"
+            tools:layout="@layout/fragment_list"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
             app:layout_constraintTop_toTopOf="parent" />
 
