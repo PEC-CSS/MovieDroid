@@ -1,4 +1,4 @@
-package com.pec_acm.moviedroid.MainPage.List;
+package com.pec_acm.moviedroid.mainpage.list;
 
 import android.os.Bundle;
 

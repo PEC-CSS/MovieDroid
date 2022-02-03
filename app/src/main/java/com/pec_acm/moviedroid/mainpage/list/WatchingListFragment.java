@@ -1,4 +1,4 @@
-package com.pec_acm.moviedroid.MainPage.List;
+package com.pec_acm.moviedroid.mainpage.list;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.pec_acm.moviedroid.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OnHoldListFragment#newInstance} factory method to
+ * Use the {@link WatchingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OnHoldListFragment extends Fragment {
+public class WatchingListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class OnHoldListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OnHoldListFragment() {
+    public WatchingListFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class OnHoldListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment OnHoldListFragment.
+     * @return A new instance of fragment WatchingListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static OnHoldListFragment newInstance(String param1, String param2) {
-        OnHoldListFragment fragment = new OnHoldListFragment();
+    public static WatchingListFragment newInstance(String param1, String param2) {
+        WatchingListFragment fragment = new WatchingListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class OnHoldListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_on_hold_list, container, false);
+        return inflater.inflate(R.layout.fragment_watching_list, container, false);
     }
 }
