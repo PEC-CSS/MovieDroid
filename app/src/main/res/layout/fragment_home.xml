@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainpage.home.HomeFragment">
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    
     <TextView
+        android:id="@+id/tv_top250movies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_250_movies"
+        android:layout_margin="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_250movies"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/tv_top250movies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_top250tvshows"
+        app:layout_constraintTop_toBottomOf="@id/rv_250movies"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/top_250_tv_shows"
+        android:layout_margin="@dimen/_20sdp"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_top250tvshows"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/tv_top250tvshows"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

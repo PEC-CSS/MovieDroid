@@ -6,6 +6,9 @@ import retrofit2.http.GET
 
 interface IMDBapi {
 
-    @GET("/Top250Movies/$API_KEY")
-    suspend fun getTop250Movies() : Response<List<Movie>>
+    @GET("Top250Movies/$API_KEY")
+    suspend fun getTop250Movies() : Response<Movie>
+
+    @GET("Top250TVs/$API_KEY")
+    suspend fun getTop250TVShows() :Response<TVShow>
 }
