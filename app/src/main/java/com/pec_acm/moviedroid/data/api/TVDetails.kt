@@ -1,6 +1,6 @@
 package com.pec_acm.moviedroid.data.api
 
-data class ShowDetails(
+data class TVDetails(
     val crew: String,
     val fullTitle: String,
     val id: String,

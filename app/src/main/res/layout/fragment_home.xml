@@ -11,18 +11,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-    
-    <TextView
-        android:id="@+id/tv_top250movies"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_top250movies"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/top_250_movies"
-        android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="@dimen/_16ssp"
-        android:textStyle="bold"
-        />
+        app:layout_constraintEnd_toEndOf="parent">
+    
+        <TextView
+            android:id="@+id/tv_top250movies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/top_250_movies"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/all250movies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,22 +43,35 @@
         android:orientation="horizontal"
         android:layout_marginVertical="@dimen/_5sdp"
         tools:listitem="@layout/image_rv"
-        app:layout_constraintTop_toBottomOf="@id/tv_top250movies"
+        app:layout_constraintTop_toBottomOf="@id/ll_top250movies"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    <LinearLayout
+        android:id="@+id/ll_top250tvshows"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/rv_250movies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_top250tvshows"
-        app:layout_constraintTop_toBottomOf="@id/rv_250movies"
-        app:layout_constraintStart_toStartOf="parent"
         android:text="@string/top_250_tv_shows"
-        android:layout_margin="@dimen/_20sdp"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         />
+        <ImageView
+            android:id="@+id/all250tvshows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +79,155 @@
         android:orientation="horizontal"
         android:layout_marginVertical="@dimen/_5sdp"
         tools:listitem="@layout/image_rv"
-        app:layout_constraintTop_toBottomOf="@id/tv_top250tvshows"
+        app:layout_constraintTop_toBottomOf="@id/ll_top250tvshows"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:id="@+id/ll_mostPopularMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rv_top250tvshows"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_20sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_mostPopularMovies"
+        android:text="Most Popular Movies"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+
+        <ImageView
+            android:id="@+id/allmostPopularMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_mostPopularMovies"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/ll_mostPopularMovies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_mostPopularTVshows"
+        app:layout_constraintTop_toBottomOf="@id/rv_mostPopularMovies"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_20sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_mostPopularTVshows"
+        android:text="Most Popular TV Shows"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+        <ImageView
+            android:id="@+id/allmostPopularTVshows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_mostPopularTVShows"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/ll_mostPopularTVshows"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_inTheaters"
+        app:layout_constraintTop_toBottomOf="@id/rv_mostPopularTVShows"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_20sdp"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_inTheaters"
+        android:text="In Theaters"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+        <ImageView
+            android:id="@+id/allinTheaters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_inTheaters"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/ll_inTheaters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_comingSoon"
+        app:layout_constraintTop_toBottomOf="@id/rv_inTheaters"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_20sdp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_comingSoon"
+        android:text="Coming Soon"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        />
+        <ImageView
+            android:id="@+id/allComingSoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_comingSoon"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_5sdp"
+        tools:listitem="@layout/image_rv"
+        app:layout_constraintTop_toBottomOf="@id/ll_comingSoon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

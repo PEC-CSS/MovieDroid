@@ -31,9 +31,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.top250Movies.observe(viewLifecycleOwner) {
             val result = it
             val movies = result.items
-            val movieList = arrayListOf<String>()
+            val movieList = arrayListOf<Pair<String,String>>()
             for (i in 0..8) {
-                movieList.add(movies[i].image)
+                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
             }
             val top250MovieAdapter = HorizontalAdapter(movieList, requireContext())
             binding.rv250movies.adapter = top250MovieAdapter
@@ -42,13 +42,60 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.top250TVShows.observe(viewLifecycleOwner){
             val result = it
             val tvShow = result.items
-            val tvShowList = arrayListOf<String>()
+            val tvShowList = arrayListOf<Pair<String,String>>()
             for (i in 0..8){
-                tvShowList.add(tvShow[i].image)
+                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
             }
             Log.d("TV","$tvShowList")
             val top250TVShowAdapter = HorizontalAdapter(tvShowList,requireContext())
             binding.rvTop250tvshows.adapter = top250TVShowAdapter
+        }
+        viewModel.getMostPopularMovies()
+        viewModel.mostPopularMovies.observe(viewLifecycleOwner){
+            val result = it
+            val movies = result.items
+            val movieList = arrayListOf<Pair<String,String>>()
+            for (i in 0..8) {
+                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+            }
+            val mostPopularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            binding.rvMostPopularMovies.adapter = mostPopularMoviesAdapter
+        }
+
+        viewModel.getMostPopularTVshows()
+        viewModel.mostPopularTVShows.observe(viewLifecycleOwner){
+            val result = it
+            val tvShow = result.items
+            val tvShowList = arrayListOf<Pair<String,String>>()
+            for (i in 0..8){
+                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
+            }
+            val mostPopularTVShows = HorizontalAdapter(tvShowList,requireContext())
+            binding.rvMostPopularTVShows.adapter = mostPopularTVShows
+        }
+
+        viewModel.getInTheaters()
+        viewModel.inTheaters.observe(viewLifecycleOwner){
+            val result = it
+            val theaterItem = result.items
+            val theaterItemList = arrayListOf<Pair<String,String>>()
+            for (i in theaterItem.indices){
+                theaterItemList.add(Pair(theaterItem[i].image,theaterItem[i].fullTitle))
+            }
+            val inTheatersAdapter = HorizontalAdapter(theaterItemList,requireContext())
+            binding.rvInTheaters.adapter = inTheatersAdapter
+        }
+
+        viewModel.getComingSoon()
+        viewModel.comingSoon.observe(viewLifecycleOwner){
+            val result = it
+            val comingSoonItem = result.items
+            val comingSoonItemList = arrayListOf<Pair<String,String>>()
+            for (i in comingSoonItem.indices){
+                comingSoonItemList.add(Pair(comingSoonItem[i].image,comingSoonItem[i].fullTitle))
+            }
+            val comingSoonAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
+            binding.rvComingSoon.adapter = comingSoonAdapter
         }
         return view
     }

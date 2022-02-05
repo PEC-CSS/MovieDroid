@@ -11,4 +11,16 @@ interface IMDBapi {
 
     @GET("Top250TVs/$API_KEY")
     suspend fun getTop250TVShows() :Response<TVShow>
+
+    @GET("MostPopularMovies/$API_KEY")
+    suspend fun getMostPopularMovies() :Response<Movie>
+
+    @GET("MostPopularTVs/$API_KEY")
+    suspend fun getMostPopularTVshows() :Response<TVShow>
+
+    @GET("InTheaters/$API_KEY")
+    suspend fun getInTheaters() : Response<Theaters>
+
+    @GET("ComingSoon/$API_KEY")
+    suspend fun getComingSoon() : Response<Theaters>
 }
