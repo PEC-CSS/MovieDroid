@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.R
 
-class HorizontalAdapter(private val images:List<String>, val context: Context):RecyclerView.Adapter<HorizontalAdapter.ViewHolder>() {
+class HorizontalAdapter(private val images:List<Pair<String,String>> , val context: Context):RecyclerView.Adapter<HorizontalAdapter.ViewHolder>() {
     class ViewHolder(itemView : View):RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.imginwa)
+        val movieTitle:TextView = itemView.findViewById(R.id.movie_title)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +23,8 @@ class HorizontalAdapter(private val images:List<String>, val context: Context):R
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val image = images[position]
-        Glide.with(context).load(image).into(holder.image)
+        Glide.with(context).load(image.first).into(holder.image)
+        holder.movieTitle.text = image.second
     }
 
     override fun getItemCount(): Int {

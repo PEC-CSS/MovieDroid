@@ -1,6 +1,6 @@
 package com.pec_acm.moviedroid.data.api
 
-data class TVShow(
+data class Theaters(
     val errorMessage: String,
-    val items: List<TVDetails>
+    val items: List<TheaterItem>
 )
