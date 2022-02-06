@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312195271485",
+    "project_id": "moviedroid-5e977",
+    "storage_bucket": "moviedroid-5e977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312195271485:android:144f6c3d868d4a18ec9354",
+        "android_client_info": {
+          "package_name": "com.pec_acm.moviedroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312195271485-rd44fta4n39r4p8l7amp8n53lpdgeqdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo4sHSg1iVhx74KWapZEBPIzhaI4gNmEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312195271485-rd44fta4n39r4p8l7amp8n53lpdgeqdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
