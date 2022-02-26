@@ -9,12 +9,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
-<br />
 <div align="center">
-  <a href="https://github.com/PEC-CSS/MovieDroid">
-    <img src="assets/logo.png" alt="Logo" width="100" height="100" />
-  </a>
-
   <h3 align="center">MovieDroid</h3>
 
   <p align="center">
@@ -181,16 +176,10 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- CONTACT -->
 ## Contact
-
-[Rahul Sharma](https://rahulsharma.vercel.app/) - acmcss@pec.edu.in - rahul2702sharma@gmail.com
-
-Project Link: [https://github.com/PEC-CSS/MovieDroid](https://github.com/PEC-CSS/MovieDroid)
+acmcss@pec.edu.in
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Android docs](https://developer.android.com/docs)
 * [IMDB API](https://imdb-api.com/api)
 
