@@ -80,10 +80,6 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 * [Android Studio](https://developer.android.com/studio)
 
 ### Installation
@@ -127,7 +123,7 @@ Select your virtual device from the list of devices and run the app
   - Physical device -  In your android device, go to settings and [enable developer options](https://developer.android.com/studio/debug/dev-options#enable).
 Connect your device to your system using USB or WiFi (Only for Android 11) 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://developer.android.com/docs)_
 
 
 
