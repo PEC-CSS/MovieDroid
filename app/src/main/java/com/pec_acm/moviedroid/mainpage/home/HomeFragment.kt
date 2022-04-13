@@ -26,17 +26,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.rv250movies.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
         binding.rvTop250tvshows.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-        // Inflate the layout for this fragment
-        viewModel.get250Movies()
-        viewModel.top250Movies.observe(viewLifecycleOwner) {
-            val result = it
-            val movies = result.items
+        viewModel.getTopMovies()
+        viewModel.topMovies.observe(viewLifecycleOwner) {
             val movieList = arrayListOf<Pair<String,String>>()
             for (i in 0..8) {
-                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+                movieList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
             }
-            val top250MovieAdapter = HorizontalAdapter(movieList, requireContext())
-            binding.rv250movies.adapter = top250MovieAdapter
+            val topMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            binding.rv250movies.adapter = topMoviesAdapter
         }
         viewModel.get250TVShows()
         viewModel.top250TVShows.observe(viewLifecycleOwner){
@@ -98,6 +95,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding.rvComingSoon.adapter = comingSoonAdapter
         }
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

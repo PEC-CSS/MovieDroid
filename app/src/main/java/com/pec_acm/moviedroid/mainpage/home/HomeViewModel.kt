@@ -9,22 +9,23 @@ import com.pec_acm.moviedroid.data.api.ApiInstance
 import com.pec_acm.moviedroid.data.api.Movie
 import com.pec_acm.moviedroid.data.api.TVShow
 import com.pec_acm.moviedroid.data.api.Theaters
+import com.pec_acm.moviedroid.model.MovieResult
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import kotlin.coroutines.coroutineContext
 
 class HomeViewModel: ViewModel() {
 
-    val top250Movies : MutableLiveData<Movie> = MutableLiveData()
+    val topMovies : MutableLiveData<List<MovieResult>> = MutableLiveData()
     val top250TVShows: MutableLiveData<TVShow> = MutableLiveData()
     val mostPopularMovies: MutableLiveData<Movie> = MutableLiveData()
     val mostPopularTVShows: MutableLiveData<TVShow> = MutableLiveData()
     val inTheaters : MutableLiveData<Theaters> = MutableLiveData()
     val comingSoon : MutableLiveData<Theaters> = MutableLiveData()
-    fun get250Movies(){
+    fun getTopMovies(){
         viewModelScope.launch {
             try {
-                top250Movies.value = ApiInstance.api.getTop250Movies().body()
+                topMovies.value = com.pec_acm.moviedroid.ApiInstance.api.getTopMovies().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
