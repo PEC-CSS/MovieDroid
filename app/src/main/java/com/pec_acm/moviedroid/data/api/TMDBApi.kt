@@ -1,6 +1,5 @@
 package com.pec_acm.moviedroid.data.api
 
-import com.pec_acm.moviedroid.ApiInstance
 import com.pec_acm.moviedroid.model.MovieListResponse
 import com.pec_acm.moviedroid.model.TvListResponse
 import retrofit2.Response

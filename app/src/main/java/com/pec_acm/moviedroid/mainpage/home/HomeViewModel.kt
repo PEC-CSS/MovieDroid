@@ -4,7 +4,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pec_acm.moviedroid.ApiInstance
+import com.pec_acm.moviedroid.data.api.ApiInstance
 import com.pec_acm.moviedroid.App
 import com.pec_acm.moviedroid.model.MovieResult
 import com.pec_acm.moviedroid.model.TvResult
