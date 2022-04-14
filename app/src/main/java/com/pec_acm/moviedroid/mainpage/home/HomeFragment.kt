@@ -26,78 +26,70 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.rv250movies.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
         binding.rvTop250tvshows.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-        // Inflate the layout for this fragment
-        viewModel.get250Movies()
-        viewModel.top250Movies.observe(viewLifecycleOwner) {
-            val result = it
-            val movies = result.items
+        viewModel.getTopMovies()
+        viewModel.topMovies.observe(viewLifecycleOwner) {
             val movieList = arrayListOf<Pair<String,String>>()
             for (i in 0..8) {
-                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+                movieList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
             }
-            val top250MovieAdapter = HorizontalAdapter(movieList, requireContext())
-            binding.rv250movies.adapter = top250MovieAdapter
+            val topMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            binding.rv250movies.adapter = topMoviesAdapter
         }
-        viewModel.get250TVShows()
-        viewModel.top250TVShows.observe(viewLifecycleOwner){
-            val result = it
-            val tvShow = result.items
+        viewModel.getTopTVShows()
+        viewModel.topTVShows.observe(viewLifecycleOwner){
             val tvShowList = arrayListOf<Pair<String,String>>()
             for (i in 0..8){
-                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
+                tvShowList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))
             }
             Log.d("TV","$tvShowList")
-            val top250TVShowAdapter = HorizontalAdapter(tvShowList,requireContext())
-            binding.rvTop250tvshows.adapter = top250TVShowAdapter
+            val topTVShowsAdapter = HorizontalAdapter(tvShowList,requireContext())
+            binding.rvTop250tvshows.adapter = topTVShowsAdapter
         }
-        viewModel.getMostPopularMovies()
-        viewModel.mostPopularMovies.observe(viewLifecycleOwner){
-            val result = it
-            val movies = result.items
+        viewModel.getPopularMovies()
+        viewModel.popularMovies.observe(viewLifecycleOwner){
             val movieList = arrayListOf<Pair<String,String>>()
             for (i in 0..8) {
-                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+                movieList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
             }
-            val mostPopularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
-            binding.rvMostPopularMovies.adapter = mostPopularMoviesAdapter
+            val popularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            binding.rvMostPopularMovies.adapter = popularMoviesAdapter
         }
 
-        viewModel.getMostPopularTVshows()
-        viewModel.mostPopularTVShows.observe(viewLifecycleOwner){
-            val result = it
-            val tvShow = result.items
+        viewModel.getPopularTVShows()
+        viewModel.popularTVShows.observe(viewLifecycleOwner){
             val tvShowList = arrayListOf<Pair<String,String>>()
             for (i in 0..8){
-                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
+                tvShowList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))
             }
             val mostPopularTVShows = HorizontalAdapter(tvShowList,requireContext())
             binding.rvMostPopularTVShows.adapter = mostPopularTVShows
         }
 
-        viewModel.getInTheaters()
-        viewModel.inTheaters.observe(viewLifecycleOwner){
-            val result = it
-            val theaterItem = result.items
+        viewModel.getNowPlayingMovies()
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner){
             val theaterItemList = arrayListOf<Pair<String,String>>()
-            for (i in theaterItem.indices){
-                theaterItemList.add(Pair(theaterItem[i].image,theaterItem[i].fullTitle))
+            for (i in 0..8){
+                theaterItemList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
             }
-            val inTheatersAdapter = HorizontalAdapter(theaterItemList,requireContext())
-            binding.rvInTheaters.adapter = inTheatersAdapter
+            val nowPlayingMoviesAdapter = HorizontalAdapter(theaterItemList,requireContext())
+            binding.rvInTheaters.adapter = nowPlayingMoviesAdapter
         }
 
-        viewModel.getComingSoon()
-        viewModel.comingSoon.observe(viewLifecycleOwner){
-            val result = it
-            val comingSoonItem = result.items
+        viewModel.getUpcomingMovies()
+        viewModel.upcomingMovies.observe(viewLifecycleOwner){
             val comingSoonItemList = arrayListOf<Pair<String,String>>()
-            for (i in comingSoonItem.indices){
-                comingSoonItemList.add(Pair(comingSoonItem[i].image,comingSoonItem[i].fullTitle))
+            for (i in 0..8){
+                comingSoonItemList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
             }
-            val comingSoonAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
-            binding.rvComingSoon.adapter = comingSoonAdapter
+            val upcomingMoviesAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
+            binding.rvComingSoon.adapter = upcomingMoviesAdapter
         }
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

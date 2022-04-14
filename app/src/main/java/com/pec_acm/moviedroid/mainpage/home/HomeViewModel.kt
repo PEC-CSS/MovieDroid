@@ -4,67 +4,65 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pec_acm.moviedroid.App
 import com.pec_acm.moviedroid.data.api.ApiInstance
-import com.pec_acm.moviedroid.data.api.Movie
-import com.pec_acm.moviedroid.data.api.TVShow
-import com.pec_acm.moviedroid.data.api.Theaters
+import com.pec_acm.moviedroid.App
+import com.pec_acm.moviedroid.model.MovieResult
+import com.pec_acm.moviedroid.model.TvResult
 import kotlinx.coroutines.launch
 import java.lang.Exception
-import kotlin.coroutines.coroutineContext
 
 class HomeViewModel: ViewModel() {
 
-    val top250Movies : MutableLiveData<Movie> = MutableLiveData()
-    val top250TVShows: MutableLiveData<TVShow> = MutableLiveData()
-    val mostPopularMovies: MutableLiveData<Movie> = MutableLiveData()
-    val mostPopularTVShows: MutableLiveData<TVShow> = MutableLiveData()
-    val inTheaters : MutableLiveData<Theaters> = MutableLiveData()
-    val comingSoon : MutableLiveData<Theaters> = MutableLiveData()
-    fun get250Movies(){
+    val topMovies : MutableLiveData<List<MovieResult>> = MutableLiveData()
+    val topTVShows: MutableLiveData<List<TvResult>> = MutableLiveData()
+    val popularMovies: MutableLiveData<List<MovieResult>> = MutableLiveData()
+    val popularTVShows: MutableLiveData<List<TvResult>> = MutableLiveData()
+    val nowPlayingMovies : MutableLiveData<List<MovieResult>> = MutableLiveData()
+    val upcomingMovies : MutableLiveData<List<MovieResult>> = MutableLiveData()
+    fun getTopMovies(){
         viewModelScope.launch {
             try {
-                top250Movies.value = ApiInstance.api.getTop250Movies().body()
+                topMovies.value = ApiInstance.api.getTopMovies().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun get250TVShows(){
+    fun getTopTVShows(){
         viewModelScope.launch {
             try {
-                top250TVShows.value = ApiInstance.api.getTop250TVShows().body()
+                topTVShows.value = ApiInstance.api.getTopTvShows().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun getMostPopularMovies(){
+    fun getPopularMovies(){
         viewModelScope.launch {
             try {
-                mostPopularMovies.value = ApiInstance.api.getMostPopularMovies().body()
+                popularMovies.value = ApiInstance.api.getPopularMovies().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun getMostPopularTVshows(){
+    fun getPopularTVShows(){
         viewModelScope.launch {
             try {
-                mostPopularTVShows.value = ApiInstance.api.getMostPopularTVshows().body()
+                popularTVShows.value = ApiInstance.api.getPopularTvShows().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun getInTheaters(){
+    fun getNowPlayingMovies(){
         viewModelScope.launch {
             try {
-                inTheaters.value = ApiInstance.api.getInTheaters().body()
+                nowPlayingMovies.value = ApiInstance.api.getNowPlayingMovies().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
@@ -72,10 +70,10 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    fun getComingSoon(){
+    fun getUpcomingMovies(){
         viewModelScope.launch {
             try {
-                comingSoon.value = ApiInstance.api.getComingSoon().body()
+                upcomingMovies.value = ApiInstance.api.getUpcomingMovies().body()?.results
             }catch (e:Exception){
                 Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
             }
