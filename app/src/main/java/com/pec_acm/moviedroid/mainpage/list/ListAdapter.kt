@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 
@@ -17,7 +20,10 @@ class ListAdapter(val context : Context): RecyclerView.Adapter<ListAdapter.ListV
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val listItem = itemList[position]
+        holder.itemTitle.setText(listItem.name)
+        holder.itemCategory.setText(listItem.category.uppercase())
+        Glide.with(context).load(listItem.posterUrl).into(holder.itemImage)
     }
 
     override fun getItemCount(): Int {
@@ -31,6 +37,8 @@ class ListAdapter(val context : Context): RecyclerView.Adapter<ListAdapter.ListV
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        val itemTitle = itemView.findViewById<TextView>(R.id.item_title)
+        val itemImage = itemView.findViewById<ImageView>(R.id.item_image)
+        val itemCategory = itemView.findViewById<TextView>(R.id.item_category)
     }
 }

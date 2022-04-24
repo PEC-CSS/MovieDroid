@@ -18,6 +18,7 @@
             android:layout_marginVertical="@dimen/_6sdp"
             android:layout_marginHorizontal="@dimen/_10sdp">
             <ImageView
+                android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:src="@drawable/ic_search"/>
@@ -28,7 +29,16 @@
             android:layout_weight="1"
             android:layout_marginVertical="@dimen/_6sdp"
             android:orientation="vertical">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_20sdp"
+                tools:text="Hello everyone"
+                android:id="@+id/item_title" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_category" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
