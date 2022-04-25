@@ -17,7 +17,7 @@ class StatusBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem)
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.status_bottom_sheet,container,false)
+        val view = inflater.inflate(R.layout.bottom_sheet_layout,container,false)
         val statusList : ListView = view.findViewById(R.id.options_list)
         val statusOptions = arrayOf(
             "Watching",

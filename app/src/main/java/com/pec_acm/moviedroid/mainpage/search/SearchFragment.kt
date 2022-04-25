@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
@@ -21,7 +22,6 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         val searchList = view.findViewById<RecyclerView>(R.id.search_list)
         val searchText = view.findViewById<SearchView>(R.id.search_text)
@@ -29,13 +29,25 @@ class SearchFragment : Fragment() {
         searchListAdapter = ListAdapter(requireContext(),listViewModel)
         searchList.adapter = searchListAdapter
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        searchViewModel.movieSearchList.observe(viewLifecycleOwner){
-            val searchItems = mutableListOf<ListItem>()
-            for(i in it.indices)
-            {
-                searchItems.add(it[i].toListItem())
+        searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
+        searchViewModel.movieSearchList.observe(viewLifecycleOwner){ resultList ->
+            searchViewModel.user.observe(viewLifecycleOwner){ user->
+                val searchItems = mutableListOf<ListItem>()
+                for(i in resultList.indices)
+                {
+                    var listItem = resultList[i].toListItem()
+                    for(item in user.userList)
+                    {
+                        if(item.id==listItem.id)
+                        {
+                            listItem=item
+                            break
+                        }
+                    }
+                    searchItems.add(listItem)
+                }
+                searchListAdapter.setItemList(searchItems)
             }
-            searchListAdapter.setItemList(searchItems)
         }
         searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
