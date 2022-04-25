@@ -4,11 +4,11 @@ import com.pec_acm.moviedroid.model.MovieResult
 import com.pec_acm.moviedroid.model.TvResult
 
 data class ListItem(
-    val id : Int,
-    val name : String,
-    val category : String,
-    val posterUrl : String,
-    val score : Double,
+    val id : Int=0,
+    val name : String="",
+    val category : String="",
+    val posterUrl : String="",
+    val score : Double= 0.0,
     var personalScore : Int = 0,
     var status : Int = 0,
     var watchedEpisodes : Int = 0

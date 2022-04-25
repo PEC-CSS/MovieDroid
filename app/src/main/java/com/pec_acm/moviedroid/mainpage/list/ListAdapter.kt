@@ -1,17 +1,20 @@
 package com.pec_acm.moviedroid.mainpage.list
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 
-class ListAdapter(val context : Context): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter(val context : Context,val listViewModel: ListViewModel): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     private var itemList : MutableList<ListItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -24,6 +27,42 @@ class ListAdapter(val context : Context): RecyclerView.Adapter<ListAdapter.ListV
         holder.itemTitle.setText(listItem.name)
         holder.itemCategory.setText(listItem.category.uppercase())
         Glide.with(context).load(listItem.posterUrl).into(holder.itemImage)
+        holder.itemScore.setText(listItem.score.toString())
+        var status = ""
+        var statusColor = 0
+        when(listItem.status)
+        {
+            1 -> {
+                status="watching"
+                statusColor=R.color.green
+            }
+            2 -> {
+                status="completed"
+                statusColor=R.color.purple_700
+            }
+            3 -> {
+                status="on hold"
+                statusColor=R.color.yellow
+            }
+            4 -> {
+                status="dropped"
+                statusColor=R.color.red
+            }
+            5 -> {
+                status="plan to watch"
+                statusColor=R.color.grey
+            }
+            else -> {
+                status="add to list"
+                statusColor=R.color.black
+            }
+        }
+        holder.itemStatus.text = status.uppercase()
+        holder.itemStatus.setBackgroundResource(statusColor)
+        holder.itemStatus.setOnClickListener {
+            val bottomSheet = StatusBottomSheet(listViewModel, listItem,position)
+            bottomSheet.show((context as FragmentActivity).supportFragmentManager,bottomSheet.tag)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,8 +76,10 @@ class ListAdapter(val context : Context): RecyclerView.Adapter<ListAdapter.ListV
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val itemTitle = itemView.findViewById<TextView>(R.id.item_title)
-        val itemImage = itemView.findViewById<ImageView>(R.id.item_image)
-        val itemCategory = itemView.findViewById<TextView>(R.id.item_category)
+        val itemTitle : TextView = itemView.findViewById(R.id.item_title)
+        val itemImage : ImageView = itemView.findViewById(R.id.item_image)
+        val itemCategory: TextView = itemView.findViewById(R.id.item_category)
+        val itemScore : TextView = itemView.findViewById(R.id.item_score)
+        val itemStatus : TextView = itemView.findViewById(R.id.item_status)
     }
 }

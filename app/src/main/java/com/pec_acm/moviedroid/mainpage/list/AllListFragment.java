@@ -26,11 +26,10 @@ public class AllListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_list, container, false);
 
         RecyclerView allList = view.findViewById(R.id.all_list);
-        ListAdapter listAdapter = new ListAdapter(requireContext());
-        allList.setAdapter(listAdapter);
-
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel);
+        allList.setAdapter(listAdapter);
         listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
             public void onChanged(User user) {

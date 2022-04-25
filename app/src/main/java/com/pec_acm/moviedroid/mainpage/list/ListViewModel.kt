@@ -8,8 +8,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.User
 import kotlinx.coroutines.launch
+import java.text.FieldPosition
 
 class ListViewModel : ViewModel() {
     private var databaseReference = Firebase.database.reference
@@ -44,6 +46,43 @@ class ListViewModel : ViewModel() {
                 {
                     userReference.child(uid).setValue(User(uid,name,imageUrl,email))
                 }
+            }
+        }
+    }
+
+    fun addItem(uid : String,listItem: ListItem)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                user?.userList?.add(listItem)
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
+
+    fun setItemStatus(uid : String,position: Int,status : Int)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                val listItem = user?.userList?.get(position)
+                listItem?.status=status
+                user?.userList?.set(position, listItem!!)
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
+
+    fun setItemScore(uid : String,position: Int,score : Int)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                val listItem = user?.userList?.get(position)
+                listItem?.personalScore=score
+                user?.userList?.set(position, listItem!!)
+                userReference.child(uid).setValue(user)
             }
         }
     }

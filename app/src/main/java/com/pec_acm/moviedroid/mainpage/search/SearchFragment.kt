@@ -12,6 +12,7 @@ import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.list.ListAdapter
+import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 
 class SearchFragment : Fragment() {
     private lateinit var searchListAdapter : ListAdapter
@@ -24,7 +25,8 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         val searchList = view.findViewById<RecyclerView>(R.id.search_list)
         val searchText = view.findViewById<SearchView>(R.id.search_text)
-        searchListAdapter = ListAdapter(requireContext())
+        val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
+        searchListAdapter = ListAdapter(requireContext(),listViewModel)
         searchList.adapter = searchListAdapter
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.movieSearchList.observe(viewLifecycleOwner){
