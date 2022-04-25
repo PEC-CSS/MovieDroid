@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -28,8 +29,8 @@ class ListAdapter(val context : Context,val listViewModel: ListViewModel): Recyc
         holder.itemCategory.text = listItem.category.uppercase()
         Glide.with(context).load(listItem.posterUrl).into(holder.itemImage)
         holder.itemScore.text = listItem.score.toString()
-        var status = ""
-        var statusColor = 0
+        val status: String
+        val statusColor: Int
         when(listItem.status)
         {
             1 -> {
@@ -57,6 +58,26 @@ class ListAdapter(val context : Context,val listViewModel: ListViewModel): Recyc
                 statusColor=R.color.black
             }
         }
+        if(listItem.status>0)
+        {
+            holder.itemPersonalScore.visibility = View.VISIBLE
+            if(listItem.personalScore>0)
+            {
+                holder.itemPersonalScore.text = listItem.personalScore.toString() + "/10"
+            }
+            else
+            {
+                holder.itemPersonalScore.text = "RATE"
+            }
+
+        }
+        else holder.itemPersonalScore.visibility = View.GONE
+
+        holder.itemPersonalScore.setOnClickListener {
+            val bottomSheet = ScoreBottomSheet(listViewModel, listItem)
+            bottomSheet.show((context as FragmentActivity).supportFragmentManager,bottomSheet.tag)
+        }
+
         holder.itemStatus.text = status.uppercase()
         holder.itemStatus.setBackgroundResource(statusColor)
         holder.itemStatus.setOnClickListener {
@@ -81,5 +102,6 @@ class ListAdapter(val context : Context,val listViewModel: ListViewModel): Recyc
         val itemCategory: TextView = itemView.findViewById(R.id.item_category)
         val itemScore : TextView = itemView.findViewById(R.id.item_score)
         val itemStatus : TextView = itemView.findViewById(R.id.item_status)
+        val itemPersonalScore : TextView = itemView.findViewById(R.id.item_personal_score)
     }
 }

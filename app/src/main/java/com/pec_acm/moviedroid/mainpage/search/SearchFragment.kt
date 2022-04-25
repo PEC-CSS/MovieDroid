@@ -53,6 +53,7 @@ class SearchFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query==null) return true
                 searchViewModel.searchMovie(query)
+                searchText.clearFocus()
                 return false
             }
 

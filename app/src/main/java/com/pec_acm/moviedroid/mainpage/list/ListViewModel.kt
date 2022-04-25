@@ -41,10 +41,14 @@ class ListViewModel : ViewModel() {
     {
         viewModelScope.launch {
             userReference.child(uid).get().addOnCompleteListener {
-                val snapshot = it.result
-                if(!snapshot.exists())
-                {
-                    userReference.child(uid).setValue(User(uid,name,imageUrl,email))
+                try{
+                    val snapshot = it.result
+                    if(!snapshot.exists())
+                    {
+                        userReference.child(uid).setValue(User(uid,name,imageUrl,email))
+                    }
+                } catch (e : Exception){
+                    e.printStackTrace()
                 }
             }
         }
