@@ -24,10 +24,10 @@ class ListAdapter(val context : Context,val listViewModel: ListViewModel): Recyc
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val listItem = itemList[position]
-        holder.itemTitle.setText(listItem.name)
-        holder.itemCategory.setText(listItem.category.uppercase())
+        holder.itemTitle.text = listItem.name
+        holder.itemCategory.text = listItem.category.uppercase()
         Glide.with(context).load(listItem.posterUrl).into(holder.itemImage)
-        holder.itemScore.setText(listItem.score.toString())
+        holder.itemScore.text = listItem.score.toString()
         var status = ""
         var statusColor = 0
         when(listItem.status)
@@ -60,7 +60,7 @@ class ListAdapter(val context : Context,val listViewModel: ListViewModel): Recyc
         holder.itemStatus.text = status.uppercase()
         holder.itemStatus.setBackgroundResource(statusColor)
         holder.itemStatus.setOnClickListener {
-            val bottomSheet = StatusBottomSheet(listViewModel, listItem,position)
+            val bottomSheet = StatusBottomSheet(listViewModel, listItem)
             bottomSheet.show((context as FragmentActivity).supportFragmentManager,bottomSheet.tag)
         }
     }

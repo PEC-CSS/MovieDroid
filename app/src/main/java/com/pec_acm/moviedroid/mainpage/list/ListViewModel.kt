@@ -61,28 +61,43 @@ class ListViewModel : ViewModel() {
         }
     }
 
-    fun setItemStatus(uid : String,position: Int,status : Int)
+    fun setItemStatus(uid : String,id: Int,status : Int)
     {
         viewModelScope.launch {
             userReference.child(uid).get().addOnCompleteListener {
                 val user = it.result.getValue(User::class.java)
-                val listItem = user?.userList?.get(position)
-                listItem?.status=status
-                user?.userList?.set(position, listItem!!)
-                userReference.child(uid).setValue(user)
+                for(i in user?.userList?.indices!!)
+                {
+                    val listItem = user.userList[i]
+                    if(listItem.id==id)
+                    {
+                        listItem.status=status
+                        user.userList[i] = listItem
+                        userReference.child(uid).setValue(user)
+                        break
+                    }
+                }
+
             }
         }
     }
 
-    fun setItemScore(uid : String,position: Int,score : Int)
+    fun setItemScore(uid : String,id: Int,score : Int)
     {
         viewModelScope.launch {
             userReference.child(uid).get().addOnCompleteListener {
                 val user = it.result.getValue(User::class.java)
-                val listItem = user?.userList?.get(position)
-                listItem?.personalScore=score
-                user?.userList?.set(position, listItem!!)
-                userReference.child(uid).setValue(user)
+                for(i in user?.userList?.indices!!)
+                {
+                    val listItem = user.userList[i]
+                    if(listItem.id==id)
+                    {
+                        listItem.personalScore=score
+                        user.userList[i] = listItem
+                        userReference.child(uid).setValue(user)
+                        break
+                    }
+                }
             }
         }
     }

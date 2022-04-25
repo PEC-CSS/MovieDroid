@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 
-class StatusBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem,val position : Int) : BottomSheetDialogFragment() {
+class StatusBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem) : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +38,7 @@ class StatusBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem,
                 }
                 else
                 {
-                    listViewModel.setItemStatus(FirebaseAuth.getInstance().uid!!,position,i+1)
+                    listViewModel.setItemStatus(FirebaseAuth.getInstance().uid!!,listItem.id,i+1)
                 }
             }
             dismiss()
