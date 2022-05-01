@@ -18,7 +18,7 @@ import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 class SearchFragment : Fragment() {
     private lateinit var searchListAdapter : ListAdapter
     private lateinit var searchViewModel: SearchViewModel
-    val searchItems = mutableListOf<ListItem>()
+    var searchItems = mutableListOf<ListItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
         searchViewModel.movieSearchList.observe(viewLifecycleOwner){ resultList ->
             searchViewModel.user.observe(viewLifecycleOwner){ user->
-
+                searchItems.clear()
                 for(i in resultList.indices)
                 {
                     var listItem = resultList[i].toListItem()
