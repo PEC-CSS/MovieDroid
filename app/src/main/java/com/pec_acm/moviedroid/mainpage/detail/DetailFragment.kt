@@ -25,9 +25,18 @@ class DetailFragment : Fragment() {
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
         detailViewModel.movieDetailList.observe(viewLifecycleOwner){movieDetail ->
-            Glide.with(this).load(movieDetail.poster_path).into(binding.image)
+            if (movieDetail.backdrop_path!=null) {
+                Glide.with(this).load("https://image.tmdb.org/t/p/w780" + movieDetail.backdrop_path)
+                    .into(binding.image)
+            }
             binding.hello.text = movieDetail.title
-            binding.genre.text = movieDetail.genres[0].name
+            var genres = ""
+            for (i in movieDetail.genres){
+                genres+=i.name + "  "
+
+            }
+            binding.genre.text = genres
+
             binding.overview.text = movieDetail.overview
         }
         return binding.root

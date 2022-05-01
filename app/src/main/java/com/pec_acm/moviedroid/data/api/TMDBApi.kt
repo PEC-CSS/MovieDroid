@@ -78,15 +78,15 @@ interface TMDBApi {
 
     @GET("movie/{movie_id}")
     suspend fun movieDetailByID(
+        @Path("movie_id") movie_id : Int,
         @Query("api_key")
-        apiKey: String = ApiInstance.API_KEY,
-       @Path("movie_id") movie_id : Int
+        apiKey: String = ApiInstance.API_KEY
     ) : Response<MovieDetail>
 
     @GET("tv/{tv_id}")
     suspend fun tvShowByID(
+        @Path("tv_id") tv_id : Int,
         @Query("api_key")
         apiKey: String = ApiInstance.API_KEY,
-        @Path("tv_id") tv_id : Int
     ) : Response<TVDetail>
 }

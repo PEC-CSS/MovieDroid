@@ -13,33 +13,36 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImage"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_160sdp"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_120sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+
             android:layout_margin="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_20sdp">
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/hello"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/cardImage"
-            tools:text="Hello"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="hello"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/_10sdp"
             android:textSize="@dimen/_22ssp"/>
         <TextView
             android:id="@+id/genre"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/hello"
-            app:layout_constraintStart_toEndOf="@id/cardImage"
+            app:layout_constraintTop_toBottomOf="@id/cardImage"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="thriller"
             android:layout_margin="@dimen/_10sdp"
             android:textSize="@dimen/_12sdp"/>
@@ -49,9 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardImage">
+            app:layout_constraintTop_toBottomOf="@id/genre">
 
             <TextView
                 android:id="@+id/overview"
