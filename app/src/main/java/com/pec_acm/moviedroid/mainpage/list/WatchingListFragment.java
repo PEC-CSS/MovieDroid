@@ -29,7 +29,7 @@ public class WatchingListFragment extends Fragment {
         RecyclerView watchingList = view.findViewById(R.id.watching_list);
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
-        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel);
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
         watchingList.setAdapter(listAdapter);
         listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override

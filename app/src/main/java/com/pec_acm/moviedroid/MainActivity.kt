@@ -1,8 +1,8 @@
 package com.pec_acm.moviedroid
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -26,15 +26,34 @@ class MainActivity : AppCompatActivity() {
         //Implementing Bottom Navigation View
         val bottomNavigationView = binding!!.bottomNavBar
         val navController = findNavController(R.id.main_page_fragment_container)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment,R.id.searchFragment,R.id.listFragment))
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        val appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.listFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
         val user = FirebaseAuth.getInstance().currentUser
-        listViewModel.addUser(user!!.uid,user.displayName,user.photoUrl?.toString(),user.email)
+        listViewModel.addUser(user!!.uid, user.displayName, user.photoUrl?.toString(), user.email)
         listViewModel.getUser(user.uid)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.detailFragment) {
+                bottomNavigationView.visibility = View.GONE
+            } else {
+                bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
 }

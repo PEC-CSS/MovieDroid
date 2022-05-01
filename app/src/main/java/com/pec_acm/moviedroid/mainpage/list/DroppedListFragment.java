@@ -29,7 +29,7 @@ public class DroppedListFragment extends Fragment {
         RecyclerView droppedList = view.findViewById(R.id.dropped_list);
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
-        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel);
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
         droppedList.setAdapter(listAdapter);
         listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
