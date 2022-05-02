@@ -1,9 +1,12 @@
 package com.pec_acm.moviedroid.data.api
 
+import com.pec_acm.moviedroid.model.MovieDetail
 import com.pec_acm.moviedroid.model.MovieListResponse
+import com.pec_acm.moviedroid.model.TVDetail
 import com.pec_acm.moviedroid.model.TvListResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TMDBApi {
@@ -73,4 +76,17 @@ interface TMDBApi {
         apiKey : String = ApiInstance.API_KEY
     ) : Response<TvListResponse>
 
+    @GET("movie/{movie_id}")
+    suspend fun movieDetailByID(
+        @Path("movie_id") movie_id : Int,
+        @Query("api_key")
+        apiKey: String = ApiInstance.API_KEY
+    ) : Response<MovieDetail>
+
+    @GET("tv/{tv_id}")
+    suspend fun tvShowByID(
+        @Path("tv_id") tv_id : Int,
+        @Query("api_key")
+        apiKey: String = ApiInstance.API_KEY,
+    ) : Response<TVDetail>
 }

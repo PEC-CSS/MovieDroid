@@ -18,6 +18,7 @@ import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 class SearchFragment : Fragment() {
     private lateinit var searchListAdapter : ListAdapter
     private lateinit var searchViewModel: SearchViewModel
+    var searchItems = mutableListOf<ListItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,13 +27,13 @@ class SearchFragment : Fragment() {
         val searchList = view.findViewById<RecyclerView>(R.id.search_list)
         val searchText = view.findViewById<SearchView>(R.id.search_text)
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
-        searchListAdapter = ListAdapter(requireContext(),listViewModel)
+        searchListAdapter = ListAdapter(requireContext(),listViewModel, this)
         searchList.adapter = searchListAdapter
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
         searchViewModel.movieSearchList.observe(viewLifecycleOwner){ resultList ->
             searchViewModel.user.observe(viewLifecycleOwner){ user->
-                val searchItems = mutableListOf<ListItem>()
+                searchItems.clear()
                 for(i in resultList.indices)
                 {
                     var listItem = resultList[i].toListItem()
@@ -58,9 +59,14 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                 if (newText=="") {
+                     searchItems.clear()
+                     searchViewModel.movieSearchList.value = arrayListOf()
+                     searchViewModel.tvShowSearchList.value = arrayListOf()
+                     searchListAdapter.notifyDataSetChanged()
+                 }
                 return true
             }
-
         })
         return view
     }

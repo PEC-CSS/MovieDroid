@@ -29,7 +29,7 @@ public class CompletedListFragment extends Fragment {
         RecyclerView completedList = view.findViewById(R.id.completed_list);
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
-        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel);
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
         completedList.setAdapter(listAdapter);
         listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override

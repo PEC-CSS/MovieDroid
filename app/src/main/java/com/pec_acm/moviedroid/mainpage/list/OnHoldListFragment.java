@@ -29,7 +29,7 @@ public class OnHoldListFragment extends Fragment {
         RecyclerView onHoldList = view.findViewById(R.id.on_hold_list);
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
-        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel);
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
         onHoldList.setAdapter(listAdapter);
         listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
