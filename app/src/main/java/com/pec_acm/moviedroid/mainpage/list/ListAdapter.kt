@@ -46,6 +46,7 @@ class ListAdapter @JvmOverloads constructor(val context : Context, val listViewM
 
         val holder =  viewHolder as ListAdapter.ListViewHolder;
 
+        // Decrement the position by 1 before accessing in case of showCount being true as list size is incremented by 1 to accommodate ListViewCountViewHolder.
         val listItem = if (showCount) itemList[position - 1] else itemList[position]
         holder.binding.itemTitle.text = listItem.name
         holder.binding.itemCategory.text = listItem.category.uppercase()
@@ -104,7 +105,8 @@ class ListAdapter @JvmOverloads constructor(val context : Context, val listViewM
     }
 
     override fun getItemCount(): Int {
-        return if (showCount && itemList.isNotEmpty()) itemList.size + 1 else itemList.size
+        // Increment list size by 1 in case of showCount being true to accommodate the ListViewCountViewHolder.
+        return if (showCount) itemList.size + 1 else itemList.size
     }
 
     override fun getItemViewType(position: Int): Int {
