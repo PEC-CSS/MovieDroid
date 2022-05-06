@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
         val searchList = view.findViewById<RecyclerView>(R.id.search_list)
         val searchText = view.findViewById<SearchView>(R.id.search_text)
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
-        searchListAdapter = ListAdapter(requireContext(),listViewModel, this)
+        searchListAdapter = ListAdapter(requireContext(),listViewModel, this, false)
         searchList.adapter = searchListAdapter
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
