@@ -18,7 +18,7 @@ import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.search.SearchFragment
 import com.pec_acm.moviedroid.mainpage.search.SearchFragmentDirections
 
-class ListAdapter @JvmOverloads constructor(val context : Context, val listViewModel: ListViewModel, val fragment: Fragment?, val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListAdapter @JvmOverloads constructor(private val context : Context, private val listViewModel: ListViewModel, val fragment: Fragment?, private val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val NORMAL_VIEW_HOLDER  = 0
         private const val ITEM_COUNT_VIEW_HOLDER = 1
