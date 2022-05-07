@@ -13,6 +13,7 @@ Provide some screenshots of the changes made (if applicable).
 ## Checklist
 
 Please make sure to review the following before submitting your PR: 
+<!---To check the points, put a 'x' in the boxes below -->
 
 - [ ] I have read the [contribution guidelines](https://github.com/PEC-CSS/MovieDroid/blob/main/CONTRIBUTING.md).
 - [ ] I have read the code of conduct.
