@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -21,6 +22,7 @@ import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var authListener: FirebaseAuth.AuthStateListener
+    private val logoutObserver: MutableLiveData<FirebaseAuth> = MutableLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,12 +91,16 @@ class MainActivity : AppCompatActivity() {
 
         authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             if (null == firebaseAuth.currentUser) {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+                logoutObserver.value = firebaseAuth
             }
         }
 
         FirebaseAuth.getInstance().addAuthStateListener(authListener)
+
+        logoutObserver.observe(this) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
     override fun onDestroy() {
