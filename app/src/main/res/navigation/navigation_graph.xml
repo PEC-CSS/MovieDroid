@@ -5,11 +5,15 @@
     android:id="@+id/navigation_graph.xml"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/show_log_out_dialog"
+        app:destination="@+id/logoutDialogFragment"/>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pec_acm.moviedroid.mainpage.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -17,11 +21,12 @@
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.pec_acm.moviedroid.mainpage.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_listFragment"
             app:destination="@id/listFragment" />
@@ -29,22 +34,29 @@
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.pec_acm.moviedroid.mainpage.list.ListFragment"
         android:label="Your List"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.pec_acm.moviedroid.mainpage.detail.DetailFragment"
         android:label="About"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="itemID"
             app:argType="integer" />
     </fragment>
+
+    <dialog
+        android:id="@+id/logoutDialogFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.LogoutDialogFragment"
+        android:label="LogoutDialogFragment" />
 </navigation>
