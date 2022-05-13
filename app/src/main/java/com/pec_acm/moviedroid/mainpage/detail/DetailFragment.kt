@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentDetailBinding
 
+
 class DetailFragment : Fragment() {
     private lateinit var detailViewModel: DetailViewModel
     private val args: DetailFragmentArgs by navArgs()
@@ -21,7 +22,6 @@ class DetailFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(inflater, container, false)
-        binding.hello.text = args.itemID.toString()
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
         detailViewModel.movieDetailList.observe(viewLifecycleOwner){movieDetail ->
