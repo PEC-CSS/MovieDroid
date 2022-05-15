@@ -14,8 +14,8 @@ import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.MovieListCountItemBinding
 import com.pec_acm.moviedroid.databinding.MovieListItemBinding
 import com.pec_acm.moviedroid.firebase.ListItem
-import com.pec_acm.moviedroid.mainpage.search.SearchFragment
-import com.pec_acm.moviedroid.mainpage.search.SearchFragmentDirections
+import com.pec_acm.moviedroid.mainpage.detail.DetailFragmentDirections
+
 
 class ListAdapter @JvmOverloads constructor(private val context : Context, private val listViewModel: ListViewModel, val fragment: Fragment?, private val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -123,7 +123,8 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    itemView.findNavController().navigate(R.id.detailFragment)
+                    val direction = DetailFragmentDirections.actionDetailFragment(itemID!!)
+                    itemView.findNavController().navigate(direction)
                 }
             }
         }
