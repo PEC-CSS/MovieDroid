@@ -1,32 +1,28 @@
 package com.pec_acm.moviedroid.mainpage.list;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.pec_acm.moviedroid.R;
+import com.pec_acm.moviedroid.databinding.FragmentCompletedListBinding;
 import com.pec_acm.moviedroid.firebase.ListItem;
 import com.pec_acm.moviedroid.firebase.User;
-
 import java.util.ArrayList;
 
 
 public class CompletedListFragment extends Fragment {
+    private FragmentCompletedListBinding binding;
     private ListViewModel listViewModel;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_completed_list, container, false);
-
-        RecyclerView completedList = view.findViewById(R.id.completed_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding =FragmentCompletedListBinding.inflate(inflater,container,false);
+        View view =binding.getRoot();
+        RecyclerView completedList = binding.completedList;
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
         ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
