@@ -5,8 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -17,8 +15,7 @@ import com.pec_acm.moviedroid.databinding.MovieListCountItemBinding
 import com.pec_acm.moviedroid.databinding.MovieListItemBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.detail.DetailFragmentDirections
-import com.pec_acm.moviedroid.mainpage.search.SearchFragment
-import com.pec_acm.moviedroid.mainpage.search.SearchFragmentDirections
+
 
 class ListAdapter @JvmOverloads constructor(private val context : Context, private val listViewModel: ListViewModel, val fragment: Fragment?, private val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
