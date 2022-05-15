@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainpage.search.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_text"
         android:layout_width="match_parent"
@@ -14,12 +14,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Search movie" />
 
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/searchChipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_text"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        >
+        <com.google.android.material.chip.Chip
+            android:id="@+id/movieChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movies"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/search_toggle"
+
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TV Series"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/search_toggle" />
+
+    </com.google.android.material.chip.ChipGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_text"
+        app:layout_constraintTop_toBottomOf="@+id/searchChipGroup"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/movie_list_item"/>
 
