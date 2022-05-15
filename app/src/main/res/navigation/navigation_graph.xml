@@ -59,4 +59,8 @@
         android:id="@+id/logoutDialogFragment"
         android:name="com.pec_acm.moviedroid.mainpage.LogoutDialogFragment"
         android:label="LogoutDialogFragment" />
+
+    <action
+        android:id="@+id/action_detail_fragment"
+        app:destination="@id/detailFragment"/>
 </navigation>

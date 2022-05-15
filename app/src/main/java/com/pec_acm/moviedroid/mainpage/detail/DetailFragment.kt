@@ -20,7 +20,6 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
