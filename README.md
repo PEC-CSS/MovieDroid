@@ -177,7 +177,7 @@ acmcss@pec.edu.in
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 * [Android docs](https://developer.android.com/docs)
-* [IMDB API](https://imdb-api.com/api)
+* [TMDB API](https://developers.themoviedb.org/3)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

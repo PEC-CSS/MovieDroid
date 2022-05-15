@@ -28,18 +28,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvTop250tvshows.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         viewModel.getTopMovies()
         viewModel.topMovies.observe(viewLifecycleOwner) {
-            val movieList = arrayListOf<Pair<String,String>>()
+            val movieList =  arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8) {
-                movieList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
+                movieList.add(Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title)))
             }
             val topMoviesAdapter = HorizontalAdapter(movieList, requireContext())
             binding.rv250movies.adapter = topMoviesAdapter
         }
         viewModel.getTopTVShows()
         viewModel.topTVShows.observe(viewLifecycleOwner){
-            val tvShowList = arrayListOf<Pair<String,String>>()
+            val tvShowList =  arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8){
-                tvShowList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))
+                tvShowList.add((Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))))
             }
             Log.d("TV","$tvShowList")
             val topTVShowsAdapter = HorizontalAdapter(tvShowList,requireContext())
@@ -47,9 +47,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         viewModel.getPopularMovies()
         viewModel.popularMovies.observe(viewLifecycleOwner){
-            val movieList = arrayListOf<Pair<String,String>>()
+            val movieList = arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8) {
-                movieList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
+                movieList.add((Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
             }
             val popularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
             binding.rvMostPopularMovies.adapter = popularMoviesAdapter
@@ -57,9 +57,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.getPopularTVShows()
         viewModel.popularTVShows.observe(viewLifecycleOwner){
-            val tvShowList = arrayListOf<Pair<String,String>>()
+            val tvShowList =  arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8){
-                tvShowList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))
+                tvShowList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))))
             }
             val mostPopularTVShows = HorizontalAdapter(tvShowList,requireContext())
             binding.rvMostPopularTVShows.adapter = mostPopularTVShows
@@ -67,9 +67,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.getNowPlayingMovies()
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner){
-            val theaterItemList = arrayListOf<Pair<String,String>>()
+            val theaterItemList =  arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8){
-                theaterItemList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
+                theaterItemList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
             }
             val nowPlayingMoviesAdapter = HorizontalAdapter(theaterItemList,requireContext())
             binding.rvInTheaters.adapter = nowPlayingMoviesAdapter
@@ -77,9 +77,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.getUpcomingMovies()
         viewModel.upcomingMovies.observe(viewLifecycleOwner){
-            val comingSoonItemList = arrayListOf<Pair<String,String>>()
+            val comingSoonItemList =  arrayListOf<Pair<Int,Pair<String,String>>>()
             for (i in 0..8){
-                comingSoonItemList.add(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))
+                comingSoonItemList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
             }
             val upcomingMoviesAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
             binding.rvComingSoon.adapter = upcomingMoviesAdapter
