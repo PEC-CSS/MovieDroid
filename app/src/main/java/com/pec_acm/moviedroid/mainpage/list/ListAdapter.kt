@@ -123,16 +123,7 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    val searchDirection =
-                        SearchFragmentDirections.actionSearchFragmentToDetailFragment(it)
-                    val listDirection =
-                        ListFragmentDirections.actionListFragmentToDetailFragment(it)
-
-                    if (fragment is SearchFragment)
-                        itemView.findNavController().navigate(searchDirection)
-                    else {
-                        itemView.findNavController().navigate(listDirection)
-                    }
+                    itemView.findNavController().navigate(R.id.detailFragment)
                 }
             }
         }

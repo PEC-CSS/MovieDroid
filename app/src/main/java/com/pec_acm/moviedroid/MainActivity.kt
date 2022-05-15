@@ -33,9 +33,15 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.main_page_fragment_container)
         binding.bottomNavBar.setupWithNavController(navController)
 
+        val bottomNavDestinations = setOf(
+            R.id.homeFragment,
+            R.id.searchFragment,
+            R.id.listFragment
+        )
+
         // Implementing Navigation drawer
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.searchFragment, R.id.listFragment),
+            bottomNavDestinations,
             binding.dlParent
         )
         binding.toolBar.setupWithNavController(navController, appBarConfiguration)
@@ -48,9 +54,9 @@ class MainActivity : AppCompatActivity() {
 
         val headerView: View = binding.sideNavBar.getHeaderView(0)
 
-        val tvUserName: TextView = headerView.findViewById(R.id.tvUserName)
-        val tvEmailId: TextView = headerView.findViewById(R.id.tvEmailId)
-        val ivProfilePic: ImageView = headerView.findViewById(R.id.ivProfilePicture)
+        val tvUserName: TextView = headerView.findViewById(R.id.tv_user_name)
+        val tvEmailId: TextView = headerView.findViewById(R.id.tv_email_id)
+        val ivProfilePic: ImageView = headerView.findViewById(R.id.iv_profile_picture)
 
         tvUserName.text = user.displayName
         tvEmailId.text = user.email
@@ -61,19 +67,17 @@ class MainActivity : AppCompatActivity() {
             .into(ivProfilePic)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.detailFragment) {
-                binding.bottomNavBar.visibility = View.GONE
-            } else {
+            if (destination.id in bottomNavDestinations) {
                 binding.bottomNavBar.visibility = View.VISIBLE
+            } else {
+                binding.bottomNavBar.visibility = View.GONE
             }
         }
 
         binding.sideNavBar.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.item_show_logout_dialog -> {
-                    Navigation
-                        .findNavController(this, R.id.main_page_fragment_container)
-                        .navigate(R.id.show_log_out_dialog)
+                    navController.navigate(R.id.show_log_out_dialog)
                 }
 
                 else -> {
