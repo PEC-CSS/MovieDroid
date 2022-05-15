@@ -1,32 +1,28 @@
 package com.pec_acm.moviedroid.mainpage.list;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.pec_acm.moviedroid.R;
+import com.pec_acm.moviedroid.databinding.FragmentDroppedListBinding;
 import com.pec_acm.moviedroid.firebase.ListItem;
 import com.pec_acm.moviedroid.firebase.User;
-
 import java.util.ArrayList;
 
 public class DroppedListFragment extends Fragment {
-
+    private FragmentDroppedListBinding binding;
     private ListViewModel listViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dropped_list, container, false);
-
-        RecyclerView droppedList = view.findViewById(R.id.dropped_list);
+        binding = FragmentDroppedListBinding.inflate(inflater,container,false);
+        View view=binding.getRoot();
+        RecyclerView droppedList = binding.droppedList;
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.getUser(FirebaseAuth.getInstance().getUid());
         ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);

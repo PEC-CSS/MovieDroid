@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentSearchBinding
@@ -28,8 +27,8 @@ class SearchFragment : Fragment() {
     ): View {
         _binding = FragmentSearchBinding.inflate(layoutInflater,container, false)
         val view = binding.root
-        val searchList = view.findViewById<RecyclerView>(R.id.search_list)
-        val searchText = view.findViewById<SearchView>(R.id.search_text)
+        val searchList = binding.searchList
+        val searchText = binding.searchText
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
         searchListAdapter = ListAdapter(requireContext(),listViewModel, this, false)
         searchList.adapter = searchListAdapter
