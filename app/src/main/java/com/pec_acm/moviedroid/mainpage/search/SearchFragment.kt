@@ -82,16 +82,9 @@ class SearchFragment : Fragment() {
                 else if (checkedChipID == binding.tvChip.id){
                     searchViewModel.searchTvShow(query)
                 }
-                binding.searchChipGroup.setOnCheckedChangeListener { _, id ->
-                    if (id ==binding.movieChip.id) {
-                        binding.movieChip.setChipBackgroundColorResource(R.color.search_toggle)
-                        searchViewModel.searchMovie(query)
-                    }
-                    else if (id == binding.tvChip.id){
-                        searchViewModel.searchTvShow(query)
-                    }
-                }
+
                 searchText.clearFocus()
+
                 return false
             }
 
@@ -103,6 +96,16 @@ class SearchFragment : Fragment() {
                      searchViewModel.tvShowSearchList.value = arrayListOf()
                      searchListAdapter.notifyDataSetChanged()
                  }
+
+                binding.searchChipGroup.setOnCheckedChangeListener { _, id ->
+                    if (id ==binding.movieChip.id && newText!="") {
+                        binding.movieChip.setChipBackgroundColorResource(R.color.search_toggle)
+                        searchViewModel.searchMovie(newText.toString())
+                    }
+                    else if (id == binding.tvChip.id && newText!=""){
+                        searchViewModel.searchTvShow(newText.toString())
+                    }
+                }
                 return true
             }
         })
