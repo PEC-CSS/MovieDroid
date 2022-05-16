@@ -1,7 +1,6 @@
 package com.pec_acm.moviedroid.mainpage.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentHomeBinding
+import com.pec_acm.moviedroid.firebase.ListItem
+import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.adapters.HorizontalAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -27,61 +28,77 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rv250movies.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
         binding.rvTop250tvshows.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         viewModel.getTopMovies()
+        val topMovies = mutableListOf<ListItem>()
         viewModel.topMovies.observe(viewLifecycleOwner) {
-            val movieList =  arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8) {
-                movieList.add(Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title)))
+                val listItem = it[i].toListItem()
+                topMovies.add(listItem)
             }
-            val topMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            val topMoviesAdapter = HorizontalAdapter(requireContext())
+            topMoviesAdapter.setItemList(topMovies)
             binding.rv250movies.adapter = topMoviesAdapter
         }
         viewModel.getTopTVShows()
+        val topTVShows = mutableListOf<ListItem>()
         viewModel.topTVShows.observe(viewLifecycleOwner){
-            val tvShowList =  arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8){
-                tvShowList.add((Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))))
+                val listItem = it[i].toListItem()
+                topTVShows.add(listItem)
             }
-            Log.d("TV","$tvShowList")
-            val topTVShowsAdapter = HorizontalAdapter(tvShowList,requireContext())
+            val topTVShowsAdapter = HorizontalAdapter(requireContext())
+            topTVShowsAdapter.setItemList(topTVShows)
             binding.rvTop250tvshows.adapter = topTVShowsAdapter
         }
         viewModel.getPopularMovies()
+        val popularMovies = mutableListOf<ListItem>()
         viewModel.popularMovies.observe(viewLifecycleOwner){
-            val movieList = arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8) {
-                movieList.add((Pair(it[i].id,Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
+                val listItem = it[i].toListItem()
+                popularMovies.add(listItem)
             }
-            val popularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
+            val popularMoviesAdapter = HorizontalAdapter( requireContext())
+            popularMoviesAdapter.setItemList(popularMovies)
             binding.rvMostPopularMovies.adapter = popularMoviesAdapter
         }
 
         viewModel.getPopularTVShows()
+        val popularTVShows = mutableListOf<ListItem>()
         viewModel.popularTVShows.observe(viewLifecycleOwner){
-            val tvShowList =  arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8){
-                tvShowList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].name))))
+                val listItem = it[i].toListItem()
+                popularTVShows.add(listItem)
             }
-            val mostPopularTVShows = HorizontalAdapter(tvShowList,requireContext())
+            val mostPopularTVShows = HorizontalAdapter(requireContext())
+            mostPopularTVShows.setItemList(popularTVShows)
             binding.rvMostPopularTVShows.adapter = mostPopularTVShows
         }
-
         viewModel.getNowPlayingMovies()
+        val nowPlayingMovies = mutableListOf<ListItem>()
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner){
-            val theaterItemList =  arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8){
-                theaterItemList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
+                val listItem = it[i].toListItem()
+                nowPlayingMovies.add(listItem)
             }
-            val nowPlayingMoviesAdapter = HorizontalAdapter(theaterItemList,requireContext())
+            val nowPlayingMoviesAdapter = HorizontalAdapter(requireContext())
+            nowPlayingMoviesAdapter.setItemList(nowPlayingMovies)
             binding.rvInTheaters.adapter = nowPlayingMoviesAdapter
         }
 
         viewModel.getUpcomingMovies()
+        val upcomingMovies = mutableListOf<ListItem>()
         viewModel.upcomingMovies.observe(viewLifecycleOwner){
-            val comingSoonItemList =  arrayListOf<Pair<Int,Pair<String,String>>>()
+
             for (i in 0..8){
-                comingSoonItemList.add(Pair(it[i].id,(Pair("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+it[i].poster_path,it[i].title))))
+                val listItem = it[i].toListItem()
+                upcomingMovies.add(listItem)
             }
-            val upcomingMoviesAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
+            val upcomingMoviesAdapter = HorizontalAdapter(requireContext())
+            upcomingMoviesAdapter.setItemList(upcomingMovies)
             binding.rvComingSoon.adapter = upcomingMoviesAdapter
         }
         return view
