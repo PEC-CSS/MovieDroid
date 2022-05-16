@@ -14,7 +14,8 @@ import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.MovieListCountItemBinding
 import com.pec_acm.moviedroid.databinding.MovieListItemBinding
 import com.pec_acm.moviedroid.firebase.ListItem
-import com.pec_acm.moviedroid.mainpage.detail.DetailFragmentDirections
+import com.pec_acm.moviedroid.mainpage.search.SearchFragment
+import com.pec_acm.moviedroid.mainpage.search.SearchFragmentDirections
 
 
 class ListAdapter @JvmOverloads constructor(private val context : Context, private val listViewModel: ListViewModel, val fragment: Fragment?, private val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -43,7 +44,7 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
             return
         }
 
-        val holder =  viewHolder as ListAdapter.ListViewHolder;
+        val holder =  viewHolder as ListAdapter.ListViewHolder
 
         // Decrement the position by 1 before accessing in case of showCount being true as list size is incremented by 1 to accommodate ListViewCountViewHolder.
         val listItem = if (showCount) itemList[position - 1] else itemList[position]
@@ -52,6 +53,7 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         Glide.with(context).load(listItem.posterUrl).into(holder.binding.itemImage)
         holder.binding.itemScore.text = listItem.score.toString()
         holder.itemID = listItem.id
+        holder.itemCategory = listItem.category
         val status: String
         val statusColor: Int
         when (listItem.status) {
@@ -117,18 +119,30 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         notifyDataSetChanged()
     }
 
-    inner class ListViewHolder(val binding: MovieListItemBinding, var itemID: Int? = null) :
+    inner class ListViewHolder(val binding: MovieListItemBinding, var itemID: Int? = null, var itemCategory: String? = null) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    val direction = DetailFragmentDirections.actionDetailFragment(itemID!!)
-                    itemView.findNavController().navigate(direction)
+                    if (itemCategory == "movie") {
+                        if (fragment is SearchFragment){
+                            itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMovieDetailFragment(it))
+                        }
+                        else{
+                           itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToMovieDetailFragment(it))
+                        }
+                    } else if (itemCategory == "tv") {
+                        if (fragment is SearchFragment){
+                            itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToTvDetailFragment(it))
+                        }
+                        else{
+                            itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToTvDetailFragment(it))
+                        }
+                    }
                 }
             }
         }
     }
-
     inner class ListViewCountViewHolder(val binding: MovieListCountItemBinding): RecyclerView.ViewHolder(binding.root)
 }

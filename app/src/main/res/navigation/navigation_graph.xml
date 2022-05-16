@@ -18,8 +18,11 @@
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_homeFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
     </fragment>
 
     <fragment
@@ -31,8 +34,11 @@
             android:id="@+id/action_searchFragment_to_listFragment"
             app:destination="@id/listFragment" />
         <action
-            android:id="@+id/action_searchFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_searchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
     </fragment>
 
     <fragment
@@ -41,15 +47,18 @@
         android:label="Your List"
         tools:layout="@layout/fragment_list">
         <action
-            android:id="@+id/action_listFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_listFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.pec_acm.moviedroid.mainpage.detail.DetailFragment"
+        android:id="@+id/movieDetailFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.detail.MovieDetailFragment"
         android:label="About"
-        tools:layout="@layout/fragment_detail">
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="itemID"
             app:argType="integer" />
@@ -60,7 +69,13 @@
         android:name="com.pec_acm.moviedroid.mainpage.LogoutDialogFragment"
         android:label="LogoutDialogFragment" />
 
-    <action
-        android:id="@+id/action_detail_fragment"
-        app:destination="@id/detailFragment"/>
+    <fragment
+        android:id="@+id/tvDetailFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.detail.TvDetailFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_tv_detail" >
+        <argument
+            android:name="itemID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
