@@ -195,9 +195,9 @@ acmcss@pec.edu.in
 [issues-shield]: https://img.shields.io/github/issues/PEC-CSS/MovieDroid?style=for-the-badge
 [issues-url]: https://github.com/PEC-CSS/MovieDroid/issues
 [license-shield]: https://img.shields.io/github/license/PEC-CSS/MovieDroid?style=for-the-badge
-[license-url]: https://github.com/PEC-CSS/MovieDroid/blob/master/LICENSE.txt
+[license-url]: https://github.com/PEC-CSS/MovieDroid/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/rahul5430/
+[linkedin-url]: https://in.linkedin.com/company/pec-acm-student-chapter
 [product-screenshot-loginScreen]: assets/loginScreen.gif
 [product-screenshot-stockScreenAndWatchlist]: assets/stockScreenAndWatchlist.gif
 [product-screenshot-aboutAndProfileScreen]: assets/aboutAndProfileScreen.gif
