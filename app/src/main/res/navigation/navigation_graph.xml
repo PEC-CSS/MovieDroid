@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_homeFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allItems"
+            app:destination="@id/allItems" />
     </fragment>
 
     <fragment
@@ -77,5 +80,14 @@
         <argument
             android:name="itemID"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/allItems"
+        android:name="com.pec_acm.moviedroid.mainpage.home.AllItems"
+        android:label="Complete List"
+        tools:layout="@layout/fragment_all_items" >
+        <argument
+            android:name="type"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pec_acm.moviedroid.R
@@ -101,6 +102,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             upcomingMoviesAdapter.setItemList(upcomingMovies)
             binding.rvComingSoon.adapter = upcomingMoviesAdapter
         }
+
+        binding.llTopmovies.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topMovies"))
+        }
+        binding.llToptvshows.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topTVSeries"))
+        }
+        binding.llMostPopularMovies.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularMovies"))
+        }
+        binding.llMostPopularTVshows.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularTVSeries"))
+        }
+        binding.llComingSoon.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon"))
+        }
+        binding.llInTheaters.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("inTheaters"))
+        }
         return view
     }
 
@@ -108,5 +134,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onDestroyView()
         _binding = null
     }
-
 }
