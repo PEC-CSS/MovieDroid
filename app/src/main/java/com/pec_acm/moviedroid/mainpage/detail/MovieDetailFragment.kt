@@ -12,10 +12,11 @@ import com.pec_acm.moviedroid.databinding.FragmentMovieDetailBinding
 
 
 class MovieDetailFragment : Fragment() {
+
     private lateinit var detailViewModel: DetailViewModel
     private val args: MovieDetailFragmentArgs by navArgs()
-
     lateinit var binding : FragmentMovieDetailBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
