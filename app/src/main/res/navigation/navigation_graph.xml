@@ -89,5 +89,11 @@
         <argument
             android:name="type"
             app:argType="string" />
+        <action
+            android:id="@+id/action_allItems_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_allItems_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>
