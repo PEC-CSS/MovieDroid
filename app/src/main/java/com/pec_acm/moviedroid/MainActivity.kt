@@ -19,14 +19,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.databinding.ActivityMainBinding
 import com.pec_acm.moviedroid.mainpage.list.ListViewModel
+import com.pec_acm.moviedroid.mainpage.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
     private lateinit var authListener: FirebaseAuth.AuthStateListener
     private val logoutObserver: MutableLiveData<FirebaseAuth> = MutableLiveData()
+    private var isBottomNavHidden = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //Implementing Bottom Navigation View
@@ -68,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in bottomNavDestinations) {
-                binding.bottomNavBar.visibility = View.VISIBLE
+                showBottomNavigation()
             } else {
                 binding.bottomNavBar.visibility = View.GONE
             }
@@ -107,6 +110,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun hideBottomNavigation(){
+        binding.bottomNavBar
+            .animate()
+            .translationY(binding.bottomNavBar.height.toFloat())
+            .setDuration(300)
+
+    }
+
+    fun showBottomNavigation(){
+        binding.bottomNavBar.visibility = View.VISIBLE
+        binding.bottomNavBar
+            .animate()
+            .translationY(0f)
+            .setDuration(300)
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -122,6 +142,24 @@ class MainActivity : AppCompatActivity() {
             }
             else -> {
                 super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.main_page_fragment_container)
+        val fragment = navHost?.childFragmentManager?.primaryNavigationFragment
+        when(fragment){
+            is SearchFragment -> {
+                if(fragment.searchText.isIconified){
+                    super.onBackPressed()
+                }
+                else{
+                    fragment.searchText.isIconified = true
+                }
+            }
+            else -> {
+                super.onBackPressed()
             }
         }
     }

@@ -1,12 +1,15 @@
 package com.pec_acm.moviedroid.mainpage.search
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentSearchBinding
@@ -20,20 +23,48 @@ class SearchFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    lateinit var searchText : SearchView
     var searchItems = mutableListOf<ListItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(layoutInflater,container, false)
+
         val view = binding.root
         val searchList = binding.searchList
-        val searchText = binding.searchText
+        searchText = binding.searchText
+
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
         searchListAdapter = ListAdapter(requireContext(),listViewModel, this, false)
         searchList.adapter = searchListAdapter
+
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
+
+        searchViewModel.searchResult.observe(viewLifecycleOwner){ searchResult ->
+            when(searchResult)
+            {
+                SearchResult.FOUND -> {
+                    binding.searchList.visibility = View.VISIBLE
+                    binding.searchLottie.visibility = View.GONE
+                }
+                SearchResult.NOT_FOUND -> {
+                    binding.searchList.visibility = View.GONE
+                    binding.searchLottie.visibility = View.VISIBLE
+                    binding.searchLottie.setAnimation(R.raw.empty_search_animation)
+                    binding.searchLottie.playAnimation()
+                    Toast.makeText(requireContext(),"No result found",Toast.LENGTH_SHORT).show()
+                }
+                SearchResult.SEARCHING -> {
+                    binding.searchList.visibility = View.GONE
+                    binding.searchLottie.visibility = View.VISIBLE
+                    binding.searchLottie.setAnimation(R.raw.search_animation)
+                    binding.searchLottie.playAnimation()
+                }
+            }
+        }
+
         searchViewModel.movieSearchList.observe(viewLifecycleOwner){ resultList ->
             searchViewModel.user.observe(viewLifecycleOwner){ user->
                 searchItems.clear()
@@ -53,6 +84,7 @@ class SearchFragment : Fragment() {
                 searchListAdapter.setItemList(searchItems)
             }
         }
+
         searchViewModel.tvShowSearchList.observe(viewLifecycleOwner) { resultList ->
             searchViewModel.user.observe(viewLifecycleOwner) { user ->
                 searchItems.clear()
@@ -70,6 +102,7 @@ class SearchFragment : Fragment() {
 
             }
         }
+
         searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query==null) return true
@@ -90,7 +123,6 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                  if (newText=="") {
                      searchItems.clear()
-                     binding.searchChipGroup.clearCheck()
                      searchViewModel.movieSearchList.value = arrayListOf()
                      searchViewModel.tvShowSearchList.value = arrayListOf()
                      searchListAdapter.notifyDataSetChanged()
@@ -108,6 +140,7 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+
         return view
     }
 

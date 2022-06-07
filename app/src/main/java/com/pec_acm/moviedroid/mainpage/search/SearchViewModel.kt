@@ -20,17 +20,35 @@ class SearchViewModel : ViewModel() {
     val user : MutableLiveData<User> = MutableLiveData()
     val movieSearchList : MutableLiveData<List<MovieResult>> = MutableLiveData()
     val tvShowSearchList : MutableLiveData<List<TvResult>> = MutableLiveData()
+    val searchResult : MutableLiveData<SearchResult> = MutableLiveData()
+
     fun searchMovie(query : String)
     {
         viewModelScope.launch {
+            searchResult.value = SearchResult.SEARCHING
             movieSearchList.value = ApiInstance.api.searchMovie(query).body()?.results
+
+            if(movieSearchList.value?.isNotEmpty() == true){
+                searchResult.value = SearchResult.FOUND
+            }
+            else{
+                searchResult.value = SearchResult.NOT_FOUND
+            }
         }
     }
 
     fun searchTvShow(query : String)
     {
         viewModelScope.launch {
+            searchResult.value = SearchResult.SEARCHING
             tvShowSearchList.value = ApiInstance.api.searchTvShow(query).body()?.results
+
+            if(tvShowSearchList.value?.isNotEmpty() == true){
+                searchResult.value = SearchResult.FOUND
+            }
+            else{
+                searchResult.value = SearchResult.NOT_FOUND
+            }
         }
     }
 

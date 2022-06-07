@@ -22,6 +22,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_text"
         app:singleSelection="true"
         app:selectionRequired="true"
+        app:checkedChip="@id/movieChip"
         >
         <com.google.android.material.chip.Chip
             android:id="@+id/movieChip"
@@ -32,7 +33,7 @@
             android:clickable="true"
             android:focusable="true"
             app:chipBackgroundColor="@color/search_toggle"
-
+            android:layout_marginStart="@dimen/_10sdp"
             />
         <com.google.android.material.chip.Chip
             android:id="@+id/tvChip"
@@ -42,7 +43,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
-            app:chipBackgroundColor="@color/search_toggle" />
+            app:chipBackgroundColor="@color/search_toggle"/>
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -54,5 +55,16 @@
         app:layout_constraintTop_toBottomOf="@+id/searchChipGroup"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/movie_list_item"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_250sdp"
+        android:id="@+id/search_lottie"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchChipGroup"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
