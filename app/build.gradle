@@ -92,8 +92,6 @@ dependencies {
 
     // Tensorflow Lite
     implementation 'org.tensorflow:tensorflow-lite:2.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:2.8.0'
-    implementation 'org.tensorflow:tensorflow-lite-support:2.8.0'
 
     // SafeArgs Java
     implementation "androidx.navigation:navigation-fragment:$nav_version"
