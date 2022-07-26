@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -32,8 +31,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //Implementing Bottom Navigation View
         val navController = findNavController(R.id.main_page_fragment_container)
+
         binding.bottomNavBar.setupWithNavController(navController)
 
         val bottomNavDestinations = setOf(
@@ -72,8 +73,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in bottomNavDestinations) {
                 showBottomNavigation()
+                showToolBar()
             } else {
                 binding.bottomNavBar.visibility = View.GONE
+                binding.toolBar.visibility = View.GONE
             }
         }
 
@@ -117,14 +120,16 @@ class MainActivity : AppCompatActivity() {
             .setDuration(300)
 
     }
-
     fun showBottomNavigation(){
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.bottomNavBar
             .animate()
             .translationY(0f)
             .setDuration(300)
-
+    }
+    fun showToolBar(){
+        binding.bottomNavBar.visibility = View.VISIBLE
+        binding.toolBar.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {
