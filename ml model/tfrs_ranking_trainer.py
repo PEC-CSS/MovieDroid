@@ -1,7 +1,6 @@
-
 from typing import Dict, Text
 from typing import List
-
+import pandas as pd
 import numpy as np
 import tensorflow as tf
 
@@ -20,7 +19,10 @@ _FEATURE_SPEC = {
         for feature in _FEATURE_KEYS
     }, _LABEL_KEY: tf.io.FixedLenFeature(shape=[1], dtype=tf.int64)
 }
-
+ratingspath = 'data/TFRS-ranking/ratings.csv'
+df = pd.read_csv(ratingspath)
+num_of_users = len(df['userId'].unique())
+num_of_movies = len(df['movieId'].unique())
 
 class RankingModel(tf.keras.Model):
 
@@ -28,12 +30,12 @@ class RankingModel(tf.keras.Model):
     super().__init__()
     embedding_dimension = 32
 
-    unique_user_ids = np.array(range(943)).astype(str)
-    unique_movie_ids = np.array(range(1682)).astype(str)
+    unique_user_ids = np.array(range(num_of_users)).astype(str)
+    unique_movie_ids = np.array(range(num_of_movies)).astype(str)
 
     # Compute embeddings for users.
     self.user_embeddings = tf.keras.Sequential([
-        tf.keras.layers.Input(shape=(1,), name='userId', dtype=tf.int64),
+        tf.keras.layers.Input(shape=(1), name='userId', dtype=tf.int64),
         tf.keras.layers.Lambda(lambda x: tf.as_string(x)),
         tf.keras.layers.StringLookup(
             vocabulary=unique_user_ids, mask_token=None),
@@ -43,7 +45,7 @@ class RankingModel(tf.keras.Model):
 
     # Compute embeddings for movies.
     self.movie_embeddings = tf.keras.Sequential([
-        tf.keras.layers.Input(shape=(1,), name='movieId', dtype=tf.int64),
+        tf.keras.layers.Input(shape=(1), name='movieId', dtype=tf.int64),
         tf.keras.layers.Lambda(lambda x: tf.as_string(x)),
         tf.keras.layers.StringLookup(
             vocabulary=unique_movie_ids, mask_token=None),
@@ -130,5 +132,12 @@ def run_fn(fn_args: tfx.components.FnArgs):
       epochs = 3,
       validation_data=eval_dataset,
       validation_steps=fn_args.eval_steps)
-
   model.save(fn_args.serving_model_dir)
+  converter = tf.lite.TFLiteConverter.from_saved_model(fn_args.serving_model_dir) # path to the SavedModel directory
+# print("Folder loaded successfully...")
+  tflite_model = converter.convert()
+
+# print("Model ready to write...")
+# Save the model.
+  with open('model.tflite', 'wb') as f:
+    f.write(tflite_model)
