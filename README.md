@@ -44,7 +44,7 @@
         </ul>
       </li>
       <li><a href="#usage">Usage</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
+<!--       <li><a href="#roadmap">Roadmap</a></li> -->
       <li><a href="#contributing">Contributing</a></li>
       <li><a href="#license">License</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -118,10 +118,10 @@ keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -sto
 - Open the cloned project in Android Studio.
 - Select your preferred device and click on Run app.
 - You can run the app using:
-  - Virtual device - If you haven't created a virtual device yet, create one by going to Tools->AVD Manager (Device Manager in Bumblebee) and create virtual device, choose the device specifications according to your needs.
+  - Virtual device - If you haven't created a virtual device yet, create one by going to Tools->AVD Manager (Device Manager in Bumblebee and above) and create a virtual device. Choose the device specifications according to your needs.
 Select your virtual device from the list of devices and run the app
   - Physical device -  In your android device, go to settings and [enable developer options](https://developer.android.com/studio/debug/dev-options#enable).
-Connect your device to your system using USB or WiFi (Only for Android 11) 
+Connect your device to your system using USB or WiFi (Only for Android 11 and above) 
 
 _For more examples, please refer to the [Documentation](https://developer.android.com/docs)_
 
