@@ -1,66 +1,45 @@
 package com.pec_acm.moviedroid.mainpage.list;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.firebase.auth.FirebaseAuth;
+import com.pec_acm.moviedroid.databinding.FragmentCompletedListBinding;
+import com.pec_acm.moviedroid.firebase.ListItem;
+import com.pec_acm.moviedroid.firebase.User;
+import java.util.ArrayList;
 
-import com.pec_acm.moviedroid.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CompletedListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CompletedListFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CompletedListFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CompletedListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CompletedListFragment newInstance(String param1, String param2) {
-        CompletedListFragment fragment = new CompletedListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    private FragmentCompletedListBinding binding;
+    private ListViewModel listViewModel;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_completed_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding =FragmentCompletedListBinding.inflate(inflater,container,false);
+        View view =binding.getRoot();
+        RecyclerView completedList = binding.completedList;
+        listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        listViewModel.getUser(FirebaseAuth.getInstance().getUid());
+        ListAdapter listAdapter = new ListAdapter(requireContext(),listViewModel, this);
+        completedList.setAdapter(listAdapter);
+        listViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if(user==null) return;
+                ArrayList<ListItem> itemList = new ArrayList<>();
+                for(int i=0;i<user.getUserList().size();i++)
+                {
+                    ListItem listItem = user.getUserList().get(i);
+                    if(listItem.getStatus()==2) itemList.add(listItem);
+                }
+                listAdapter.setItemList(itemList);
+            }
+        });
+        return view;
     }
 }

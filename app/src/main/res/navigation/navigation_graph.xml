@@ -5,27 +5,95 @@
     android:id="@+id/navigation_graph.xml"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/show_log_out_dialog"
+        app:destination="@+id/logoutDialogFragment"/>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pec_acm.moviedroid.mainpage.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allItems"
+            app:destination="@id/allItems" />
     </fragment>
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.pec_acm.moviedroid.mainpage.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.pec_acm.moviedroid.mainpage.list.ListFragment"
         android:label="Your List"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.detail.MovieDetailFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="itemID"
+            app:argType="integer" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/logoutDialogFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.LogoutDialogFragment"
+        android:label="LogoutDialogFragment" />
+
+    <fragment
+        android:id="@+id/tvDetailFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.detail.TvDetailFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_tv_detail" >
+        <argument
+            android:name="itemID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/allItems"
+        android:name="com.pec_acm.moviedroid.mainpage.home.AllItems"
+        android:label="Complete List"
+        tools:layout="@layout/fragment_all_items" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_allItems_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_allItems_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>

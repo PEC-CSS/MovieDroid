@@ -1,16 +1,18 @@
 package com.pec_acm.moviedroid.mainpage.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentHomeBinding
+import com.pec_acm.moviedroid.firebase.ListItem
+import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.adapters.HorizontalAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -26,78 +28,110 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.rv250movies.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
         binding.rvTop250tvshows.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-        // Inflate the layout for this fragment
-        viewModel.get250Movies()
-        viewModel.top250Movies.observe(viewLifecycleOwner) {
-            val result = it
-            val movies = result.items
-            val movieList = arrayListOf<Pair<String,String>>()
+        viewModel.getTopMovies()
+        val topMovies = mutableListOf<ListItem>()
+        viewModel.topMovies.observe(viewLifecycleOwner) {
+
             for (i in 0..8) {
-                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+                val listItem = it[i].toListItem()
+                topMovies.add(listItem)
             }
-            val top250MovieAdapter = HorizontalAdapter(movieList, requireContext())
-            binding.rv250movies.adapter = top250MovieAdapter
+            val topMoviesAdapter = HorizontalAdapter(requireContext())
+            topMoviesAdapter.setItemList(topMovies)
+            binding.rv250movies.adapter = topMoviesAdapter
         }
-        viewModel.get250TVShows()
-        viewModel.top250TVShows.observe(viewLifecycleOwner){
-            val result = it
-            val tvShow = result.items
-            val tvShowList = arrayListOf<Pair<String,String>>()
+        viewModel.getTopTVShows()
+        val topTVShows = mutableListOf<ListItem>()
+        viewModel.topTVShows.observe(viewLifecycleOwner){
+
             for (i in 0..8){
-                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
+                val listItem = it[i].toListItem()
+                topTVShows.add(listItem)
             }
-            Log.d("TV","$tvShowList")
-            val top250TVShowAdapter = HorizontalAdapter(tvShowList,requireContext())
-            binding.rvTop250tvshows.adapter = top250TVShowAdapter
+            val topTVShowsAdapter = HorizontalAdapter(requireContext())
+            topTVShowsAdapter.setItemList(topTVShows)
+            binding.rvTop250tvshows.adapter = topTVShowsAdapter
         }
-        viewModel.getMostPopularMovies()
-        viewModel.mostPopularMovies.observe(viewLifecycleOwner){
-            val result = it
-            val movies = result.items
-            val movieList = arrayListOf<Pair<String,String>>()
+        viewModel.getPopularMovies()
+        val popularMovies = mutableListOf<ListItem>()
+        viewModel.popularMovies.observe(viewLifecycleOwner){
+
             for (i in 0..8) {
-                movieList.add(Pair(movies[i].image,movies[i].fullTitle))
+                val listItem = it[i].toListItem()
+                popularMovies.add(listItem)
             }
-            val mostPopularMoviesAdapter = HorizontalAdapter(movieList, requireContext())
-            binding.rvMostPopularMovies.adapter = mostPopularMoviesAdapter
+            val popularMoviesAdapter = HorizontalAdapter( requireContext())
+            popularMoviesAdapter.setItemList(popularMovies)
+            binding.rvMostPopularMovies.adapter = popularMoviesAdapter
         }
 
-        viewModel.getMostPopularTVshows()
-        viewModel.mostPopularTVShows.observe(viewLifecycleOwner){
-            val result = it
-            val tvShow = result.items
-            val tvShowList = arrayListOf<Pair<String,String>>()
+        viewModel.getPopularTVShows()
+        val popularTVShows = mutableListOf<ListItem>()
+        viewModel.popularTVShows.observe(viewLifecycleOwner){
+
             for (i in 0..8){
-                tvShowList.add(Pair(tvShow[i].image,tvShow[i].fullTitle))
+                val listItem = it[i].toListItem()
+                popularTVShows.add(listItem)
             }
-            val mostPopularTVShows = HorizontalAdapter(tvShowList,requireContext())
+            val mostPopularTVShows = HorizontalAdapter(requireContext())
+            mostPopularTVShows.setItemList(popularTVShows)
             binding.rvMostPopularTVShows.adapter = mostPopularTVShows
         }
+        viewModel.getNowPlayingMovies()
+        val nowPlayingMovies = mutableListOf<ListItem>()
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner){
 
-        viewModel.getInTheaters()
-        viewModel.inTheaters.observe(viewLifecycleOwner){
-            val result = it
-            val theaterItem = result.items
-            val theaterItemList = arrayListOf<Pair<String,String>>()
-            for (i in theaterItem.indices){
-                theaterItemList.add(Pair(theaterItem[i].image,theaterItem[i].fullTitle))
+            for (i in 0..8){
+                val listItem = it[i].toListItem()
+                nowPlayingMovies.add(listItem)
             }
-            val inTheatersAdapter = HorizontalAdapter(theaterItemList,requireContext())
-            binding.rvInTheaters.adapter = inTheatersAdapter
+            val nowPlayingMoviesAdapter = HorizontalAdapter(requireContext())
+            nowPlayingMoviesAdapter.setItemList(nowPlayingMovies)
+            binding.rvInTheaters.adapter = nowPlayingMoviesAdapter
         }
 
-        viewModel.getComingSoon()
-        viewModel.comingSoon.observe(viewLifecycleOwner){
-            val result = it
-            val comingSoonItem = result.items
-            val comingSoonItemList = arrayListOf<Pair<String,String>>()
-            for (i in comingSoonItem.indices){
-                comingSoonItemList.add(Pair(comingSoonItem[i].image,comingSoonItem[i].fullTitle))
+        viewModel.getUpcomingMovies()
+        val upcomingMovies = mutableListOf<ListItem>()
+        viewModel.upcomingMovies.observe(viewLifecycleOwner){
+
+            for (i in 0..8){
+                val listItem = it[i].toListItem()
+                upcomingMovies.add(listItem)
             }
-            val comingSoonAdapter = HorizontalAdapter(comingSoonItemList,requireContext())
-            binding.rvComingSoon.adapter = comingSoonAdapter
+            val upcomingMoviesAdapter = HorizontalAdapter(requireContext())
+            upcomingMoviesAdapter.setItemList(upcomingMovies)
+            binding.rvComingSoon.adapter = upcomingMoviesAdapter
+        }
+
+        binding.llTopmovies.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topMovies"))
+        }
+        binding.llToptvshows.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topTVSeries"))
+        }
+        binding.llMostPopularMovies.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularMovies"))
+        }
+        binding.llMostPopularTVshows.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularTVSeries"))
+        }
+        binding.llComingSoon.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon"))
+        }
+        binding.llInTheaters.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("inTheaters"))
         }
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
