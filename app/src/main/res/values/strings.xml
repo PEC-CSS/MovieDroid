@@ -54,5 +54,7 @@
     <string name="rating_3">3 - Very Bad</string>
     <string name="rating_2">2 - Horrible</string>
     <string name="rating_1">1 - Nightmare</string>
-
+    
+    <string name="welcome">Welcome</string>
+    <string name="to">to</string>
 </resources>
