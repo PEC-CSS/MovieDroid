@@ -11,7 +11,7 @@ body:
     id: Suggestion
     attributes:
       label: Suggestion / Feature Request
-      description: Describe the feature(s) you would like to see added.
+      description: Describe the feature(s) along with screenshots that you would like to see added.
       placeholder: Tell us your suggestion
       value: "Your suggestion here"
     validations:
