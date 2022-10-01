@@ -30,9 +30,9 @@ body:
     id: version
     attributes:
       label: Version
-      description: What version of our software are you running?
+      description: Which version of our software are you running?
       placeholder: e.g. v10.0 
-      value: "A bug happened!"
+      value: "e.g. v10.0"
     validations:
       required: true
   - type: dropdown
