@@ -15,4 +15,5 @@
     <string name="welcome">Welcome</string>
     <string name="to">to</string>
     <string name="email_id">youremailid@gmail.com</string>
+    <string name="name">Name</string>
 </resources>
