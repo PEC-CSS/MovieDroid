@@ -78,8 +78,8 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         if (currentUser != null){
-            Log.d(TAG, "Currently Signe in: " + currentUser.getEmail());
-            showToastMessage("Currently Logged in: "+currentUser.getEmail());
+            Log.d(TAG, getString(R.string.currently_signed_in, currentUser.getEmail()));
+            showToastMessage(getString(R.string.currently_logged_in, currentUser.getEmail()));
         }
     }
     public void signInToGoogle(){
@@ -95,17 +95,17 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                showToastMessage("Google Sign in Succeeded");
+                showToastMessage(getString(R.string.google_sign_in_succeeded));
                 firebaseAuthWithGoogle(account);
             }catch (ApiException e){
-                Log.w(TAG, "Google Sign in failed", e);
-                showToastMessage("Google Sign in Failed"+e);
+                Log.w(TAG, getString(R.string.google_sign_in_failed), e);
+                showToastMessage(getString(R.string.google_sign_in_failed)+e);
             }
         }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account){
-        Log.d(TAG , "firebaseAuthWithGoogle:"+account.getId());
+        Log.d(TAG , getString(R.string.firebase_auth_with_google, account.getId()));
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
@@ -115,12 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            Log.d(TAG, "signInWithCredential:success: currentUser: "+user.getEmail());
-                            showToastMessage("Firebase Authentication Succeeded");
+                            Log.d(TAG, getString(R.string.signinwithcredential_success, user.getEmail()));
+                            showToastMessage(getString(R.string.firebase_auth_succeeded));
                             launchMainActivity(user);
                         }else{
-                            Log.w(TAG,"signInWithCredential:failure", task.getException());
-                            showToastMessage("Firebase Authentication failed: "+ task.getException());
+                            Log.w(TAG,getString(R.string.signinwithcredential_failure), task.getException());
+                            showToastMessage(getString(R.string.firebase_auth_failed, task.getException()));
                         }
 
                     }

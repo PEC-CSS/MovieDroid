@@ -20,11 +20,11 @@ class StatusBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem)
         val view = inflater.inflate(R.layout.bottom_sheet_layout,container,false)
         val statusList : ListView = view.findViewById(R.id.options_list)
         val statusOptions = arrayOf(
-            "Watching",
-            "Completed",
-            "On Hold",
-            "Dropped",
-            "Plan to Watch"
+            getString(R.string.watching_tab),
+            getString(R.string.completed_tab),
+            getString(R.string.on_hold_tab),
+            getString(R.string.dropped_tab),
+            getString(R.string.plan_to_watch_tab)
         )
         val arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_list_item_1,statusOptions)
         statusList.adapter = arrayAdapter
