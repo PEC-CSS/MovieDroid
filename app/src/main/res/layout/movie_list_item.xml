@@ -23,7 +23,7 @@
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:src="@color/black" />
+                tools:src="@drawable/ic_search" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -44,16 +44,15 @@
 
             <TextView
                 android:id="@+id/item_category"
-                android:layout_marginVertical="@dimen/_2sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_2sdp"
                 android:textSize="@dimen/_8sdp"
                 tools:text="MOVIE" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_3sdp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -66,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
                     android:textSize="@dimen/_12sdp"
                     tools:text="9.99" />
             </LinearLayout>
@@ -74,23 +73,31 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/item_status"
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/black"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:paddingVertical="@dimen/_2sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="ADD TO LIST" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/item_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black"
+                        android:paddingHorizontal="@dimen/_6sdp"
+                        android:paddingVertical="@dimen/_3sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        tools:text="ADD TO LIST" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/item_personal_score"
