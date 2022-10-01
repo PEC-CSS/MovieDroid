@@ -38,24 +38,16 @@
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_15sdp"
                 android:fontFamily="@font/roboto"
+                android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 tools:text="Hello everyone" />
-
-            <TextView
-                android:id="@+id/item_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_marginVertical="@dimen/_2sdp"
-                android:textSize="@dimen/_8sdp"
-                tools:text="MOVIE" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -73,6 +65,29 @@
                     tools:text="9.99" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_movie" />
+
+                <TextView
+                    android:id="@+id/item_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto"
+
+                    android:textSize="@dimen/_10sdp"
+                    tools:text="MOVIE" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
