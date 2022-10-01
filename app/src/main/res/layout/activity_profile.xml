@@ -25,21 +25,23 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!--        name-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/name"
             android:fontFamily="@font/roboto"
+            android:text="@string/name"
             android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_id"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/_10ssp" />
+        <!--        email-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/email_id"
+            android:textSize="@dimen/_10ssp" />
 
 
     </LinearLayout>
