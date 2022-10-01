@@ -43,7 +43,7 @@ body:
     attributes:
       label: Which version of Android are you seeing the problem on?
       multiple: true
-      placeholder: ex. v10.0
+    placeholder: ex. v10.0
     validations:
       required: true
       
