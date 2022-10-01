@@ -39,14 +39,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
                 tools:text="Hello everyone" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -73,7 +73,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_movie" />
 
@@ -84,8 +84,7 @@
                     android:layout_marginVertical="@dimen/_2sdp"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:fontFamily="@font/roboto"
-
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_9sdp"
                     tools:text="MOVIE" />
             </LinearLayout>
 
