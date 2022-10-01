@@ -33,11 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
                 tools:text="Hello everyone"
                 android:id="@+id/item_title" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_8sdp"
                 tools:text="MOVIE"
                 android:id="@+id/item_category" />
@@ -68,6 +70,8 @@
                     android:background="@color/black"
                     android:id="@+id/item_status"
                     android:textStyle="bold"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:paddingVertical="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
