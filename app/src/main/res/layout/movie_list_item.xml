@@ -16,21 +16,21 @@
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_66sdp"
             android:layout_height="@dimen/_99sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginVertical="@dimen/_6sdp"
+            android:layout_margin="@dimen/_7sdp"
             app:cardCornerRadius="@dimen/_8sdp">
 
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ic_search" />
+                tools:src="@color/black" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_4sdp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -44,15 +44,16 @@
 
             <TextView
                 android:id="@+id/item_category"
+                android:layout_marginVertical="@dimen/_2sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_8sdp"
                 tools:text="MOVIE" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_3sdp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -65,9 +66,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:textSize="@dimen/_12sdp"
                     tools:text="9.99" />
             </LinearLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
