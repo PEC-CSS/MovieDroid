@@ -26,80 +26,78 @@ class AllItems : Fragment() {
         _binding = FragmentAllItemsBinding.inflate(layoutInflater,container,false)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.allItemsRV.layoutManager = GridLayoutManager(context, 2)
-        val type = args.type
-        if (type == "topMovies"){
-            viewModel.getTopMovies()
-            val topMovies = mutableListOf<ListItem>()
-            viewModel.topMovies.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    topMovies.add(listItem)
+        when (args.type) {
+            "topMovies" -> {
+                viewModel.getTopMovies()
+                val topMovies = mutableListOf<ListItem>()
+                viewModel.topMovies.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        topMovies.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(topMovies,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(topMovies,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
-        }
-
-        else if (type == "topTVSeries"){
-            viewModel.getTopTVShows()
-            val topTVSeries = mutableListOf<ListItem>()
-            viewModel.topTVShows.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    topTVSeries.add(listItem)
+            "topTVSeries" -> {
+                viewModel.getTopTVShows()
+                val topTVSeries = mutableListOf<ListItem>()
+                viewModel.topTVShows.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        topTVSeries.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(topTVSeries,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(topTVSeries,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
-        }
-
-        else if (type == "popularMovies"){
-            viewModel.getPopularMovies()
-            val popularMovies = mutableListOf<ListItem>()
-            viewModel.popularMovies.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    popularMovies.add(listItem)
+            "popularMovies" -> {
+                viewModel.getPopularMovies()
+                val popularMovies = mutableListOf<ListItem>()
+                viewModel.popularMovies.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        popularMovies.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(popularMovies,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(popularMovies,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
-        }
-
-        else if(type == "popularTVSeries"){
-            viewModel.getPopularTVShows()
-            val popularTVSeries = mutableListOf<ListItem>()
-            viewModel.popularTVShows.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    popularTVSeries.add(listItem)
+            "popularTVSeries" -> {
+                viewModel.getPopularTVShows()
+                val popularTVSeries = mutableListOf<ListItem>()
+                viewModel.popularTVShows.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        popularTVSeries.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(popularTVSeries,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(popularTVSeries,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
-        }
-        else if (type == "comingSoon"){
-            viewModel.getUpcomingMovies()
-            val comingSoon = mutableListOf<ListItem>()
-            viewModel.upcomingMovies.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    comingSoon.add(listItem)
+            "comingSoon" -> {
+                viewModel.getUpcomingMovies()
+                val comingSoon = mutableListOf<ListItem>()
+                viewModel.upcomingMovies.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        comingSoon.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(comingSoon,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(comingSoon,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
-        }
-        else if (type == "inTheaters"){
-            viewModel.getNowPlayingMovies()
-            val nowplaying = mutableListOf<ListItem>()
-            viewModel.nowPlayingMovies.observe(viewLifecycleOwner) {
-                for (element in it) {
-                    val listItem = element.toListItem()
-                    nowplaying.add(listItem)
+            "inTheaters" -> {
+                viewModel.getNowPlayingMovies()
+                val nowplaying = mutableListOf<ListItem>()
+                viewModel.nowPlayingMovies.observe(viewLifecycleOwner) {
+                    for (element in it) {
+                        val listItem = element.toListItem()
+                        nowplaying.add(listItem)
+                    }
+                    val topMoviesAdapter = NormalAdapter(nowplaying,requireContext())
+                    binding.allItemsRV.adapter = topMoviesAdapter
                 }
-                val topMoviesAdapter = NormalAdapter(nowplaying,requireContext())
-                binding.allItemsRV.adapter = topMoviesAdapter
             }
         }
         return binding.root
