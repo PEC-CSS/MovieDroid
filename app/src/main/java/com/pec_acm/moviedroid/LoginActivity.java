@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void configureGoogleClient(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("getString(R.string.default_web_client_id)") //For firebase auth, handle getString() function and set value for R.string.default_web_client_id
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
