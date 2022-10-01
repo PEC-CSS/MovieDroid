@@ -21,36 +21,42 @@ body:
     id: what-happened
     attributes:
       label: What happened?
-      description: Describe the issue here.
+      description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
       value: "A bug happened!"
     validations:
       required: true
   - type: dropdown
-    id: Device
+    id: version
     attributes:
-      label: Which type of Device are you seeing the problem on?
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
       multiple: true
       options:
-        - Phone
-        - Emulator
-        - Tablets
-    validations:
-      required: true
-
-  - type: dropdown
-    id: Android Version
-    attributes:
-      label: Which version of Android are you seeing the problem on?
-      multiple: true
-    placeholder: ex. v10.0
-    validations:
-      required: true
-      
-
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
   - type: textarea
     id: logs
     attributes:
-      label: Code to produce this issue.
-      description: Please copy and paste any relevant code to re-produce this issue. And the version of the browser you are using. 
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
