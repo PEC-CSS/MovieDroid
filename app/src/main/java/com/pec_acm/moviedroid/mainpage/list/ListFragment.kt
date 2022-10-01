@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
@@ -21,12 +22,12 @@ class ListFragment : Fragment() {
         listPager.adapter = ListPagerAdapter(this)
         TabLayoutMediator(binding.listTabLayout, listPager) { tab: TabLayout.Tab, position: Int ->
             val tabText: String = when (position) {
-                1 -> "Watching"
-                2 -> "Completed"
-                3 -> "On Hold"
-                4 -> "Dropped"
-                5 -> "Plan to Watch"
-                else -> "All"
+                1 -> getString(R.string.watching_tab)
+                2 -> getString(R.string.completed_tab)
+                3 -> getString(R.string.on_hold_tab)
+                4 -> getString(R.string.dropped_tab)
+                5 -> getString(R.string.plan_to_watch_tab)
+                else -> getString(R.string.all_tab)
             }
             tab.text = tabText
         }.attach()

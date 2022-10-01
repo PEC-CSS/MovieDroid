@@ -21,16 +21,16 @@ class ScoreBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem) 
         val view = inflater.inflate(R.layout.bottom_sheet_layout, container, false)
         val statusList: ListView = view.findViewById(R.id.options_list)
         val statusOptions = arrayOf(
-            "10 - Masterpiece",
-            "9 - Amazing",
-            "8 - Great",
-            "7 - Good",
-            "6 - Fine",
-            "5 - Average",
-            "4 - Bad",
-            "3 - Very Bad",
-            "2 - Horrible",
-            "1 - Nightmare"
+            getString(R.string.rating_10),
+            getString(R.string.rating_9),
+            getString(R.string.rating_8),
+            getString(R.string.rating_7),
+            getString(R.string.rating_6),
+            getString(R.string.rating_5),
+            getString(R.string.rating_4),
+            getString(R.string.rating_3),
+            getString(R.string.rating_2),
+            getString(R.string.rating_1)
         )
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, statusOptions)

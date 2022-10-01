@@ -58,27 +58,27 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         val statusColor: Int
         when (listItem.status) {
             1 -> {
-                status = "watching"
+                status = context.getString(R.string.watching_status)
                 statusColor = R.color.green
             }
             2 -> {
-                status = "completed"
+                status = context.getString(R.string.completed_status)
                 statusColor = R.color.purple_700
             }
             3 -> {
-                status = "on hold"
+                status = context.getString(R.string.on_hold_status)
                 statusColor = R.color.yellow
             }
             4 -> {
-                status = "dropped"
+                status = context.getString(R.string.dropped_status)
                 statusColor = R.color.red
             }
             5 -> {
-                status = "plan to watch"
+                status = context.getString(R.string.plan_to_watch_status)
                 statusColor = R.color.grey
             }
             else -> {
-                status = "add to list"
+                status = context.getString(R.string.add_to_list_status)
                 statusColor = R.color.black
             }
         }
@@ -125,14 +125,14 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    if (itemCategory == "movie") {
+                    if (itemCategory == context.getString(R.string.movie_item_category)) {
                         if (fragment is SearchFragment){
                             itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMovieDetailFragment(it))
                         }
                         else{
                            itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToMovieDetailFragment(it))
                         }
-                    } else if (itemCategory == "tv") {
+                    } else if (itemCategory == context.getString(R.string.tv_item_category)) {
                         if (fragment is SearchFragment){
                             itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToTvDetailFragment(it))
                         }

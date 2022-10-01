@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pec_acm.moviedroid.data.api.ApiInstance
 import com.pec_acm.moviedroid.App
+import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.model.MovieResult
 import com.pec_acm.moviedroid.model.TvResult
 import kotlinx.coroutines.launch
@@ -24,7 +25,7 @@ class HomeViewModel: ViewModel() {
             try {
                 topMovies.value = ApiInstance.api.getTopMovies().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -34,7 +35,7 @@ class HomeViewModel: ViewModel() {
             try {
                 topTVShows.value = ApiInstance.api.getTopTvShows().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -44,7 +45,7 @@ class HomeViewModel: ViewModel() {
             try {
                 popularMovies.value = ApiInstance.api.getPopularMovies().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -54,7 +55,7 @@ class HomeViewModel: ViewModel() {
             try {
                 popularTVShows.value = ApiInstance.api.getPopularTvShows().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -64,7 +65,7 @@ class HomeViewModel: ViewModel() {
             try {
                 nowPlayingMovies.value = ApiInstance.api.getNowPlayingMovies().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -75,7 +76,7 @@ class HomeViewModel: ViewModel() {
             try {
                 upcomingMovies.value = ApiInstance.api.getUpcomingMovies().body()?.results
             }catch (e:Exception){
-                Toast.makeText(App.appContext, "Exception : $e", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.appContext, App.appContext?.getString(R.string.toast_exception, e.toString()), Toast.LENGTH_SHORT).show()
             }
         }
     }

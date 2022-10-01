@@ -24,11 +24,11 @@ class HorizontalAdapter( val context: Context):RecyclerView.Adapter<HorizontalAd
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    if (itemCategory == "movie") {
+                    if (itemCategory == context.getString(R.string.movie_item_category)) {
                         val direction =
                             HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(it)
                         itemView.findNavController().navigate(direction)
-                    } else if (itemCategory == "tv") {
+                    } else if (itemCategory == context.getString(R.string.tv_item_category)) {
                         itemView.findNavController()
                             .navigate(HomeFragmentDirections.actionHomeFragmentToTvDetailFragment(it))
                     }
