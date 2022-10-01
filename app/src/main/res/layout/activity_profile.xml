@@ -19,6 +19,7 @@
             app:cardCornerRadius="@dimen/_50sdp">
 
             <ImageView
+                android:id="@+id/img_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_account_circle_24" />
@@ -27,6 +28,7 @@
 
         <!--        name-->
         <TextView
+            android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
@@ -36,6 +38,7 @@
 
         <!--        email-->
         <TextView
+            android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
