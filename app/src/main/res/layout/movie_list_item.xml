@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 tools:text="Hello everyone" />
 
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_12ssp"
                     tools:text="9.99" />
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                     android:layout_marginVertical="@dimen/_2sdp"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_9ssp"
                     tools:text="MOVIE" />
             </LinearLayout>
 
@@ -111,7 +111,7 @@
                         android:paddingHorizontal="@dimen/_6sdp"
                         android:paddingVertical="@dimen/_3sdp"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         tools:text="ADD TO LIST" />
                 </androidx.cardview.widget.CardView>
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
