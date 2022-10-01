@@ -31,7 +31,7 @@
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:fontFamily="@font/roboto"
             android:text="@string/name"
             android:textSize="@dimen/_16ssp" />
@@ -41,7 +41,7 @@
             android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/roboto"
             android:text="@string/email_id"
             android:textSize="@dimen/_10ssp" />
