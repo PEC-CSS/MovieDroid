@@ -21,7 +21,7 @@ import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 import com.pec_acm.moviedroid.mainpage.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var authListener: FirebaseAuth.AuthStateListener
     private val logoutObserver: MutableLiveData<FirebaseAuth> = MutableLiveData()
     private var isBottomNavHidden = false
@@ -86,6 +86,11 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.show_log_out_dialog)
                 }
 
+                R.id.item_move_to_profile_page -> {
+                    //move to profile activity
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
                 else -> {
                     Snackbar.make(
                         binding.root,
@@ -113,21 +118,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun hideBottomNavigation(){
+    fun hideBottomNavigation() {
         binding.bottomNavBar
             .animate()
             .translationY(binding.bottomNavBar.height.toFloat())
             .setDuration(300)
 
     }
-    fun showBottomNavigation(){
+
+    fun showBottomNavigation() {
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.bottomNavBar
             .animate()
             .translationY(0f)
             .setDuration(300)
     }
-    fun showToolBar(){
+
+    fun showToolBar() {
         binding.bottomNavBar.visibility = View.VISIBLE
         binding.toolBar.visibility = View.VISIBLE
     }
@@ -154,12 +161,11 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val navHost = supportFragmentManager.findFragmentById(R.id.main_page_fragment_container)
         val fragment = navHost?.childFragmentManager?.primaryNavigationFragment
-        when(fragment){
+        when (fragment) {
             is SearchFragment -> {
-                if(fragment.searchText.isIconified){
+                if (fragment.searchText.isIconified) {
                     super.onBackPressed()
-                }
-                else{
+                } else {
                     fragment.searchText.isIconified = true
                 }
             }
