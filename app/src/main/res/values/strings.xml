@@ -12,6 +12,49 @@
     <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="no_result_found">No result found</string>
+
+    <string name="toast_exception">Exception : %1$s</string>
+
+    <string name="movie_item_category">movie</string>
+    <string name="tv_item_category">tv</string>
+
+    <string name="watching_status">watching</string>
+    <string name="completed_status">completed</string>
+    <string name="on_hold_status">on hold</string>
+    <string name="dropped_status">dropped</string>
+    <string name="plan_to_watch_status">plan to watch</string>
+    <string name="add_to_list_status">add to list</string>
+
+    <string name="all_tab">All</string>
+    <string name="watching_tab">Watching</string>
+    <string name="completed_tab">Completed</string>
+    <string name="on_hold_tab">On Hold</string>
+    <string name="dropped_tab">Dropped</string>
+    <string name="plan_to_watch_tab">Plan to Watch</string>
+
+    <string name="currently_signed_in">Currently Signed in: %1$s</string>
+    <string name="currently_logged_in">Currently Logged in: %1$s</string>
+    <string name="google_sign_in_succeeded">Google Sign in Succeeded</string>
+    <string name="google_sign_in_failed">Google Sign in Failed </string>
+    <string name="firebase_auth_with_google">firebaseAuthWithGoogle: %1$s</string>
+    <string name="firebase_auth_succeeded">Firebase Authentication Succeeded</string>
+    <string name="firebase_auth_failed">Firebase Authentication failed:  %1$s</string>
+    <string name="signinwithcredential_failure">signInWithCredential:failure</string>
+    <string name="signinwithcredential_success">signInWithCredential:success: currentUser: %1$s"</string>
+
+    <string name="rating_10">10 - Masterpiece</string>
+    <string name="rating_9">9 - Amazing</string>
+    <string name="rating_8">8 - Great</string>
+    <string name="rating_7">7 - Good</string>
+    <string name="rating_6">6 - Fine</string>
+    <string name="rating_5">5 - Average</string>
+    <string name="rating_4">4 - Bad</string>
+    <string name="rating_3">3 - Very Bad</string>
+    <string name="rating_2">2 - Horrible</string>
+    <string name="rating_1">1 - Nightmare</string>
+    
     <string name="welcome">Welcome</string>
     <string name="to">to</string>
     <string name="email_id">youremailid@gmail.com</string>
