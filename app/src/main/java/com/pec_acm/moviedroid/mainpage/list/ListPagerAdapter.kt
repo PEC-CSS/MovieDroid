@@ -1,30 +1,21 @@
-package com.pec_acm.moviedroid.mainpage.list;
+package com.pec_acm.moviedroid.mainpage.list
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-public class ListPagerAdapter extends FragmentStateAdapter {
-    public ListPagerAdapter(@NonNull Fragment fragment) {
-        super(fragment);
-    }
-
-    @NonNull
-    @Override
-    public Fragment createFragment(int position) {
-        switch (position)
-        {
-            default: return new AllListFragment();
-            case 1: return new WatchingListFragment();
-            case 2: return new CompletedListFragment();
-            case 3: return new OnHoldListFragment();
-            case 4: return new DroppedListFragment();
-            case 5: return new PlanToWatchListFragment();
+class ListPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    override fun createFragment(position: Int): Fragment {
+        return when (position) {
+            1 -> WatchingListFragment()
+            2 -> CompletedListFragment()
+            3 -> OnHoldListFragment()
+            4 -> DroppedListFragment()
+            5 -> PlanToWatchListFragment()
+            else -> AllListFragment()
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return 6;
+    override fun getItemCount(): Int {
+        return 6
     }
 }
