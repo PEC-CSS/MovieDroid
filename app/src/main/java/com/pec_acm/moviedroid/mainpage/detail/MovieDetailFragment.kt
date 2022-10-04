@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentMovieDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     private lateinit var detailViewModel: DetailViewModel
@@ -40,7 +42,7 @@ class MovieDetailFragment : Fragment() {
         }
         return binding.root
     }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(androidx.core.R.menu.example_menu, menu)
-    }
+    }*/
 }
