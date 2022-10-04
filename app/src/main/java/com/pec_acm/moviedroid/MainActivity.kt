@@ -19,7 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.databinding.ActivityMainBinding
 import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 import com.pec_acm.moviedroid.mainpage.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var authListener: FirebaseAuth.AuthStateListener

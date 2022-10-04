@@ -14,7 +14,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.*
 import com.pec_acm.moviedroid.databinding.ActivityLoginBinding
 import com.pec_acm.moviedroid.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private val TAG = "FirebaseAuth"

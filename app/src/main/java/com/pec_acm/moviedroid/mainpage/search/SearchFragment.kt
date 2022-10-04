@@ -17,7 +17,9 @@ import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.list.ListAdapter
 import com.pec_acm.moviedroid.mainpage.list.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var searchListAdapter : ListAdapter
     private lateinit var searchViewModel: SearchViewModel
