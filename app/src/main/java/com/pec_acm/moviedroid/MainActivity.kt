@@ -72,6 +72,11 @@ class MainActivity : AppCompatActivity() {
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(ivProfilePic)
 
+        Glide.with(this)
+            .load(user.photoUrl)
+            .placeholder(R.drawable.ic_baseline_account_circle_24)
+            .into(binding.circularImageview)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in bottomNavDestinations) {
                 showBottomNavigation()
