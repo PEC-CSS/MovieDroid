@@ -1,90 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_12sdp"
-    app:cardElevation="@dimen/_5sdp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/_5sdp">
+    app:cardElevation="@dimen/_5sdp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_66sdp"
             android:layout_height="@dimen/_99sdp"
-            app:cardCornerRadius="@dimen/_8sdp"
-            android:layout_marginVertical="@dimen/_6sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp">
+            android:layout_margin="@dimen/_7sdp"
+            app:cardCornerRadius="@dimen/_8sdp">
+
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ic_search"/>
+                tools:src="@drawable/ic_search" />
         </androidx.cardview.widget.CardView>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginVertical="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_15sdp"
-                tools:text="Hello everyone"
-                android:id="@+id/item_title" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_8sdp"
-                tools:text="MOVIE"
-                android:id="@+id/item_category" />
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                tools:text="Hello everyone" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star"/>
+                    android:src="@drawable/ic_star" />
+
                 <TextView
+                    android:id="@+id/item_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="9.99"
                     android:layout_gravity="center"
-                    android:id="@+id/item_score" />
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="9.99" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_movie" />
+
+                <TextView
+                    android:id="@+id/item_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/_9ssp"
+                    tools:text="MOVIE" />
+            </LinearLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal">
-                <TextView
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="ADD TO LIST"
-                    android:background="@color/black"
-                    android:id="@+id/item_status"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/item_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black"
+                        android:paddingHorizontal="@dimen/_6sdp"
+                        android:paddingVertical="@dimen/_3sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        tools:text="ADD TO LIST" />
+                </androidx.cardview.widget.CardView>
+
                 <TextView
+                    android:id="@+id/item_personal_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="9/10"
-                    tools:visibility="visible"
-                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:id="@+id/item_personal_score"/>
+                    tools:text="9/10"
+                    tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
