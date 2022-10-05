@@ -19,8 +19,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 
-
-
 }
 plugins {
     id 'com.android.application' version '7.1.0' apply false
@@ -32,5 +30,3 @@ plugins {
     task clean(type: Delete) {
         delete rootProject.buildDir
     }
-
-
