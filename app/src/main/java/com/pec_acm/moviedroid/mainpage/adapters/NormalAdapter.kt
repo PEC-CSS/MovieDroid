@@ -21,11 +21,11 @@ class NormalAdapter(private val images:List<ListItem>, val context: Context): Re
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    if (itemCategory == "movie") {
+                    if (itemCategory == context.getString(R.string.movie_item_category)) {
                         val direction =
                             AllItemsDirections.actionAllItemsToMovieDetailFragment(it)
                         itemView.findNavController().navigate(direction)
-                    } else if (itemCategory == "tv") {
+                    } else if (itemCategory == context.getString(R.string.tv_item_category)) {
                         itemView.findNavController()
                             .navigate(AllItemsDirections.actionAllItemsToTvDetailFragment(it))
                     }

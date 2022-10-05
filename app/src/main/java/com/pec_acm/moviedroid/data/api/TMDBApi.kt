@@ -1,5 +1,6 @@
 package com.pec_acm.moviedroid.data.api
 
+import com.pec_acm.moviedroid.data.Constants
 import com.pec_acm.moviedroid.model.MovieDetail
 import com.pec_acm.moviedroid.model.MovieListResponse
 import com.pec_acm.moviedroid.model.TVDetail
@@ -14,25 +15,25 @@ interface TMDBApi {
     @GET("movie/top_rated")
     suspend fun getTopMovies(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieListResponse>
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieListResponse>
 
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieListResponse>
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieListResponse>
 
     @GET("search/movie")
@@ -40,32 +41,32 @@ interface TMDBApi {
         @Query("query")
         query: String,
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieListResponse>
 
 
     @GET("tv/top_rated")
     suspend fun getTopTvShows(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<TvListResponse>
 
     @GET("tv/popular")
     suspend fun getPopularTvShows(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<TvListResponse>
 
     @GET("tv/now_playing")
     suspend fun getNowPlayingTvShows(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<TvListResponse>
 
     @GET("tv/upcoming")
     suspend fun getUpcomingTvShows(
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<TvListResponse>
 
     @GET("search/tv")
@@ -73,20 +74,20 @@ interface TMDBApi {
         @Query("query")
         query: String,
         @Query("api_key")
-        apiKey : String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<TvListResponse>
 
     @GET("movie/{movie_id}")
     suspend fun movieDetailByID(
         @Path("movie_id") movie_id : Int,
         @Query("api_key")
-        apiKey: String = ApiInstance.API_KEY
+        apiKey : String = Constants.API_KEY
     ) : Response<MovieDetail>
 
     @GET("tv/{tv_id}")
     suspend fun tvShowByID(
         @Path("tv_id") tv_id : Int,
         @Query("api_key")
-        apiKey: String = ApiInstance.API_KEY,
+        apiKey : String = Constants.API_KEY,
     ) : Response<TVDetail>
 }

@@ -14,7 +14,9 @@ import com.pec_acm.moviedroid.databinding.FragmentHomeBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.adapters.HorizontalAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding : FragmentHomeBinding? = null
     private val binding get()  = _binding!!

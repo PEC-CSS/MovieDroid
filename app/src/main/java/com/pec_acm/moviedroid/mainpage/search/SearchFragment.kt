@@ -17,7 +17,9 @@ import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.list.ListAdapter
 import com.pec_acm.moviedroid.mainpage.list.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var searchListAdapter : ListAdapter
     private lateinit var searchViewModel: SearchViewModel
@@ -54,7 +56,7 @@ class SearchFragment : Fragment() {
                     binding.searchLottie.visibility = View.VISIBLE
                     binding.searchLottie.setAnimation(R.raw.empty_search_animation)
                     binding.searchLottie.playAnimation()
-                    Toast.makeText(requireContext(),"No result found",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),getString(R.string.no_result_found),Toast.LENGTH_SHORT).show()
                 }
                 SearchResult.SEARCHING -> {
                     binding.searchList.visibility = View.GONE
