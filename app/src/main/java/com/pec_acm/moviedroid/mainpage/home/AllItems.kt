@@ -12,7 +12,9 @@ import com.pec_acm.moviedroid.databinding.FragmentAllItemsBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.adapters.NormalAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllItems : Fragment() {
     private var _binding : FragmentAllItemsBinding? = null
     val binding get() = _binding!!
@@ -101,5 +103,10 @@ class AllItems : Fragment() {
             }
         }
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
