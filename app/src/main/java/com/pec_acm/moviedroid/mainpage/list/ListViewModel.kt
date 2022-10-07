@@ -65,6 +65,17 @@ class ListViewModel : ViewModel() {
         }
     }
 
+    fun removeItem(uid : String,listItem: ListItem)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                user?.userList?.remove(listItem)
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
+
     fun setItemStatus(uid : String,id: Int,status : Int)
     {
         viewModelScope.launch {

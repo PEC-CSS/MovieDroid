@@ -16,6 +16,7 @@ import com.pec_acm.moviedroid.databinding.MovieListItemBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.search.SearchFragment
 import com.pec_acm.moviedroid.mainpage.search.SearchFragmentDirections
+import dagger.hilt.android.internal.managers.ViewComponentManager
 
 
 class ListAdapter @JvmOverloads constructor(private val context : Context, private val listViewModel: ListViewModel, val fragment: Fragment?, private val showCount: Boolean = true): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -92,16 +93,22 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
 
         } else holder.binding.itemPersonalScore.visibility = View.GONE
 
+        val mContext = if(context is ViewComponentManager.FragmentContextWrapper) {
+            context.baseContext
+        } else {
+            context
+        }
+
         holder.binding.itemPersonalScore.setOnClickListener {
             val bottomSheet = ScoreBottomSheet(listViewModel, listItem)
-            bottomSheet.show((context as FragmentActivity).supportFragmentManager, bottomSheet.tag)
+            bottomSheet.show((mContext as FragmentActivity).supportFragmentManager, bottomSheet.tag)
         }
 
         holder.binding.itemStatus.text = status.uppercase()
         holder.binding.itemStatus.setBackgroundResource(statusColor)
         holder.binding.itemStatus.setOnClickListener {
             val bottomSheet = StatusBottomSheet(listViewModel, listItem)
-            bottomSheet.show((context as FragmentActivity).supportFragmentManager, bottomSheet.tag)
+            bottomSheet.show((mContext as FragmentActivity).supportFragmentManager, bottomSheet.tag)
         }
     }
 
