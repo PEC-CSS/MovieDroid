@@ -59,4 +59,7 @@
     <string name="to">to</string>
     <string name="email_id">youremailid@gmail.com</string>
     <string name="name">Name</string>
+    <string name="app_description" translatable="false">MovieDroid is a completely free and open source native android application that maintains an organized and categorized list of a user\'s favourite movies and TV shows.</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="about" translatable="false">About</string>
 </resources>

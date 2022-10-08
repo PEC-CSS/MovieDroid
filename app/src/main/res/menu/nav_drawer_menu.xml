@@ -9,6 +9,10 @@
         android:title="@string/settings"/>
 
     <item
+        android:id="@+id/item_move_to_about_page"
+        android:title="@string/about"/>
+
+    <item
         android:id="@+id/item_show_logout_dialog"
         android:title="@string/logout"/>
 </menu>

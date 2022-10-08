@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieDroid">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +33,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
