@@ -98,6 +98,13 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                 }
+
+                R.id.item_move_to_about_page -> {
+                    //move to about activity
+                    val intent = Intent(this, AboutActivity::class.java)
+                    startActivity(intent)
+                }
+
                 else -> {
                     Snackbar.make(
                         binding.root,
