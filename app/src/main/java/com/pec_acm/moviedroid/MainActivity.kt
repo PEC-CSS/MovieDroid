@@ -77,6 +77,8 @@ class MainActivity : AppCompatActivity() {
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(binding.circularImageview)
 
+        _openProfileActivity()
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in bottomNavDestinations) {
                 showBottomNavigation()
@@ -129,6 +131,13 @@ class MainActivity : AppCompatActivity() {
         logoutObserver.observe(this) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+    }
+
+    private fun _openProfileActivity() {
+        binding.circleCard.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
