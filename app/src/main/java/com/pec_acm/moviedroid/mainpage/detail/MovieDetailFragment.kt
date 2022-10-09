@@ -1,7 +1,6 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -28,7 +27,7 @@ class MovieDetailFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
-        detailViewModel.getMovieTvVideo(args.itemID)
+        detailViewModel.getMovieVideo(args.itemID)
         detailViewModel.movieDetailList.observe(viewLifecycleOwner){movieDetail ->
             binding.collapsingToolbarLayout.title = movieDetail.title
 
@@ -45,7 +44,7 @@ class MovieDetailFragment : Fragment() {
             binding.overview.text = movieDetail.overview
         }
 
-        detailViewModel.movieTvVideoDetails.observe(viewLifecycleOwner){ movieTvVideo ->
+        detailViewModel.movieVideoDetails.observe(viewLifecycleOwner){ movieTvVideo ->
             binding.videoRcv.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = VideoAdapter(requireContext(),movieTvVideo.results)

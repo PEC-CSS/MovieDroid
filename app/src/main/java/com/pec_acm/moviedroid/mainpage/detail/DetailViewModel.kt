@@ -13,12 +13,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val api : TMDBApi
+    private val api: TMDBApi
 ) : ViewModel() {
 
     val movieDetailList: MutableLiveData<MovieDetail> = MutableLiveData()
     val tvDetailList: MutableLiveData<TVDetail> = MutableLiveData()
-    val movieTvVideoDetails:  MutableLiveData<MovieTvVideo> = MutableLiveData()
+    val movieVideoDetails: MutableLiveData<MovieTvVideo> = MutableLiveData()
+    val tvVideoDetails: MutableLiveData<MovieTvVideo> = MutableLiveData()
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
@@ -32,9 +33,15 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getMovieTvVideo(id: Int) {
+    fun getMovieVideo(id: Int) {
         viewModelScope.launch {
-            movieTvVideoDetails.value = api.movieTvVideosByID(movie_id = id).body()
+            movieVideoDetails.value = api.movieVideosByID(movie_id = id).body()
+        }
+    }
+
+    fun getTvVideo(id: Int) {
+        viewModelScope.launch {
+            tvVideoDetails.value = api.tvVideosByID(tv_id = id).body()
         }
     }
 

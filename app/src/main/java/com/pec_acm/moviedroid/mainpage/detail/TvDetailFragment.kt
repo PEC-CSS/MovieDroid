@@ -26,7 +26,7 @@ class TvDetailFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getTVShowDetail(args.itemID)
-        detailViewModel.getMovieTvVideo(args.itemID)
+        detailViewModel.getTvVideo(args.itemID)
         detailViewModel.tvDetailList.observe(viewLifecycleOwner){tvDetail->
             binding.collapsingToolbarLayout.title = tvDetail.name
                 if (tvDetail.backdrop_path!=null){
@@ -42,10 +42,10 @@ class TvDetailFragment : Fragment() {
         }
 
 
-        detailViewModel.movieTvVideoDetails.observe(viewLifecycleOwner){ movieTvVideo ->
+        detailViewModel.tvVideoDetails.observe(viewLifecycleOwner){ tvVideo ->
             binding.videoRcv.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = VideoAdapter(requireContext(),movieTvVideo.results)
+                adapter = VideoAdapter(requireContext(),tvVideo.results)
             }
         }
 

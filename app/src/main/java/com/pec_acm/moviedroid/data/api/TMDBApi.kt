@@ -89,8 +89,15 @@ interface TMDBApi {
     ) : Response<TVDetail>
 
     @GET("movie/{movie_id}/videos")
-    suspend fun movieTvVideosByID(
+    suspend fun movieVideosByID(
         @Path("movie_id") movie_id : Int,
+        @Query("api_key")
+        apiKey : String = Constants.API_KEY
+    ) : Response<MovieTvVideo>
+
+    @GET("tv/{tv_id}/videos")
+    suspend fun tvVideosByID(
+        @Path("tv_id") tv_id : Int,
         @Query("api_key")
         apiKey : String = Constants.API_KEY
     ) : Response<MovieTvVideo>
