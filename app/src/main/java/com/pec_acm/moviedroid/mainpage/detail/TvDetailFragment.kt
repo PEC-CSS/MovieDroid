@@ -1,13 +1,16 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentTvDetailBinding
+import com.pec_acm.moviedroid.mainpage.adapters.VideoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +26,7 @@ class TvDetailFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getTVShowDetail(args.itemID)
+        detailViewModel.getTvVideo(args.itemID)
         detailViewModel.tvDetailList.observe(viewLifecycleOwner){tvDetail->
             binding.collapsingToolbarLayout.title = tvDetail.name
                 if (tvDetail.backdrop_path!=null){
@@ -36,6 +40,15 @@ class TvDetailFragment : Fragment() {
             binding.genre.text = genres
             binding.overview.text = tvDetail.overview
         }
+
+
+        detailViewModel.tvVideoDetails.observe(viewLifecycleOwner){ tvVideo ->
+            binding.videoRcv.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = VideoAdapter(requireContext(),tvVideo.results)
+            }
+        }
+
         return binding.root
     }
 
