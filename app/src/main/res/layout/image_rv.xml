@@ -20,10 +20,15 @@
 
     <TextView
         android:id="@+id/movie_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem"
-        android:layout_gravity="bottom|center"
+        tools:text="asfdsdfsdfsdfsdfsdfsdfsdfsf"
+        android:maxLines="1"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:textSize="@dimen/_14sdp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/_12sdp"/>
 
 </androidx.cardview.widget.CardView>
