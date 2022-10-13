@@ -67,9 +67,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:maxLines="4"
                     android:textSize="@dimen/_14ssp"
                     tools:text="@tools:sample/lorem/random" />
             </ScrollView>
+
+            <ImageView
+                android:id="@+id/expand_collapse"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/overviewScroll"
+                app:tint="@color/light_grey" />
 
             <TextView
                 android:id="@+id/trailer_tag"
@@ -79,7 +91,7 @@
                 android:text="Trailers/Videos"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overviewScroll" />
+                app:layout_constraintTop_toBottomOf="@id/expand_collapse" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/video_rcv"
