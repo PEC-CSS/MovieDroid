@@ -1,6 +1,6 @@
 # Contributing
 
-Ensure not to commit your version of the google-services.json file while making a pull request and make sure to mention any changes made in the database or storage structure on firebase. 
+Ensure **not to commit your version of the google-services.json file** while making a pull request and make sure to mention any changes made in the database or storage structure on firebase. 
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 

@@ -19,6 +19,8 @@ class MovieDetailFragment : Fragment() {
     private val args: MovieDetailFragmentArgs by navArgs()
     lateinit var binding : FragmentMovieDetailBinding
 
+    var expandedText: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +44,16 @@ class MovieDetailFragment : Fragment() {
             binding.genre.text = genres
 
             binding.overview.text = movieDetail.overview
+        }
+        binding.expandCollapse.setOnClickListener {
+            expandedText = !expandedText
+            if(expandedText){
+                binding.overview.maxLines = Int.MAX_VALUE
+                binding.expandCollapse.rotation = 180f
+            } else {
+                binding.overview.maxLines = 4
+                binding.expandCollapse.rotation = 0f
+            }
         }
 
         detailViewModel.movieVideoDetails.observe(viewLifecycleOwner){ movieTvVideo ->
