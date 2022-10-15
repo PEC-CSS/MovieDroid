@@ -9,9 +9,9 @@
     <SearchView
         android:id="@+id/search_text"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_margin="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:background="@drawable/background"
         android:iconifiedByDefault="false"
         android:inputType="text"
