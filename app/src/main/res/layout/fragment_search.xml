@@ -6,13 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainpage.search.SearchFragment">
 
-
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/search_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Search movie" />
+        android:layout_height="35dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryBackground="@null"
+        android:queryHint="Search Movies"
+        android:searchIcon="@drawable/ic_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/searchChipGroup"
