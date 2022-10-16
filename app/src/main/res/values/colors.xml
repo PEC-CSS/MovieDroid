@@ -12,4 +12,5 @@
     <color name="red">#D50000</color>
     <color name="grey">#5E5B5B</color>
     <color name="light_grey">#807C7C</color>
+    <color name="searchBar">#efefef</color>
 </resources>
