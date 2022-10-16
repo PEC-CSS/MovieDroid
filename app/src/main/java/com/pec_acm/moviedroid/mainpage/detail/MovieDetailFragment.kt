@@ -1,7 +1,10 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
 import android.os.Bundle
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +18,7 @@ class MovieDetailFragment : Fragment() {
 
     private lateinit var detailViewModel: DetailViewModel
     private val args: MovieDetailFragmentArgs by navArgs()
-    lateinit var binding : FragmentMovieDetailBinding
+    lateinit var binding: FragmentMovieDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,21 +28,29 @@ class MovieDetailFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
-        detailViewModel.movieDetailList.observe(viewLifecycleOwner){movieDetail ->
+        detailViewModel.movieDetailList.observe(viewLifecycleOwner) { movieDetail ->
             binding.collapsingToolbarLayout.title = movieDetail.title
 
-            if (movieDetail.backdrop_path!=null) {
+            if (movieDetail.backdrop_path != null) {
                 Glide.with(this).load("https://image.tmdb.org/t/p/w780" + movieDetail.backdrop_path)
                     .into(binding.image)
             }
             var genres = ""
-            for (i in movieDetail.genres){
-                genres+=i.name + "  "
+            for (i in movieDetail.genres) {
+                genres += i.name + "  "
             }
             binding.genre.text = genres
 
             binding.overview.text = movieDetail.overview
         }
+
+        //movie credits
+        detailViewModel.getMovieCredits(args.itemID)
+        detailViewModel.movieCreditsList.observe(viewLifecycleOwner){ movieCredits->
+            Log.e("@@@",movieCredits.crew.toString())
+        }
+
+
         return binding.root
     }
     /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
