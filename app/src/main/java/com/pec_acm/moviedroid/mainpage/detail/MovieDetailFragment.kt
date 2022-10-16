@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentMovieDetailBinding
+import com.pec_acm.moviedroid.mainpage.adapters.VideoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +19,8 @@ class MovieDetailFragment : Fragment() {
     private val args: MovieDetailFragmentArgs by navArgs()
     lateinit var binding : FragmentMovieDetailBinding
 
+    var expandedText: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +29,7 @@ class MovieDetailFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.getMovieDetail(args.itemID)
+        detailViewModel.getMovieVideo(args.itemID)
         detailViewModel.movieDetailList.observe(viewLifecycleOwner){movieDetail ->
             binding.collapsingToolbarLayout.title = movieDetail.title
 
@@ -40,6 +45,24 @@ class MovieDetailFragment : Fragment() {
 
             binding.overview.text = movieDetail.overview
         }
+        binding.expandCollapse.setOnClickListener {
+            expandedText = !expandedText
+            if(expandedText){
+                binding.overview.maxLines = Int.MAX_VALUE
+                binding.expandCollapse.rotation = 180f
+            } else {
+                binding.overview.maxLines = 4
+                binding.expandCollapse.rotation = 0f
+            }
+        }
+
+        detailViewModel.movieVideoDetails.observe(viewLifecycleOwner){ movieTvVideo ->
+            binding.videoRcv.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = VideoAdapter(requireContext(),movieTvVideo.results)
+            }
+        }
+
         return binding.root
     }
     /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
