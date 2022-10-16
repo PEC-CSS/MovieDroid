@@ -1,5 +1,6 @@
 package com.pec_acm.moviedroid.mainpage.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class HorizontalAdapter( val context: Context):RecyclerView.Adapter<HorizontalAd
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.image_rv,parent,false)
         return ViewHolder(view)
