@@ -27,12 +27,12 @@ class AllListFragment : Fragment() {
         allList.adapter = listAdapter
         listViewModel!!.user.observe(viewLifecycleOwner, Observer { user ->
             if (user == null) return@Observer
-            listAdapter.setItemList(user.userList.sorted())
+            listAdapter.setItemList(user.userList.sortedByStatus())
         })
         return view
     }
 
-    private fun MutableList<ListItem>.sorted(): MutableList<ListItem> {
+    private fun MutableList<ListItem>.sortedByStatus(): MutableList<ListItem> {
         return this.sortedBy { it.name }.sortedBy { it.status }.toMutableList()
     }
 
