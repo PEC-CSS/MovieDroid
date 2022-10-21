@@ -7,6 +7,20 @@
     tools:context=".AboutActivity">
 
     <!--    title-->
+
+    <ImageButton
+        android:id="@+id/back_btn_about"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035" />
+
     <TextView
         android:id="@+id/tvAboutTitle"
         android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.pec_acm.moviedroid.databinding.ActivityAboutBinding
+import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -26,6 +27,10 @@ class AboutActivity : AppCompatActivity() {
             val urlIntent = Intent(android.content.Intent.ACTION_VIEW)
             urlIntent.data = Uri.parse(GITHUB_URL)
             startActivity(urlIntent)
+        }
+
+        back_btn_about.setOnClickListener {
+            this.finish()
         }
 
     }
