@@ -14,10 +14,16 @@ import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.home.AllItemsDirections
 
 
-class NormalAdapter(private val images:List<ListItem>, val context: Context): RecyclerView.Adapter<NormalAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView : View, var itemCategory: String? = null, var itemID: Int? = null): RecyclerView.ViewHolder(itemView) {
+class NormalAdapter(private val images: List<ListItem>, val context: Context) :
+    RecyclerView.Adapter<NormalAdapter.ViewHolder>() {
+    inner class ViewHolder(
+        itemView: View,
+        var itemCategory: String? = null,
+        var itemID: Int? = null
+    ) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.imginwa)
         val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
+
         init {
             itemView.setOnClickListener {
                 itemID?.let {
@@ -35,7 +41,7 @@ class NormalAdapter(private val images:List<ListItem>, val context: Context): Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_rv,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_rv2, parent, false)
         return ViewHolder(view)
     }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llinwa"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_192sdp"
+    android:layout_marginBottom="12dp"
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    app:cardElevation="@dimen/_4sdp">
+
+
+    <ImageView
+        android:id="@+id/imginwa"
+        android:contentDescription="@string/movie_poster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/icon_for_moviedroid" />
+
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_black"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        tools:text="asfdsdfsdfsdfsdfsdfsdfsdfsf" />
+
+</com.google.android.material.card.MaterialCardView>
