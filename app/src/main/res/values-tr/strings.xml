@@ -52,4 +52,5 @@
     <string name="to"></string>
     <string name="email_id">sizinepostanız@gmail.com</string>
     <string name="name">İsim</string>
+    <string name="movie_poster">Movie Poster</string>
 </resources>

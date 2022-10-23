@@ -2,13 +2,10 @@ package com.pec_acm.moviedroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_profile.*
 
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
@@ -34,8 +31,8 @@ class ProfileActivity : AppCompatActivity() {
             .into(binding.imgProfile)
         }
 
-        back_btn_profile.setOnClickListener {
-            this.finish()
+        binding.backBtnProfile.setOnClickListener {
+            finish()
         }
 
     }

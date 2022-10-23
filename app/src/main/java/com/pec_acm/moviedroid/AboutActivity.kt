@@ -4,8 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pec_acm.moviedroid.data.Constants
 import com.pec_acm.moviedroid.databinding.ActivityAboutBinding
-import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -20,16 +20,13 @@ class AboutActivity : AppCompatActivity() {
         //github link button
         binding.btnGithubLink.setOnClickListener {
 
-            //github repo link
-            val GITHUB_URL = "https://github.com/PEC-CSS/MovieDroid"
-
             //open url
-            val urlIntent = Intent(android.content.Intent.ACTION_VIEW)
-            urlIntent.data = Uri.parse(GITHUB_URL)
+            val urlIntent = Intent(Intent.ACTION_VIEW)
+            urlIntent.data = Uri.parse(Constants.GITHUB_URL)
             startActivity(urlIntent)
         }
 
-        back_btn_about.setOnClickListener {
+        binding.backBtnAbout .setOnClickListener {
             this.finish()
         }
 
