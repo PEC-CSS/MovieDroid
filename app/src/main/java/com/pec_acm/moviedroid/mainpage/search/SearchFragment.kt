@@ -8,6 +8,7 @@ import android.widget.Toast
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentSearchBinding
@@ -25,6 +26,13 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var searchText : SearchView
     var searchItems = mutableListOf<ListItem>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
