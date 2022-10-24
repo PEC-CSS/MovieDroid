@@ -20,30 +20,4 @@
         app:layout_constraintTop_toBottomOf="@id/list_tab_layout"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_animation"
-        android:layout_width="264dp"
-        android:layout_height="264dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_tab_layout"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:layout_constraintVertical_bias="0.4"
-        app:lottie_rawRes="@raw/empty" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/no_entries_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="No entry found!"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@id/lottie_animation"
-        app:layout_constraintStart_toStartOf="@id/lottie_animation"
-        app:layout_constraintTop_toBottomOf="@id/lottie_animation" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

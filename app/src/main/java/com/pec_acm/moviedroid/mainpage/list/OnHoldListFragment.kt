@@ -13,13 +13,14 @@ import com.pec_acm.moviedroid.firebase.ListItem
 import java.util.ArrayList
 
 class OnHoldListFragment : Fragment() {
-    private var binding: FragmentOnHoldListBinding? = null
+    private var _binding: FragmentOnHoldListBinding? = null
+    private val binding get() = _binding!!
     private var listViewModel: ListViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentOnHoldListBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentOnHoldListBinding.inflate(inflater, container, false)
         val view: View = binding!!.root
         val onHoldList = binding!!.onHoldList
         listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
@@ -32,6 +33,14 @@ class OnHoldListFragment : Fragment() {
             for (i in user.userList.indices) {
                 val listItem = user.userList[i]
                 if (listItem.status == 3) itemList.add(listItem)
+            }
+            if(itemList.isEmpty()) {
+                binding.lottieAnimation.visibility = View.VISIBLE
+                binding.noEntriesText.visibility = View.VISIBLE
+            }
+            else {
+                binding.lottieAnimation.visibility = View.GONE
+                binding.noEntriesText.visibility = View.GONE
             }
             listAdapter.setItemList(itemList)
         })

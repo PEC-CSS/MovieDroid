@@ -13,14 +13,15 @@ import com.pec_acm.moviedroid.databinding.FragmentCompletedListBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 
 class CompletedListFragment : Fragment() {
-    private var binding: FragmentCompletedListBinding? = null
+    private var _binding: FragmentCompletedListBinding? = null
+    private val binding get() = _binding!!
     private var listViewModel: ListViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCompletedListBinding.inflate(inflater, container, false)
+        _binding = FragmentCompletedListBinding.inflate(inflater, container, false)
         val view: View = binding!!.root
         val completedList = binding!!.completedList
         listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
@@ -33,6 +34,14 @@ class CompletedListFragment : Fragment() {
             for (i in user.userList.indices) {
                 val listItem = user.userList[i]
                 if (listItem.status == 2) itemList.add(listItem)
+            }
+            if(itemList.isEmpty()) {
+                binding.lottieAnimation.visibility = View.VISIBLE
+                binding.noEntriesText.visibility = View.VISIBLE
+            }
+            else {
+                binding.lottieAnimation.visibility = View.GONE
+                binding.noEntriesText.visibility = View.GONE
             }
             listAdapter.setItemList(itemList)
         })

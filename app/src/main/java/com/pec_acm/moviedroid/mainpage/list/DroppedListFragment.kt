@@ -12,13 +12,14 @@ import com.pec_acm.moviedroid.databinding.FragmentDroppedListBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 
 class DroppedListFragment : Fragment() {
-    private lateinit var binding: FragmentDroppedListBinding
+    private lateinit var _binding: FragmentDroppedListBinding
+    private val binding get() = _binding!!
     private lateinit var listViewModel: ListViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDroppedListBinding.inflate(inflater, container, false)
+        _binding = FragmentDroppedListBinding.inflate(inflater, container, false)
         val view: View = binding.root
         val droppedList = binding.droppedList
         listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
@@ -35,6 +36,14 @@ class DroppedListFragment : Fragment() {
                 for (i in user.userList.indices) {
                     val listItem = user.userList[i]
                     if (listItem.status == 4) itemList.add(listItem)
+                }
+                if(itemList.isEmpty()) {
+                    binding.lottieAnimation.visibility = View.VISIBLE
+                    binding.noEntriesText.visibility = View.VISIBLE
+                }
+                else {
+                    binding.lottieAnimation.visibility = View.GONE
+                    binding.noEntriesText.visibility = View.GONE
                 }
                 listAdapter.setItemList(itemList)
             })
