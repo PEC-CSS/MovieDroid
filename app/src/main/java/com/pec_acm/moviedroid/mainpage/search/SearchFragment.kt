@@ -56,18 +56,22 @@ class SearchFragment : Fragment() {
                 SearchResult.FOUND -> {
                     binding.searchList.visibility = View.VISIBLE
                     binding.searchLottie.visibility = View.GONE
+                    binding.noSearchText.visibility = View.GONE
                 }
                 SearchResult.NOT_FOUND -> {
                     binding.searchList.visibility = View.GONE
                     binding.searchLottie.visibility = View.VISIBLE
-                    binding.searchLottie.setAnimation(R.raw.empty_search_animation)
-                    binding.searchLottie.playAnimation()
-                    Toast.makeText(requireContext(),getString(R.string.no_result_found),Toast.LENGTH_SHORT).show()
+                    binding.searchLottie.apply {
+                        setAnimation(R.raw.no_search)
+                        playAnimation()
+                    }
+                    binding.noSearchText.visibility = View.VISIBLE
                 }
                 SearchResult.SEARCHING -> {
                     binding.searchList.visibility = View.GONE
                     binding.searchLottie.visibility = View.VISIBLE
-                    binding.searchLottie.setAnimation(R.raw.search_animation)
+                    binding.noSearchText.visibility = View.GONE
+                    binding.searchLottie.setAnimation(R.raw.searching)
                     binding.searchLottie.playAnimation()
                 }
             }
