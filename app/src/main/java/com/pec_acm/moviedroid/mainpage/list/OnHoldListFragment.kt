@@ -34,6 +34,7 @@ class OnHoldListFragment : Fragment() {
                 val listItem = user.userList[i]
                 if (listItem.status == 3) itemList.add(listItem)
             }
+            itemList.sortBy { it.name }
             if(itemList.isEmpty()) {
                 binding.lottieAnimation.visibility = View.VISIBLE
                 binding.noEntriesText.visibility = View.VISIBLE
