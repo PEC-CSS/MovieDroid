@@ -33,6 +33,7 @@ class OnHoldListFragment : Fragment() {
                 val listItem = user.userList[i]
                 if (listItem.status == 3) itemList.add(listItem)
             }
+            itemList.sortBy { it.name }
             listAdapter.setItemList(itemList)
         })
         return view
