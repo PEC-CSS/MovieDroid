@@ -12,13 +12,14 @@ import com.pec_acm.moviedroid.databinding.FragmentWatchingListBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 
 class WatchingListFragment : Fragment() {
-    private lateinit var binding: FragmentWatchingListBinding
+    private var _binding: FragmentWatchingListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var listViewModel: ListViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentWatchingListBinding.inflate(inflater, container, false)
+        _binding = FragmentWatchingListBinding.inflate(inflater, container, false)
         val view: View = binding.root
         val watchingList = binding.watchingList
         listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
@@ -37,6 +38,14 @@ class WatchingListFragment : Fragment() {
                     if (listItem.status == 1) itemList.add(listItem)
                 }
                 itemList.sortBy { it.name }
+                if(itemList.isEmpty()) {
+                    binding.lottieAnimation.visibility = View.VISIBLE
+                    binding.noEntriesText.visibility = View.VISIBLE
+                }
+                else {
+                    binding.lottieAnimation.visibility = View.GONE
+                    binding.noEntriesText.visibility = View.GONE
+                }
                 listAdapter.setItemList(itemList)
             })
         return view

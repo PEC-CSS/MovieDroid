@@ -41,7 +41,11 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         if (getItemViewType(position) == ITEM_COUNT_VIEW_HOLDER) {
             val holder: ListAdapter.ListViewCountViewHolder = viewHolder as ListViewCountViewHolder
 
-            holder.binding.itemListCount.text = context.getString(R.string.num_entries, itemList.size)
+            if (itemList.size == 0)
+                holder.binding.itemListCount.visibility = View.GONE
+            else
+                holder.binding.itemListCount.text = context.getString(R.string.num_entries, itemList.size)
+
             return
         }
 

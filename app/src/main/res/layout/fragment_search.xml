@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainpage.search.SearchFragment">
 
     <SearchView
@@ -26,32 +26,33 @@
         android:id="@+id/searchChipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:checkedChip="@id/movieChip"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_text"
-        app:singleSelection="true"
         app:selectionRequired="true"
-        app:checkedChip="@id/movieChip"
-        >
+        app:singleSelection="true">
+
         <com.google.android.material.chip.Chip
             android:id="@+id/movieChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Movies"
+            android:layout_marginStart="@dimen/_10sdp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
-            app:chipBackgroundColor="@color/search_toggle"
-            android:layout_marginStart="@dimen/_10sdp"
-            />
+            android:text="Movies" />
+
         <com.google.android.material.chip.Chip
             android:id="@+id/tvChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TV Series"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
-            app:chipBackgroundColor="@color/search_toggle"/>
+            android:text="TV Series" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -59,20 +60,35 @@
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchChipGroup"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/movie_list_item"/>
+        tools:listitem="@layout/movie_list_item" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_250sdp"
         android:id="@+id/search_lottie"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="264dp"
+        android:layout_height="264dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchChipGroup"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_bias="0.36"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/searching" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/no_search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No search found!"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="-2dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/search_lottie"
+        app:layout_constraintStart_toStartOf="@id/search_lottie"
+        app:layout_constraintTop_toBottomOf="@id/search_lottie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
