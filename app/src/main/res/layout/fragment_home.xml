@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_mostPopularMovies"
-        android:text="Most Popular Movies"
+        android:text="@string/most_popular_movies"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         />
@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_mostPopularTVshows"
-        android:text="Most Popular TV Shows"
+        android:text="@string/most_popular_tv_shows"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         />
@@ -172,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_inTheaters"
-        android:text="In Theaters"
+        android:text="@string/in_theatre"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         />
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_comingSoon"
-        android:text="Coming Soon"
+        android:text="@string/coming_soon"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         />

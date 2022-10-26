@@ -3,6 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="top_movies">Top movies</string>
     <string name="top_tv_shows">Top TV Shows</string>
+    <string name="coming_soon">Coming Soon</string>
     <string name="num_entries">%d Entries</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
@@ -63,4 +64,7 @@
     <string name="github" translatable="false">Github</string>
     <string name="about" translatable="false">About</string>
     <string name="movie_poster">Movie Poster</string>
+    <string name="in_theatre">In Theatre</string>
+    <string name="most_popular_movies">Most Popular Movies</string>
+    <string name="most_popular_tv_shows">Most Popular TV Shows</string>
 </resources>

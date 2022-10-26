@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentAllItemsBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
@@ -28,6 +29,9 @@ class AllItems : Fragment() {
         _binding = FragmentAllItemsBinding.inflate(layoutInflater,container,false)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.allItemsRV.layoutManager = GridLayoutManager(context, 2)
+        binding.backAllItem.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
         when (args.type) {
             "topMovies" -> {
                 viewModel.getTopMovies()
@@ -39,6 +43,7 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(topMovies,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.top_movies)
                 }
             }
             "topTVSeries" -> {
@@ -51,6 +56,9 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(topTVSeries,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.top_tv_shows)
+
+
                 }
             }
             "popularMovies" -> {
@@ -63,6 +71,8 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(popularMovies,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.most_popular_movies)
+
                 }
             }
             "popularTVSeries" -> {
@@ -75,6 +85,8 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(popularTVSeries,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.most_popular_tv_shows)
+
                 }
             }
             "comingSoon" -> {
@@ -87,6 +99,8 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(comingSoon,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.coming_soon)
+
                 }
             }
             "inTheaters" -> {
@@ -99,6 +113,8 @@ class AllItems : Fragment() {
                     }
                     val topMoviesAdapter = NormalAdapter(nowplaying,requireContext())
                     binding.allItemsRV.adapter = topMoviesAdapter
+                    binding.itemHeading.text = getString(R.string.in_theatre)
+
                 }
             }
         }

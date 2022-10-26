@@ -53,4 +53,8 @@
     <string name="email_id">sizinepostanız@gmail.com</string>
     <string name="name">İsim</string>
     <string name="movie_poster">Movie Poster</string>
+    <string name="coming_soon" translatable="false">Çok yakında</string>
+    <string name="in_theatre">tiyatroda</string>
+    <string name="most_popular_movies">En Popüler Filmler</string>
+    <string name="most_popular_tv_shows">En Popüler TV Dizileri</string>
 </resources>
