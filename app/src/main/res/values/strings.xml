@@ -63,4 +63,5 @@
     <string name="github" translatable="false">Github</string>
     <string name="about" translatable="false">About</string>
     <string name="movie_poster">Movie Poster</string>
+    <string name="internet_not_available">Internet Not Available</string>
 </resources>
