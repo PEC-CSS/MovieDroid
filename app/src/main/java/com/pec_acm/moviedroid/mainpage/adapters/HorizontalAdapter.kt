@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
+import com.pec_acm.moviedroid.App
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.home.HomeFragmentDirections
@@ -33,13 +35,22 @@ class HorizontalAdapter(val context: Context) :
         init {
             itemView.setOnClickListener {
                 itemID?.let {
-                    if (itemCategory == context.getString(R.string.movie_item_category)) {
-                        val direction =
-                            HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(it)
-                        itemView.findNavController().navigate(direction)
-                    } else if (itemCategory == context.getString(R.string.tv_item_category)) {
-                        itemView.findNavController()
-                            .navigate(HomeFragmentDirections.actionHomeFragmentToTvDetailFragment(it))
+                    val app = (context.applicationContext as App)
+                    if(app.isOnline) {
+                        if (itemCategory == context.getString(R.string.movie_item_category)) {
+                            val direction =
+                                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(it)
+                            itemView.findNavController().navigate(direction)
+                        } else if (itemCategory == context.getString(R.string.tv_item_category)) {
+                            itemView.findNavController()
+                                .navigate(
+                                    HomeFragmentDirections.actionHomeFragmentToTvDetailFragment(
+                                        it
+                                    )
+                                )
+                        }
+                    }else{
+                        Toast.makeText(context,context.getString(R.string.internet_not_available),Toast.LENGTH_SHORT).show()
                     }
                 }
             }

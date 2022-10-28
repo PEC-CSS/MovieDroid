@@ -56,9 +56,11 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         holder.binding.itemTitle.text = listItem.name
         holder.binding.itemCategory.text = listItem.category.uppercase()
 
-        Glide.with(context)
-            .load(listItem.posterUrl)
-            .into(holder.binding.itemImage)
+        if(listItem.posterUrl.isNotEmpty()) {
+            Glide.with(context)
+                .load(listItem.posterUrl)
+                .into(holder.binding.itemImage)
+        }
 
         holder.binding.itemScore.text = listItem.score.toString()
         holder.itemID = listItem.id
