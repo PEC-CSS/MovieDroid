@@ -107,27 +107,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.llTopmovies.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topMovies"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topMovies", "Top Movies"))
         }
         binding.llToptvshows.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topTVSeries"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("topTVSeries", "Top TV Series"))
         }
         binding.llMostPopularMovies.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularMovies"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularMovies", "Popular Movies"))
         }
         binding.llMostPopularTVshows.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularTVSeries"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("popularTVSeries",  "Popular TV Series"))
         }
         binding.llComingSoon.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon", "Cooming Soon"))
         }
         binding.llInTheaters.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("inTheaters"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("inTheaters", "Now Playing"))
         }
         return view
     }
