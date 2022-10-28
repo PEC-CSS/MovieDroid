@@ -89,6 +89,9 @@
         <argument
             android:name="type"
             app:argType="string" />
+        <argument
+            android:name="screenName"
+            app:argType="string" />
         <action
             android:id="@+id/action_allItems_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
