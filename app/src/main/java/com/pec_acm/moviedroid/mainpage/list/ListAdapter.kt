@@ -41,7 +41,11 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         if (getItemViewType(position) == ITEM_COUNT_VIEW_HOLDER) {
             val holder: ListAdapter.ListViewCountViewHolder = viewHolder as ListViewCountViewHolder
 
-            holder.binding.itemListCount.text = context.getString(R.string.num_entries, itemList.size)
+            if (itemList.size == 0)
+                holder.binding.itemListCount.visibility = View.GONE
+            else
+                holder.binding.itemListCount.text = context.getString(R.string.num_entries, itemList.size)
+
             return
         }
 
@@ -51,10 +55,17 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         val listItem = if (showCount) itemList[position - 1] else itemList[position]
         holder.binding.itemTitle.text = listItem.name
         holder.binding.itemCategory.text = listItem.category.uppercase()
-        Glide.with(context).load(listItem.posterUrl).into(holder.binding.itemImage)
+
+        if(listItem.posterUrl.isNotEmpty()) {
+            Glide.with(context)
+                .load(listItem.posterUrl)
+                .into(holder.binding.itemImage)
+        }
+
         holder.binding.itemScore.text = listItem.score.toString()
         holder.itemID = listItem.id
         holder.itemCategory = listItem.category
+
         val status: String
         val statusColor: Int
         when (listItem.status) {
@@ -86,7 +97,7 @@ class ListAdapter @JvmOverloads constructor(private val context : Context, priva
         if (listItem.status > 0) {
             holder.binding.itemPersonalScore.visibility = View.VISIBLE
             if (listItem.personalScore > 0) {
-                holder.binding.itemPersonalScore.text = listItem.personalScore.toString() + "/10"
+                holder.binding.itemPersonalScore.text = "${listItem.personalScore}/10"
             } else {
                 holder.binding.itemPersonalScore.text = "RATE"
             }

@@ -12,4 +12,12 @@
     <color name="red">#D50000</color>
     <color name="grey">#5E5B5B</color>
     <color name="light_grey">#807C7C</color>
+    <color name="orange_200">#FFCC80</color>
+    <color name="orange_700">#F57C00</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_700">#388E3C</color>
+    <color name="blue_200">#9FA8DA</color>
+    <color name="blue_700">#303F9F</color>
+    <color name="searchBar">#efefef</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>

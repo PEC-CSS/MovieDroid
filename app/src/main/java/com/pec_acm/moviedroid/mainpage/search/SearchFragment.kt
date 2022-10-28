@@ -1,15 +1,14 @@
 package com.pec_acm.moviedroid.mainpage.search
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentSearchBinding
@@ -27,6 +26,13 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var searchText : SearchView
     var searchItems = mutableListOf<ListItem>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,24 +50,36 @@ class SearchFragment : Fragment() {
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
 
+        binding.movieChip.setOnClickListener {
+            searchText.queryHint = "Search Movies"
+        }
+
+        binding.tvChip.setOnClickListener {
+            searchText.queryHint = "Search TV Shows"
+        }
+
         searchViewModel.searchResult.observe(viewLifecycleOwner){ searchResult ->
             when(searchResult)
             {
                 SearchResult.FOUND -> {
                     binding.searchList.visibility = View.VISIBLE
                     binding.searchLottie.visibility = View.GONE
+                    binding.noSearchText.visibility = View.GONE
                 }
                 SearchResult.NOT_FOUND -> {
                     binding.searchList.visibility = View.GONE
                     binding.searchLottie.visibility = View.VISIBLE
-                    binding.searchLottie.setAnimation(R.raw.empty_search_animation)
-                    binding.searchLottie.playAnimation()
-                    Toast.makeText(requireContext(),getString(R.string.no_result_found),Toast.LENGTH_SHORT).show()
+                    binding.searchLottie.apply {
+                        setAnimation(R.raw.no_search)
+                        playAnimation()
+                    }
+                    binding.noSearchText.visibility = View.VISIBLE
                 }
                 SearchResult.SEARCHING -> {
                     binding.searchList.visibility = View.GONE
                     binding.searchLottie.visibility = View.VISIBLE
-                    binding.searchLottie.setAnimation(R.raw.search_animation)
+                    binding.noSearchText.visibility = View.GONE
+                    binding.searchLottie.setAnimation(R.raw.searching)
                     binding.searchLottie.playAnimation()
                 }
             }
