@@ -41,7 +41,7 @@
                 android:fontFamily="@font/roboto"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="17sp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 tools:text="@tools:sample/lorem/random" />
 
