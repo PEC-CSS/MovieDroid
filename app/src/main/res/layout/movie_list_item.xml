@@ -111,7 +111,6 @@
                         android:layout_height="wrap_content"
                         android:background="@color/black"
                         android:paddingHorizontal="@dimen/_6sdp"
-                        android:paddingVertical="@dimen/_3sdp"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
