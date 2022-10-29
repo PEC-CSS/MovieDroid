@@ -23,7 +23,7 @@ class CreditsAdapter(val context: Context, val crewList: List<Crew>) :
     override fun onBindViewHolder(holder: CreditsViewHolder, position: Int) {
         holder.cName.text = crewList[position].name
         val profile_full_path =
-            "https://image.tmdb.org/t/p/w138_h175_face" + crewList[position].profile_path
+            "https://image.tmdb.org/t/p/w138_and_h175_face" + crewList[position].profile_path
         Glide.with(context)
             .load(profile_full_path)
             .into(holder.cImage)
