@@ -28,6 +28,8 @@ class AllItems : Fragment() {
         _binding = FragmentAllItemsBinding.inflate(layoutInflater,container,false)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.allItemsRV.layoutManager = GridLayoutManager(context, 2)
+        setupToolbar()
+
         when (args.type) {
             "topMovies" -> {
                 viewModel.getTopMovies()
@@ -103,6 +105,15 @@ class AllItems : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun setupToolbar() {
+        binding.genericToolbar.apply {
+            title = args.screenName
+            setNavigationOnClickListener {
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     override fun onDestroyView() {
