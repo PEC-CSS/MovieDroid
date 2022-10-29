@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.model.Crew
 
-class CreditsAdapter(val context: Context, val crewList: List<Crew>) :
+class CreditsAdapter(val context: Context, private val crewList: List<Crew>) :
     Adapter<CreditsAdapter.CreditsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsViewHolder {
