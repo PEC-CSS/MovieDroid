@@ -22,6 +22,7 @@ class DetailViewModel @Inject constructor(
 
     //movie and tv shows credits
     val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
+    val tvCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
 
 
     fun getMovieDetail(id: Int) {
@@ -33,6 +34,12 @@ class DetailViewModel @Inject constructor(
     fun getMovieCredits(id: Int) {
         viewModelScope.launch {
             movieCreditsList.value = api.movieCreditsByID(movie_id = id).body()
+        }
+    }
+
+    fun getTvCredits(id: Int) {
+        viewModelScope.launch {
+            tvCreditsList.value = api.tvCreditsByID(tv_id = id).body()
         }
     }
 

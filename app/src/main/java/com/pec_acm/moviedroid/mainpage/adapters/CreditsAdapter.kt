@@ -12,17 +12,21 @@ import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.model.Crew
 
-class CreditsAdapter(val context: Context, val crewList: List<Crew>) : Adapter<CreditsAdapter.CreditsViewHolder>() {
+class CreditsAdapter(val context: Context, val crewList: List<Crew>) :
+    Adapter<CreditsAdapter.CreditsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.cast_crew_item,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.cast_crew_item, parent, false)
         return CreditsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CreditsViewHolder, position: Int) {
         holder.cName.text = crewList[position].name
+        val profile_full_path =
+            "https://image.tmdb.org/t/p/w138_h175_face" + crewList[position].profile_path
         Glide.with(context)
-            .load(crewList[position].profile_path).into(holder.cImage)
+            .load(profile_full_path)
+            .into(holder.cImage)
     }
 
     override fun getItemCount(): Int {
