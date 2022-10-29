@@ -27,6 +27,6 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.44' apply false
 }
 
-    task clean(type: Delete) {
-        delete rootProject.buildDir
-    }
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

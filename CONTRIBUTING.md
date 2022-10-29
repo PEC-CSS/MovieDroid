@@ -1,6 +1,6 @@
 # Contributing
 
-Ensure not to commit your version of the google-services.json file while making a pull request and make sure to mention any changes made in the database or storage structure on firebase. 
+Ensure **not to commit your version of the google-services.json file** while making a pull request and make sure to mention any changes made in the database or storage structure on firebase. 
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -12,3 +12,4 @@ Please note we have a code of conduct, please follow it in all your interactions
    variables, exposed ports, useful file locations and container parameters.
 3. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
+4. Before creating a Pull Request, make sure you create an issue out of it and get is assigned beforehand, or if there is already an issue, ask for it to be assigned to    you. 

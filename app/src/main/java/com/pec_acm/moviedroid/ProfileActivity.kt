@@ -2,8 +2,6 @@ package com.pec_acm.moviedroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.databinding.ActivityProfileBinding
@@ -33,7 +31,9 @@ class ProfileActivity : AppCompatActivity() {
             .into(binding.imgProfile)
         }
 
-
+        binding.backBtnProfile.setOnClickListener {
+            finish()
+        }
 
     }
 }

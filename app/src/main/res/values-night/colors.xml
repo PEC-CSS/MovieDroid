@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="searchBar">#1f1f1f</color>
+    <color name="orange_200">#FFCC80</color>
+    <color name="orange_700">#F57C00</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_700">#388E3C</color>
+    <color name="blue_200">#9FA8DA</color>
+    <color name="blue_700">#303F9F</color>
+</resources>
