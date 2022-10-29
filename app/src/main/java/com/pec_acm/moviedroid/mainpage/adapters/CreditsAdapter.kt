@@ -1,6 +1,7 @@
 package com.pec_acm.moviedroid.mainpage.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class CreditsAdapter(val context: Context, private val crewList: List<Crew>) :
             "https://image.tmdb.org/t/p/w138_and_h175_face" + crewList[position].profile_path
         Glide.with(context)
             .load(profile_full_path)
+            .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(holder.cImage)
     }
 
