@@ -4,7 +4,7 @@ Describe the changes you have made.
 
 ## Issue Resolved
 
-Link to the issue that is resolved by this pull request goes here e.g. 'Fixes #10'.
+Link to the issue that is resolved by this pull request goes here e.g. ```Fixes #10```.
 
 ## Screenshots 
 
