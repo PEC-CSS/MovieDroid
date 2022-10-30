@@ -1,9 +1,11 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pec_acm.moviedroid.data.api.TMDBApi
+import com.pec_acm.moviedroid.model.MovieCredits
 import com.pec_acm.moviedroid.model.MovieDetail
 import com.pec_acm.moviedroid.model.MovieTvVideo
 import com.pec_acm.moviedroid.model.TVDetail
@@ -21,9 +23,26 @@ class DetailViewModel @Inject constructor(
     val movieVideoDetails: MutableLiveData<MovieTvVideo> = MutableLiveData()
     val tvVideoDetails: MutableLiveData<MovieTvVideo> = MutableLiveData()
 
+    //movie and tv shows credits
+    val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
+    val tvCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
+
+
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
             movieDetailList.value = api.movieDetailByID(movie_id = id).body()
+        }
+    }
+
+    fun getMovieCredits(id: Int) {
+        viewModelScope.launch {
+            movieCreditsList.value = api.movieCreditsByID(movie_id = id).body()
+        }
+    }
+
+    fun getTvCredits(id: Int) {
+        viewModelScope.launch {
+            tvCreditsList.value = api.tvCreditsByID(tv_id = id).body()
         }
     }
 

@@ -15,9 +15,8 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            app:contentScrim="@color/purple_200"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/purple_200">
             <ImageView
                 android:id="@id/image"
                 android:layout_width="match_parent"
@@ -71,6 +70,15 @@
                     tools:text="@tools:sample/lorem/random" />
             </ScrollView>
 
+
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/overviewScroll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
             <TextView
                 android:id="@+id/trailer_tag"
                 android:layout_width="wrap_content"
@@ -91,6 +99,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/trailer_tag"
                 tools:listitem="@layout/single_video_item" />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Cast and Crew"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTvCredits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
