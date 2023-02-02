@@ -48,6 +48,7 @@
     <string name="rating_3">3 - Çok Kötü</string>
     <string name="rating_2">2 - Korkunç</string>
     <string name="rating_1">1 - Kabus</string>
+    <string name="remove_rating">Derecelendirmeyi Kaldır</string>
     <string name="welcome">Hoşgeldiniz</string>
     <string name="to"></string>
     <string name="email_id">sizinepostanız@gmail.com</string>

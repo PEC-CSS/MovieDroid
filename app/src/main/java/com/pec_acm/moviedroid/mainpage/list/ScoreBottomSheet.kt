@@ -30,7 +30,8 @@ class ScoreBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem) 
             getString(R.string.rating_4),
             getString(R.string.rating_3),
             getString(R.string.rating_2),
-            getString(R.string.rating_1)
+            getString(R.string.rating_1),
+            getString(R.string.remove_rating)
         )
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, statusOptions)
