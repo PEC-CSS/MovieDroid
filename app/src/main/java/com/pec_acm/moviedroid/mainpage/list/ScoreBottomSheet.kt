@@ -12,7 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 
-class ScoreBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem) : BottomSheetDialogFragment() {
+class ScoreBottomSheet(val listViewModel: ListViewModel, val listItem: ListItem) :
+    BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +38,10 @@ class ScoreBottomSheet(val listViewModel: ListViewModel,val listItem: ListItem) 
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, statusOptions)
         statusList.adapter = arrayAdapter
         statusList.setOnItemClickListener { adapterView, view, i, id ->
-            if (10 - i != listItem.personalScore) {
-                listViewModel.setItemScore(FirebaseAuth.getInstance().uid!!, listItem.id, 10-i)
+            if (10 == i) {
+                listViewModel.removeItem(FirebaseAuth.getInstance().uid!!, listItem)
+            } else if (10 - i != listItem.personalScore) {
+                listViewModel.setItemScore(FirebaseAuth.getInstance().uid!!, listItem.id, 10 - i)
             }
             dismiss()
         }
