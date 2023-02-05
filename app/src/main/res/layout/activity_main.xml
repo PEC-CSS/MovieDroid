@@ -29,6 +29,7 @@
                     android:text="@string/app_name"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/rubikvinyl"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/circleCard"
                     app:layout_constraintStart_toStartOf="parent"
