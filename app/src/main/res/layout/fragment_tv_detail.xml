@@ -15,8 +15,10 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/purple_200">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:contentScrim="@color/ic_launcher_background"
+            app:expandedTitleTextColor="@color/white"
+            app:collapsedTitleTextColor="@color/black">
             <ImageView
                 android:id="@id/image"
                 android:layout_width="match_parent"
