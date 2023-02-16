@@ -1,10 +1,13 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.data.api.TMDBApi
+import com.pec_acm.moviedroid.firebase.ListItem
+import com.pec_acm.moviedroid.firebase.User
 import com.pec_acm.moviedroid.model.MovieCredits
 import com.pec_acm.moviedroid.model.MovieDetail
 import com.pec_acm.moviedroid.model.MovieTvVideo
@@ -27,6 +30,11 @@ class DetailViewModel @Inject constructor(
     val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
     val tvCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
 
+    private var databaseReference = Firebase.database.reference
+    private var userReference = databaseReference.child("Users")
+    val user : MutableLiveData<User> = MutableLiveData()
+
+    val isFav: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
@@ -64,4 +72,35 @@ class DetailViewModel @Inject constructor(
         }
     }
 
+    fun addFavItem(uid : String,listItem: ListItem)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                user?.favList?.add(listItem)
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
+
+    fun removeFavItem(uid : String,listItem: ListItem)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                user?.favList?.remove(listItem)
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
+
+    fun setFavItem(uid : String,listItem: ListItem)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                isFav.value = user?.favList?.contains(listItem) == true
+            }
+        }
+    }
 }

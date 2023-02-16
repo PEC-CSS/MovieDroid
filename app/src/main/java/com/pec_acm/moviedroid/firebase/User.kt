@@ -5,5 +5,6 @@ data class User(
     var name : String? = null,
     var imageUrl : String? = null,
     var email : String? = null,
-    var userList: MutableList<ListItem> = mutableListOf()
+    var userList: MutableList<ListItem> = mutableListOf(),
+    var favList: MutableList<ListItem> = mutableListOf()
 )

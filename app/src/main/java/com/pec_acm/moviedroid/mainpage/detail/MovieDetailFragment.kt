@@ -10,7 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentMovieDetailBinding
+import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
 import com.pec_acm.moviedroid.mainpage.adapters.VideoAdapter
 import com.pec_acm.moviedroid.mainpage.adapters.CreditsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +50,22 @@ class MovieDetailFragment : Fragment() {
             binding.genre.text = genres
 
             binding.overview.text = movieDetail.overview
+            detailViewModel.setFavItem(FirebaseAuth.getInstance().uid!!, movieDetail.toListItem())
+            detailViewModel.isFav.observe(viewLifecycleOwner) { fav ->
+                if (fav) {
+                    binding.favBtn.setBackgroundResource(R.drawable.ic_favorite_red_24)
+                }
+                binding.favBtn.setOnClickListener {
+                    if (fav) {
+                        detailViewModel.removeFavItem(FirebaseAuth.getInstance().uid!!, movieDetail.toListItem())
+                        binding.favBtn.setBackgroundResource(R.drawable.ic_favorite_shadow_24)
+                    }
+                    else {
+                        detailViewModel.addFavItem(FirebaseAuth.getInstance().uid!!, movieDetail.toListItem())
+                        binding.favBtn.setBackgroundResource(R.drawable.ic_favorite_red_24)
+                    }
+                }
+            }
         }
         binding.expandCollapse.setOnClickListener {
             expandedText = !expandedText
