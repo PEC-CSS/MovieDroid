@@ -6,7 +6,7 @@ import com.pec_acm.moviedroid.model.TVDetail
 import com.pec_acm.moviedroid.model.TvResult
 
 data class ListItem(
-    var id : Int=0,
+    val id : Int=0,
     val name : String="",
     val category : String="",
     val posterUrl : String="",
