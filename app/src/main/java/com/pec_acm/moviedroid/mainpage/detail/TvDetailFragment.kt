@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentTvDetailBinding
 import com.pec_acm.moviedroid.mainpage.adapters.VideoAdapter
 import com.pec_acm.moviedroid.mainpage.adapters.CreditsAdapter
@@ -42,6 +43,10 @@ class TvDetailFragment : Fragment() {
             }
             binding.genre.text = genres
             binding.overview.text = tvDetail.overview
+        }
+
+        binding.favBtn.setOnClickListener {
+            binding.favBtn.setBackgroundResource(R.drawable.ic_favorite_red_24)
         }
 
 

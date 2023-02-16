@@ -26,6 +26,15 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/favBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/ic_favorite_shadow_24"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
