@@ -1,10 +1,11 @@
 package com.pec_acm.moviedroid.firebase
 
 import com.pec_acm.moviedroid.model.MovieResult
+import com.pec_acm.moviedroid.model.TVDetail
 import com.pec_acm.moviedroid.model.TvResult
 
 data class ListItem(
-    val id : Int=0,
+    var id : Int=0,
     val name : String="",
     val category : String="",
     val posterUrl : String="",
@@ -49,6 +50,24 @@ data class ListItem(
         {
             val listItem = toListItem()
             listItem.status = status
+            return listItem
+        }
+
+        fun TVDetail.toListItem() : ListItem
+        {
+            return ListItem(
+                    id,
+                    name,
+                    "tv",
+                    POSTER_URL+poster_path,
+                    vote_average
+            )
+        }
+
+        fun TVDetail.toListItem(_id: Int) : ListItem
+        {
+            val listItem = toListItem()
+            listItem.id = _id
             return listItem
         }
     }
