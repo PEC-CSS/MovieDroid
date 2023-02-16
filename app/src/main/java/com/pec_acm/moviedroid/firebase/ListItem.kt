@@ -65,13 +65,6 @@ data class ListItem(
             )
         }
 
-        fun MovieDetail.toListItem(_id: Int) : ListItem
-        {
-            val listItem = toListItem()
-            listItem.id = _id
-            return listItem
-        }
-
         fun TVDetail.toListItem() : ListItem
         {
             return ListItem(
@@ -81,13 +74,6 @@ data class ListItem(
                     POSTER_URL+poster_path,
                     vote_average
             )
-        }
-
-        fun TVDetail.toListItem(_id: Int) : ListItem
-        {
-            val listItem = toListItem()
-            listItem.id = _id
-            return listItem
         }
     }
 }
