@@ -79,6 +79,7 @@ class DetailViewModel @Inject constructor(
                 val user = it.result.getValue(User::class.java)
                 user?.favList?.add(listItem)
                 userReference.child(uid).setValue(user)
+                isFav.value = true
             }
         }
     }
@@ -90,6 +91,7 @@ class DetailViewModel @Inject constructor(
                 val user = it.result.getValue(User::class.java)
                 user?.favList?.remove(listItem)
                 userReference.child(uid).setValue(user)
+                isFav.value = false
             }
         }
     }
