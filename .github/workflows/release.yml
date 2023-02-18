@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        type: boolean
+        required: false
+        default: false
+      draft:
+        type: boolean
+        required: false
+        default: false
+      version_tag:
+        type: string
+        required: true
+      release_name:
+        type: string
+        required: false
+      release_body:
+        type: string
+        required: false
+
+
+jobs:
+  apk:
+    name: Generate APK
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+          cache: gradle
+      - name: Set execution flag for gradlew
+        run: chmod +x gradlew
+      - name: Run unit tests
+        run: ./gradlew test
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Build APK
+        run: ./gradlew assembleRelease
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/release/
+
+  release:
+    permissions:
+      contents: write
+    name: Release APK
+    needs: apk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ inputs.version_tag }}
+          name: ${{ inputs.release_name }}
+          body: ${{ inputs.release_body }}
+          draft: ${{ inputs.draft }}
+          prerelease: ${{ inputs.prerelease }}
+          make_latest: legacy
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: apk/app-release-unsigned.apk
+          asset_name: ${{ github.event.repository.name }}.apk
+          asset_content_type: application/zip
