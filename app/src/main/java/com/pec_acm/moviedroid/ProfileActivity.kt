@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.databinding.ActivityProfileBinding
+import com.pec_acm.moviedroid.firebase.User
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +22,9 @@ class ProfileActivity : AppCompatActivity() {
 
         val user = FirebaseAuth.getInstance().currentUser
 
+        val databaseReference = Firebase.database.reference
+        val userReference = databaseReference.child("Users")
+
         //update the info
 
         if (user != null) {
@@ -29,6 +35,46 @@ class ProfileActivity : AppCompatActivity() {
             .load(user.photoUrl)
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(binding.imgProfile)
+
+            var movieRate = 0
+            var tvRate = 0
+            var movieCount = 0
+            var tvCount = 0
+
+            userReference.child(user.uid).get().addOnCompleteListener {
+                val userDbRef = it.result.getValue(User::class.java)
+                for (item in userDbRef!!.userList)
+                {
+                    if (item.personalScore != 0)
+                    {
+                        if (item.category == "tv")
+                        {
+                            tvCount += 1
+                            tvRate += item.personalScore
+                        }
+                        else
+                        {
+                            movieCount += 1
+                            movieRate += item.personalScore
+                        }
+                    }
+                }
+                binding.OverallRateText.text = buildString {
+                    append("Overall Rating: ")
+                    append((movieRate + tvRate) / (movieCount + tvCount))
+                    append("/10")
+                }
+                binding.MovieRateText.text = buildString {
+                    append("Overall Rating: ")
+                    append(movieRate / movieCount)
+                    append("/10")
+                }
+                binding.TVRateText.text = buildString {
+                    append("Overall Rating: ")
+                    append((tvRate / tvCount))
+                    append("/10")
+                }
+            }
         }
 
         binding.backBtnProfile.setOnClickListener {
