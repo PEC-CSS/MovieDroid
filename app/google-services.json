@@ -1,33 +1,42 @@
 {
   "project_info": {
-    "project_number": "312195271485",
-    "project_id": "moviedroid-5e977",
-    "storage_bucket": "moviedroid-5e977.appspot.com"
+    "project_number": "782504500861",
+    "firebase_url": "https://moviedroid-ac29e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "moviedroid-ac29e",
+    "storage_bucket": "moviedroid-ac29e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:312195271485:android:144f6c3d868d4a18ec9354",
+        "mobilesdk_app_id": "1:782504500861:android:a87e4b171da6496c531b14",
         "android_client_info": {
           "package_name": "com.pec_acm.moviedroid"
         }
       },
       "oauth_client": [
         {
-          "client_id": "312195271485-rd44fta4n39r4p8l7amp8n53lpdgeqdj.apps.googleusercontent.com",
+          "client_id": "782504500861-bsmuh20fl6fc0qg5cfj3ibkk30qhuukc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pec_acm.moviedroid",
+            "certificate_hash": "8e729f996d9f90fdb4e73e909063724a22a44e6c"
+          }
+        },
+        {
+          "client_id": "782504500861-4fcnnm4vouuvab48vmqrjn7jk3o61l06.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBo4sHSg1iVhx74KWapZEBPIzhaI4gNmEM"
+          "current_key": "AIzaSyDVkfmSKP-VutD4lGXVZR8QSY7g2X_TQkw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "312195271485-rd44fta4n39r4p8l7amp8n53lpdgeqdj.apps.googleusercontent.com",
+              "client_id": "782504500861-4fcnnm4vouuvab48vmqrjn7jk3o61l06.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
