@@ -24,6 +24,8 @@ on:
 
 jobs:
   apk:
+    permissions:
+      contents: write
     name: Generate APK
     runs-on: ubuntu-latest
     steps:
