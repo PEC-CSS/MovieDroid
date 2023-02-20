@@ -75,16 +75,15 @@ jobs:
           name: apk
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        uses: marvinpinto/action-automatic-releases@latest
         with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
           tag_name: ${{ inputs.version_tag }}
-          name: ${{ inputs.release_name }}
+          title: ${{ inputs.release_name }}
           body: ${{ inputs.release_body }}
           draft: ${{ inputs.draft }}
           prerelease: ${{ inputs.prerelease }}
-          make_latest: legacy
           files: ${{steps.sign_app.outputs.signedReleaseFile}}
 #      - name: Upload Release APK
 #        id: upload_release_asset
