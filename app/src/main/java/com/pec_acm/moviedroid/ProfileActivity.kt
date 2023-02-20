@@ -59,21 +59,21 @@ class ProfileActivity : AppCompatActivity() {
                         }
                     }
                 }
-                binding.OverallRateText.text = buildString {
-                    append("Overall Rating: ")
+                binding.OverallRateText.text = if (movieCount + tvCount != 0) buildString {
+                    append("Overall Rating:\n")
                     append((movieRate + tvRate) / (movieCount + tvCount))
                     append("/10")
-                }
-                binding.MovieRateText.text = buildString {
-                    append("Overall Rating: ")
+                } else "Rate something to view your average rating!"
+                binding.MovieRateText.text = if (movieCount != 0) buildString {
+                    append("Movie Rating:\n")
                     append(movieRate / movieCount)
                     append("/10")
-                }
-                binding.TVRateText.text = buildString {
-                    append("Overall Rating: ")
+                } else ""
+                binding.TVRateText.text = if (tvCount != 0) buildString {
+                    append("TV Shows Rating:\n")
                     append((tvRate / tvCount))
                     append("/10")
-                }
+                } else ""
             }
         }
 
