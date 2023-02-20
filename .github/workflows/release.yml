@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        type: boolean
+        required: false
+        default: false
+      release_name:
+        type: string
+        required: false
+
+jobs:
+  apk:
+    permissions:
+      contents: write
+    name: Generate and Release APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+          cache: gradle
+      - name: Set execution flag for gradlew
+        run: chmod +x gradlew
+      - name: Run unit tests
+        run: ./gradlew test
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Build APK
+        run: ./gradlew assembleRelease
+      - name: Sign app APK
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "30.0.2"
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+      - uses: marvinpinto/action-automatic-releases@latest
+        id: create_release
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          title: ${{ inputs.release_name }}
+          draft: false
+          prerelease: ${{ inputs.prerelease }}
+      - name: upload apk
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          asset_name: MovieDroid.apk
+          asset_content_type: application/zip
