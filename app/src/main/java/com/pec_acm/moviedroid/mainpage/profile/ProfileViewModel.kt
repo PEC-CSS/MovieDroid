@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.firebase.User
 import kotlinx.coroutines.launch
 
-
 class ProfileViewModel: ViewModel() {
     private var databaseReference = Firebase.database.reference
     private var userReference = databaseReference.child("Users")
@@ -49,7 +48,7 @@ class ProfileViewModel: ViewModel() {
                 {
                     overallRating.value = buildString {
                         append("Overall Rating:\n")
-                        append((movieRate + tvRate) / (movieCount + tvCount))
+                        append(String.format("%.2f", (movieRate + tvRate).toFloat() / (movieCount + tvCount)))
                         append("/10")
                     }
                 }
@@ -57,7 +56,7 @@ class ProfileViewModel: ViewModel() {
                 {
                     tvRating.value = buildString {
                         append("TV Shows Rating:\n")
-                        append((tvRate / tvCount))
+                        append(String.format("%.2f", tvRate.toFloat() / tvCount))
                         append("/10")
                     }
                 }
@@ -65,7 +64,7 @@ class ProfileViewModel: ViewModel() {
                 {
                     movieRating.value = buildString {
                         append("Movie Rating:\n")
-                        append(movieRate / movieCount)
+                        append(String.format("%.2f", movieRate.toFloat() / movieCount))
                         append("/10")
                     }
                 }
