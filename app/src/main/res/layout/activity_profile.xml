@@ -27,11 +27,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/pieChart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_btn_profile"
-        app:layout_constraintVertical_bias="0.06">
+        app:layout_constraintTop_toBottomOf="@+id/back_btn_profile">
 
         <androidx.cardview.widget.CardView
             android:layout_width="135dp"
@@ -52,41 +50,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="start|center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
 
             <!--        name-->
             <TextView
                 android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:fontFamily="@font/nunito"
-                android:text="@string/name"
-                android:textSize="@dimen/_20ssp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"/>
+                android:fontFamily="@font/nunito"
+                android:gravity="bottom"
+                android:text="@string/name"
+                android:textSize="@dimen/_20ssp" />
 
             <!--        email-->
             <TextView
                 android:id="@+id/text_email"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:fontFamily="@font/nunito"
-                android:text="@string/email_id"
-                android:textSize="@dimen/_12ssp"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical"/>
-
+                android:fontFamily="@font/nunito"
+                android:gravity="top"
+                android:text="@string/email_id"
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- pie chart -->
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChart"
+    <View
+        android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,8 +100,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.1">
 
         <TextView
             android:id="@+id/OverallRateText"
@@ -137,7 +136,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/divider2"
+        android:id="@+id/divider3"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
@@ -146,19 +145,17 @@
         app:layout_constraintBottom_toTopOf="@+id/pieChart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+    <!-- pie chart -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pieChart" />
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
