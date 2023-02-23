@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.data.api.TMDBApi
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.User
-import com.pec_acm.moviedroid.model.MovieCredits
+import com.pec_acm.moviedroid.model.MovieTvCredits
 import com.pec_acm.moviedroid.model.MovieDetail
 import com.pec_acm.moviedroid.model.MovieTvVideo
 import com.pec_acm.moviedroid.model.TVDetail
@@ -27,8 +27,8 @@ class DetailViewModel @Inject constructor(
     val tvVideoDetails: MutableLiveData<MovieTvVideo> = MutableLiveData()
 
     //movie and tv shows credits
-    val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
-    val tvCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
+    val movieCreditsList: MutableLiveData<MovieTvCredits> = MutableLiveData()
+    val tvCreditsList: MutableLiveData<MovieTvCredits> = MutableLiveData()
 
     private var databaseReference = Firebase.database.reference
     private var userReference = databaseReference.child("Users")
