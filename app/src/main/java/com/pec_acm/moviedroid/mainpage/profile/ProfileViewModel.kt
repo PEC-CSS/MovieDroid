@@ -17,6 +17,7 @@ class ProfileViewModel: ViewModel() {
     val movieRating: MutableLiveData<String> = MutableLiveData("")
     val tvRating: MutableLiveData<String> = MutableLiveData("")
 
+    val listItemsCounts: MutableLiveData<Array<Int>> = MutableLiveData(arrayOf(0, 0, 0, 0, 0))
     fun setUserRatingValues(uid : String)
     {
         viewModelScope.launch {
@@ -72,4 +73,18 @@ class ProfileViewModel: ViewModel() {
         }
     }
 
+    fun setListItemsCounts(uid: String)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                val tempListItemsCounts = arrayOf(0, 0, 0, 0, 0)
+                for (item in user!!.userList)
+                {
+                    tempListItemsCounts[item.status - 1] += 1
+                }
+                listItemsCounts.value = tempListItemsCounts
+            }
+        }
+    }
 }
