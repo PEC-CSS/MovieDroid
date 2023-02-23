@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.databinding.ActivityProfileBinding
+import com.pec_acm.moviedroid.mainpage.adapters.FavsAdapter
 import com.pec_acm.moviedroid.mainpage.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +35,7 @@ class ProfileActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         profileViewModel.setUserRatingValues(user!!.uid)
         profileViewModel.setListItemsCounts(user!!.uid)
+        profileViewModel.setFavsList(user!!.uid)
 
         //update the info
         if (user != null) {
@@ -43,6 +46,20 @@ class ProfileActivity : AppCompatActivity() {
             .load(user.photoUrl)
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(binding.imgProfile)
+
+            profileViewModel.userFavItems.observe(this) {favs ->
+                if (favs.size == 0)
+                {
+                    binding.noFavsText.visibility = View.VISIBLE
+                }
+                else
+                {
+                    binding.noFavsText.visibility = View.INVISIBLE
+                }
+                binding.favListRv.layoutManager =
+                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                binding.favListRv.adapter = FavsAdapter(this, favs)
+            }
 
             profileViewModel.listItemsCounts.observe(this) {values ->
                 if (values.sum() == 0)
