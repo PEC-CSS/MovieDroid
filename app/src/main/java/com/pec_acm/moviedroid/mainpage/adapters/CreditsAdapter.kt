@@ -16,9 +16,10 @@ import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.App
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.mainpage.detail.MovieDetailFragmentDirections
+import com.pec_acm.moviedroid.mainpage.detail.TvDetailFragmentDirections
 import com.pec_acm.moviedroid.model.Crew
 
-class CreditsAdapter(val context: Context, private val crewList: List<Crew>) :
+class CreditsAdapter(val context: Context, private val crewList: List<Crew>, val fragmentCategory: String) :
     Adapter<CreditsAdapter.CreditsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsViewHolder {
@@ -50,9 +51,18 @@ class CreditsAdapter(val context: Context, private val crewList: List<Crew>) :
                 itemID?.let {
                     val app = (context.applicationContext as App)
                     if (app.isOnline) {
-                        // TODO: check if in movie or tv?
-                        val direction = MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(it)
-                        itemView.findNavController().navigate(direction)
+                        if (fragmentCategory == context.getString(R.string.movie_item_category))
+                        {
+                            itemView.findNavController().navigate(
+                                    MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(it)
+                            )
+                        }
+                        else if (fragmentCategory == context.getString(R.string.tv_item_category))
+                        {
+                            itemView.findNavController().navigate(
+                                    TvDetailFragmentDirections.actionTvDetailFragmentToPersonDetailFragment(it)
+                            )
+                        }
                     }
                     else
                     {

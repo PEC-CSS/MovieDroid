@@ -91,7 +91,7 @@ class MovieDetailFragment : Fragment() {
         detailViewModel.movieCreditsList.observe(viewLifecycleOwner) { movieCredits ->
             binding.rvMovieCredits.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvMovieCredits.adapter = CreditsAdapter(requireContext(), movieCredits.crew)
+            binding.rvMovieCredits.adapter = CreditsAdapter(requireContext(), movieCredits.crew, getString(R.string.movie_item_category))
         }
 
 
