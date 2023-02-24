@@ -65,6 +65,9 @@
         <argument
             android:name="itemID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_personDetailFragment"
+            app:destination="@id/personDetailFragment" />
     </fragment>
 
     <dialog
@@ -80,6 +83,9 @@
         <argument
             android:name="itemID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_tvDetailFragment_to_personDetailFragment"
+            app:destination="@id/personDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/allItems"
@@ -98,5 +104,14 @@
         <action
             android:id="@+id/action_allItems_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.detail.PersonDetailFragment"
+        android:label="fragment_person_detail"
+        tools:layout="@layout/fragment_person_detail" >
+        <argument
+            android:name="itemID"
+            app:argType="integer" />
     </fragment>
 </navigation>
