@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.User
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,9 @@ class ProfileViewModel: ViewModel() {
     val tvRating: MutableLiveData<String> = MutableLiveData("")
 
     val listItemsCounts: MutableLiveData<Array<Int>> = MutableLiveData(arrayOf(0, 0, 0, 0, 0))
+
+    val userFavItems: MutableLiveData<MutableList<ListItem>> = MutableLiveData()
+
     fun setUserRatingValues(uid : String)
     {
         viewModelScope.launch {
@@ -84,6 +88,16 @@ class ProfileViewModel: ViewModel() {
                     tempListItemsCounts[item.status - 1] += 1
                 }
                 listItemsCounts.value = tempListItemsCounts
+            }
+        }
+    }
+
+    fun setFavsList(uid: String)
+    {
+        viewModelScope.launch{
+            userReference.child(uid).get().addOnCompleteListener {
+                val user = it.result.getValue(User::class.java)
+                userFavItems.value = user?.favList
             }
         }
     }
