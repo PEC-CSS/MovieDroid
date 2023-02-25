@@ -34,6 +34,7 @@ class CreditsAdapter(val context: Context, private val crewList: List<Crew>, val
             "https://image.tmdb.org/t/p/w138_and_h175_face" + crewList[position].profile_path
         Glide.with(context)
             .load(profile_full_path)
+            .centerCrop()
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(holder.cImage)
     }
