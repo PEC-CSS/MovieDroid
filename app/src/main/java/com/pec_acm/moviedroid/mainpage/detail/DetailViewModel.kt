@@ -8,11 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.data.api.TMDBApi
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.User
-import com.pec_acm.moviedroid.model.MovieTvCredits
-import com.pec_acm.moviedroid.model.MovieDetail
-import com.pec_acm.moviedroid.model.MovieTvVideo
-import com.pec_acm.moviedroid.model.TVDetail
-import com.pec_acm.moviedroid.model.PersonDetail
+import com.pec_acm.moviedroid.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,6 +29,7 @@ class DetailViewModel @Inject constructor(
 
     // person details
     val personDetailList: MutableLiveData<PersonDetail> = MutableLiveData()
+    val personCreditsList: MutableLiveData<PersonCredits> = MutableLiveData()
 
     private var databaseReference = Firebase.database.reference
     private var userReference = databaseReference.child("Users")
@@ -79,6 +76,12 @@ class DetailViewModel @Inject constructor(
     fun getPersonDetail(id: Int) {
         viewModelScope.launch {
             personDetailList.value = api.personDetailsByID(person_id = id).body()
+        }
+    }
+
+    fun getPersonCredits(id: Int) {
+        viewModelScope.launch {
+            personCreditsList.value = api.personCreditsByID(person_id = id).body()
         }
     }
 

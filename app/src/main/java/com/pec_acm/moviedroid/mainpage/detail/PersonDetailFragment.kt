@@ -1,14 +1,16 @@
 package com.pec_acm.moviedroid.mainpage.detail
 
-import android.opengl.Visibility
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentPersonDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +43,7 @@ class PersonDetailFragment : Fragment() {
                         .load("https://image.tmdb.org/t/p/w780" + personDetail.profile_path)
                         .into(binding.image)
             }
+            @RequiresApi(Build.VERSION_CODES.O)
             if (personDetail.birthday != null)
             {
                 binding.birthDay.visibility = View.VISIBLE
@@ -50,6 +53,7 @@ class PersonDetailFragment : Fragment() {
                     append(date.format(DateTimeFormatter.ofPattern("dd MMMM, yyyy")))
                 }
             } else { binding.birthDay.visibility = View.GONE }
+            @RequiresApi(Build.VERSION_CODES.O)
             if (personDetail.deathday != null)
             {
                 binding.deadDay.visibility = View.VISIBLE
@@ -61,7 +65,7 @@ class PersonDetailFragment : Fragment() {
             } else { binding.deadDay.visibility = View.GONE }
             binding.overview.text = personDetail.biography
         }
-        // make sure to display everything thats recieved lol
+
         binding.expandCollapse.setOnClickListener {
             expandedText = !expandedText
             if(expandedText){
@@ -72,7 +76,15 @@ class PersonDetailFragment : Fragment() {
                 binding.expandCollapse.rotation = 0f
             }
         }
-        // TODO: known for recycler view
+
+        detailViewModel.getPersonCredits(args.itemID)
+        detailViewModel.personCreditsList.observe(viewLifecycleOwner) { personCredits ->
+            binding.rvPersonCredits.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvPersonCredits.adapter = null
+            // TODO: make and attach adapter
+        }
+
         return binding.root
     }
 }
