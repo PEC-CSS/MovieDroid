@@ -116,4 +116,18 @@ interface TMDBApi {
         @Query("api_key")
         apiKey: String = Constants.API_KEY
     ) : Response<MovieTvCredits>
+
+    @GET("person/{person_id}")
+    suspend fun personDetailsByID(
+            @Path("person_id") person_id: Int,
+            @Query("api_key")
+            apiKey: String = Constants.API_KEY
+    ) : Response<PersonDetail>
+
+    @GET("discover/movie")
+    suspend fun personKnownForByID(
+            @Query("api_key") apiKey: String = Constants.API_KEY,
+            @Query("sort_by") sortBy: String = "sort_by=popularity.desc",
+            @Query("with_people") withPeople: String
+    ) : Response<MovieListResponse>
 }

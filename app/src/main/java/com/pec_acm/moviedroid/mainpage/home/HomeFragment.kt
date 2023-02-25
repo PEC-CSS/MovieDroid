@@ -123,7 +123,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         binding.llComingSoon.setOnClickListener {
             it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon", "Cooming Soon"))
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAllItems("comingSoon", "Coming Soon"))
         }
         binding.llInTheaters.setOnClickListener {
             it.findNavController()

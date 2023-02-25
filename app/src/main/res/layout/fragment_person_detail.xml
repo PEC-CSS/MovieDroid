@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainpage.detail.TvDetailFragment">
+    tools:context=".mainpage.detail.">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -19,21 +19,13 @@
             app:contentScrim="@color/ic_launcher_background"
             app:expandedTitleTextColor="@color/white"
             app:collapsedTitleTextColor="@color/black">
+
             <ImageView
                 android:id="@id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/favBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom|end"
-                android:background="@drawable/ic_favorite_shadow_24"
-                android:layout_marginBottom="12dp"
-                android:layout_marginEnd="12dp" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -55,22 +47,33 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/genre"
+                android:id="@+id/birth_day"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="thriller" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dead_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/birth_day" />
 
             <ScrollView
                 android:id="@+id/overviewScroll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genre">
+                app:layout_constraintTop_toBottomOf="@id/dead_day">
 
                 <TextView
                     android:id="@+id/overview"
@@ -81,49 +84,37 @@
                     tools:text="@tools:sample/lorem/random" />
             </ScrollView>
 
-
-             <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/overviewScroll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/trailer_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:text="Trailers/Videos"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overviewScroll" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/video_rcv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/trailer_tag"
-                tools:listitem="@layout/single_video_item" />
+                app:layout_constraintTop_toBottomOf="@id/overviewScroll">
 
+                <ImageView
+                    android:id="@+id/expand_collapse"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_arrow_down"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/overviewScroll"
+                    app:tint="@color/light_grey" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cast and Crew"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="Known for"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTvCredits"
+                    android:id="@+id/rvPersonCredits"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

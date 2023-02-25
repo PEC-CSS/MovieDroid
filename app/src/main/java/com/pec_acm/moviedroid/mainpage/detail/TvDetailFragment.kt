@@ -77,7 +77,7 @@ class TvDetailFragment : Fragment() {
         detailViewModel.tvCreditsList.observe(viewLifecycleOwner) { tvCredits ->
             binding.rvTvCredits.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvTvCredits.adapter = CreditsAdapter(requireContext(), tvCredits.crew)
+            binding.rvTvCredits.adapter = CreditsAdapter(requireContext(), tvCredits.crew, getString(R.string.tv_item_category))
         }
 
         return binding.root

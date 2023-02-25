@@ -8,10 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.data.api.TMDBApi
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.User
-import com.pec_acm.moviedroid.model.MovieTvCredits
-import com.pec_acm.moviedroid.model.MovieDetail
-import com.pec_acm.moviedroid.model.MovieTvVideo
-import com.pec_acm.moviedroid.model.TVDetail
+import com.pec_acm.moviedroid.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,6 +26,10 @@ class DetailViewModel @Inject constructor(
     //movie and tv shows credits
     val movieCreditsList: MutableLiveData<MovieTvCredits> = MutableLiveData()
     val tvCreditsList: MutableLiveData<MovieTvCredits> = MutableLiveData()
+
+    // person details
+    val personDetailList: MutableLiveData<PersonDetail> = MutableLiveData()
+    val personKnownForList: MutableLiveData<List<MovieResult>> = MutableLiveData()
 
     private var databaseReference = Firebase.database.reference
     private var userReference = databaseReference.child("Users")
@@ -69,6 +70,18 @@ class DetailViewModel @Inject constructor(
     fun getTvVideo(id: Int) {
         viewModelScope.launch {
             tvVideoDetails.value = api.tvVideosByID(tv_id = id).body()
+        }
+    }
+
+    fun getPersonDetail(id: Int) {
+        viewModelScope.launch {
+            personDetailList.value = api.personDetailsByID(person_id = id).body()
+        }
+    }
+
+    fun getPersonKnownFor(id: Int) {
+        viewModelScope.launch {
+            personKnownForList.value = api.personKnownForByID(withPeople = id.toString()).body()?.results
         }
     }
 
