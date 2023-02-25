@@ -1,9 +1,6 @@
 package com.pec_acm.moviedroid.firebase
 
-import com.pec_acm.moviedroid.model.MovieDetail
-import com.pec_acm.moviedroid.model.MovieResult
-import com.pec_acm.moviedroid.model.TVDetail
-import com.pec_acm.moviedroid.model.TvResult
+import com.pec_acm.moviedroid.model.*
 
 data class ListItem(
     val id : Int=0,
@@ -73,6 +70,28 @@ data class ListItem(
                     "tv",
                     POSTER_URL+poster_path,
                     vote_average
+            )
+        }
+
+        fun PersonCreditCrew.toListItem() : ListItem
+        {
+            return ListItem(
+                    id,
+                    if (media_type == "tv") name else title,
+                    media_type,
+                    POSTER_URL+poster_path,
+                    vote_average
+            )
+        }
+
+        fun PersonCreditCast.toListItem() : ListItem
+        {
+            return ListItem(
+                id,
+                if (media_type == "tv") name else title,
+                media_type,
+                POSTER_URL+poster_path,
+                vote_average
             )
         }
     }

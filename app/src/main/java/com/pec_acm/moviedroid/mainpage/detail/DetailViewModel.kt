@@ -29,7 +29,7 @@ class DetailViewModel @Inject constructor(
 
     // person details
     val personDetailList: MutableLiveData<PersonDetail> = MutableLiveData()
-    val personKnownForList: MutableLiveData<List<MovieResult>> = MutableLiveData()
+    val personCreditsList: MutableLiveData<PersonCredits> = MutableLiveData()
 
     private var databaseReference = Firebase.database.reference
     private var userReference = databaseReference.child("Users")
@@ -79,9 +79,9 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getPersonKnownFor(id: Int) {
+    fun getPersonCredits(id: Int) {
         viewModelScope.launch {
-            personKnownForList.value = api.personKnownForByID(withPeople = id.toString()).body()?.results
+            personCreditsList.value = api.personCreditByID(person_id = id).body()
         }
     }
 
