@@ -2,6 +2,7 @@ package com.pec_acm.moviedroid.mainpage.detail
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,7 @@ import java.time.format.DateTimeFormatter
 class PersonDetailFragment : Fragment() {
 
     private lateinit var detailViewModel: DetailViewModel
-    private val args: PersonDetailFragmentArgs by navArgs()
+    private val args: PersonDetailFragmentArgs by this.navArgs()
     lateinit var binding: FragmentPersonDetailBinding
 
     var expandedText: Boolean = false
@@ -80,18 +81,21 @@ class PersonDetailFragment : Fragment() {
             }
         }
 
-        detailViewModel.getPersonKnownFor(args.itemID)
-        detailViewModel.personKnownForList.observe(viewLifecycleOwner) {
-            // no api endpoint to get known for tv shows
-            // can use person/{person_id}/combined_credits and sort by popularity but im lazy
-            val knownForMovies = mutableListOf<ListItem>()
-            for (item in it)
+        detailViewModel.getPersonCredits(args.itemID)
+        detailViewModel.personCreditsList.observe(viewLifecycleOwner) {personCredits ->
+            val knownFor = mutableListOf<ListItem>()
+            for (item in personCredits.crew.sortedBy { it.popularity })
             {
-                knownForMovies.add(item.toListItem())
+                knownFor.add(item.toListItem())
             }
+            for (item in personCredits.cast.sortedBy { it.popularity })
+            {
+                knownFor.add(item.toListItem())
+            }
+            knownFor.reverse()
             binding.rvPersonCredits.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvPersonCredits.adapter = FavsAdapter(requireContext(), knownForMovies)
+            binding.rvPersonCredits.adapter = FavsAdapter(requireContext(), knownFor)
         }
         return binding.root
     }
