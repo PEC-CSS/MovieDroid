@@ -13,6 +13,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.databinding.FragmentPersonDetailBinding
+import com.pec_acm.moviedroid.firebase.ListItem
+import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
+import com.pec_acm.moviedroid.mainpage.adapters.FavsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -77,14 +80,19 @@ class PersonDetailFragment : Fragment() {
             }
         }
 
-        detailViewModel.getPersonCredits(args.itemID)
-        detailViewModel.personCreditsList.observe(viewLifecycleOwner) { personCredits ->
+        detailViewModel.getPersonKnownFor(args.itemID)
+        detailViewModel.personKnownForList.observe(viewLifecycleOwner) {
+            // no api endpoint to get known for tv shows
+            // can use person/{person_id}/combined_credits and sort by popularity but im lazy
+            val knownForMovies = mutableListOf<ListItem>()
+            for (item in it)
+            {
+                knownForMovies.add(item.toListItem())
+            }
             binding.rvPersonCredits.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvPersonCredits.adapter = null
-            // TODO: make and attach adapter
+            binding.rvPersonCredits.adapter = FavsAdapter(requireContext(), knownForMovies)
         }
-
         return binding.root
     }
 }

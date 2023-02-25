@@ -124,10 +124,10 @@ interface TMDBApi {
             apiKey: String = Constants.API_KEY
     ) : Response<PersonDetail>
 
-    @GET("person/{person_id}/combined_credits")
-    suspend fun personCreditsByID(
-            @Path("person_id") person_id: Int,
-            @Query("api_key")
-            apiKey: String = Constants.API_KEY
-    ) : Response<PersonCredits>
+    @GET("discover/movie")
+    suspend fun personKnownForByID(
+            @Query("api_key") apiKey: String = Constants.API_KEY,
+            @Query("sort_by") sortBy: String = "sort_by=popularity.desc",
+            @Query("with_people") withPeople: String
+    ) : Response<MovieListResponse>
 }
