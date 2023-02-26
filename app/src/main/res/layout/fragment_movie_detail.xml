@@ -125,12 +125,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cast and Crew"
+                    android:text="Cast"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvMovieCredits"
+                    android:id="@+id/rvMovieCast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crew"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMovieCrew"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
