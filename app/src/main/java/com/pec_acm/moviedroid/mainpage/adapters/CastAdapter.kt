@@ -1,7 +1,6 @@
 package com.pec_acm.moviedroid.mainpage.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +10,15 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.App
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.mainpage.detail.MovieDetailFragmentDirections
 import com.pec_acm.moviedroid.mainpage.detail.TvDetailFragmentDirections
-import com.pec_acm.moviedroid.model.Crew
+import com.pec_acm.moviedroid.model.Cast
 
-class CreditsAdapter(val context: Context, private val crewList: List<Crew>, val fragmentCategory: String) :
-    Adapter<CreditsAdapter.CreditsViewHolder>() {
+class CastAdapter(val context: Context, private val castList: List<Cast>, val fragmentCategory: String) :
+        Adapter<CastAdapter.CreditsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.cast_crew_item, parent, false)
@@ -28,19 +26,19 @@ class CreditsAdapter(val context: Context, private val crewList: List<Crew>, val
     }
 
     override fun onBindViewHolder(holder: CreditsViewHolder, position: Int) {
-        holder.cName.text = crewList[position].name
-        holder.itemID = crewList[position].id
+        holder.cName.text = castList[position].name
+        holder.itemID = castList[position].id
         val profile_full_path =
-            "https://image.tmdb.org/t/p/w138_and_h175_face" + crewList[position].profile_path
+                "https://image.tmdb.org/t/p/w138_and_h175_face" + castList[position].profile_path
         Glide.with(context)
-            .load(profile_full_path)
-            .centerCrop()
-            .placeholder(R.drawable.ic_baseline_account_circle_24)
-            .into(holder.cImage)
+                .load(profile_full_path)
+                .centerCrop()
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .into(holder.cImage)
     }
 
     override fun getItemCount(): Int {
-        return crewList.size
+        return castList.size
     }
 
     inner class CreditsViewHolder(itemView: View, var itemID: Int? = null) : RecyclerView.ViewHolder(itemView) {

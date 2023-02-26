@@ -14,8 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentMovieDetailBinding
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
+import com.pec_acm.moviedroid.mainpage.adapters.CastAdapter
 import com.pec_acm.moviedroid.mainpage.adapters.VideoAdapter
-import com.pec_acm.moviedroid.mainpage.adapters.CreditsAdapter
+import com.pec_acm.moviedroid.mainpage.adapters.CrewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -89,9 +90,13 @@ class MovieDetailFragment : Fragment() {
         //movie credits
         detailViewModel.getMovieCredits(args.itemID)
         detailViewModel.movieCreditsList.observe(viewLifecycleOwner) { movieCredits ->
-            binding.rvMovieCredits.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvMovieCredits.adapter = CreditsAdapter(requireContext(), movieCredits.crew, getString(R.string.movie_item_category))
+            binding.rvMovieCast.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvMovieCast.adapter = CastAdapter(requireContext(), movieCredits.cast, getString(R.string.movie_item_category))
+
+            binding.rvMovieCrew.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvMovieCrew.adapter = CrewAdapter(requireContext(), movieCredits.crew, getString(R.string.movie_item_category))
         }
 
 
