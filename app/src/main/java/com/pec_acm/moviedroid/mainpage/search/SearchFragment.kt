@@ -14,6 +14,7 @@ import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.databinding.FragmentSearchBinding
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.firebase.ListItem.Companion.toListItem
+import com.pec_acm.moviedroid.mainpage.adapters.PeopleSearchAdapter
 import com.pec_acm.moviedroid.mainpage.list.ListAdapter
 import com.pec_acm.moviedroid.mainpage.list.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +46,6 @@ class SearchFragment : Fragment() {
 
         val listViewModel = ViewModelProvider(this)[ListViewModel::class.java]
         searchListAdapter = ListAdapter(requireContext(),listViewModel, this, false)
-        searchList.adapter = searchListAdapter
 
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getUser(FirebaseAuth.getInstance().uid!!)
@@ -56,6 +56,10 @@ class SearchFragment : Fragment() {
 
         binding.tvChip.setOnClickListener {
             searchText.queryHint = "Search TV Shows"
+        }
+
+        binding.peopleChip.setOnClickListener {
+            searchText.queryHint = "Search People"
         }
 
         searchViewModel.searchResult.observe(viewLifecycleOwner){ searchResult ->
@@ -101,6 +105,7 @@ class SearchFragment : Fragment() {
                     }
                     searchItems.add(listItem)
                 }
+                searchList.adapter = searchListAdapter
                 searchListAdapter.setItemList(searchItems)
             }
         }
@@ -118,21 +123,30 @@ class SearchFragment : Fragment() {
                     }
                     searchItems.add(listItem)
                 }
+                searchList.adapter = searchListAdapter
                 searchListAdapter.setItemList(searchItems)
 
             }
         }
 
+        searchViewModel.personSearchList.observe(viewLifecycleOwner) { resultList ->
+            binding.searchList.adapter = PeopleSearchAdapter(requireContext(), resultList.toMutableList())
+        }
+
         searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if(query==null) return true
-                val checkedChipID = binding.searchChipGroup.checkedChipId
-                if (checkedChipID ==binding.movieChip.id) {
-                    binding.movieChip.setChipBackgroundColorResource(R.color.search_toggle)
-                    searchViewModel.searchMovie(query)
-                }
-                else if (checkedChipID == binding.tvChip.id){
-                    searchViewModel.searchTvShow(query)
+                when (binding.searchChipGroup.checkedChipId) {
+                    binding.movieChip.id -> {
+                        binding.movieChip.setChipBackgroundColorResource(R.color.search_toggle)
+                        searchViewModel.searchMovie(query)
+                    }
+                    binding.tvChip.id -> {
+                        searchViewModel.searchTvShow(query)
+                    }
+                    binding.peopleChip.id -> {
+                        searchViewModel.searchPerson(query)
+                    }
                 }
 
                 searchText.clearFocus()
@@ -145,6 +159,7 @@ class SearchFragment : Fragment() {
                      searchItems.clear()
                      searchViewModel.movieSearchList.value = arrayListOf()
                      searchViewModel.tvShowSearchList.value = arrayListOf()
+                     searchViewModel.movieSearchList.value = arrayListOf()
                      searchListAdapter.notifyDataSetChanged()
                  }
 
@@ -155,6 +170,9 @@ class SearchFragment : Fragment() {
                     }
                     else if (id == binding.tvChip.id && newText!=""){
                         searchViewModel.searchTvShow(newText.toString())
+                    }
+                    else if (id == binding.peopleChip.id && newText!="") {
+                        searchViewModel.searchPerson((newText.toString()))
                     }
                 }
                 return true
