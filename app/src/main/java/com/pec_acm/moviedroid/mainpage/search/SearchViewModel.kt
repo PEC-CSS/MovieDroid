@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.pec_acm.moviedroid.data.api.TMDBApi
 import com.pec_acm.moviedroid.firebase.User
 import com.pec_acm.moviedroid.model.MovieResult
+import com.pec_acm.moviedroid.model.PersonResult
 import com.pec_acm.moviedroid.model.TvResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ class SearchViewModel @Inject constructor(
     val user: MutableLiveData<User> = MutableLiveData()
     val movieSearchList: MutableLiveData<List<MovieResult>> = MutableLiveData()
     val tvShowSearchList: MutableLiveData<List<TvResult>> = MutableLiveData()
+    val personSearchList: MutableLiveData<List<PersonResult>> = MutableLiveData()
     val searchResult: MutableLiveData<SearchResult> = MutableLiveData()
 
     fun searchMovie(query: String) {
@@ -46,6 +48,19 @@ class SearchViewModel @Inject constructor(
             tvShowSearchList.value = api.searchTvShow(query).body()?.results
 
             if (tvShowSearchList.value?.isNotEmpty() == true) {
+                searchResult.value = SearchResult.FOUND
+            } else {
+                searchResult.value = SearchResult.NOT_FOUND
+            }
+        }
+    }
+
+    fun searchPerson(query: String) {
+        viewModelScope.launch {
+            searchResult.value = SearchResult.SEARCHING
+            personSearchList.value = api.searchPerson(query).body()?.results
+
+            if (personSearchList.value?.isNotEmpty() == true) {
                 searchResult.value = SearchResult.FOUND
             } else {
                 searchResult.value = SearchResult.NOT_FOUND

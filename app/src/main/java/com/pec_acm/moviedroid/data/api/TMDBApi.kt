@@ -129,4 +129,10 @@ interface TMDBApi {
             @Path("person_id") person_id: Int,
             @Query("api_key") apiKey: String = Constants.API_KEY
     ) : Response<PersonCredits>
+
+    @GET("search/person")
+    suspend fun searchPerson(
+            @Query("query") query: String,
+            @Query("api_key") apiKey : String = Constants.API_KEY
+    ) : Response<PersonListResponse>
 }
