@@ -130,7 +130,10 @@ class SearchFragment : Fragment() {
         }
 
         searchViewModel.personSearchList.observe(viewLifecycleOwner) { resultList ->
-            binding.searchList.adapter = PeopleSearchAdapter(requireContext(), resultList.toMutableList())
+            binding.searchList.adapter = PeopleSearchAdapter(
+                    requireContext(),
+                    resultList.sortedBy { it.popularity }.toMutableList().asReversed()
+            )
         }
 
         searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
