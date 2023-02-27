@@ -92,11 +92,11 @@ class MovieDetailFragment : Fragment() {
         detailViewModel.movieCreditsList.observe(viewLifecycleOwner) { movieCredits ->
             binding.rvMovieCast.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvMovieCast.adapter = CastAdapter(requireContext(), movieCredits.cast, getString(R.string.movie_item_category))
+            binding.rvMovieCast.adapter = CastAdapter(requireContext(), movieCredits.cast.distinctBy { it.id }, getString(R.string.movie_item_category))
 
             binding.rvMovieCrew.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvMovieCrew.adapter = CrewAdapter(requireContext(), movieCredits.crew, getString(R.string.movie_item_category))
+            binding.rvMovieCrew.adapter = CrewAdapter(requireContext(), movieCredits.crew.distinctBy { it.id }, getString(R.string.movie_item_category))
         }
 
 

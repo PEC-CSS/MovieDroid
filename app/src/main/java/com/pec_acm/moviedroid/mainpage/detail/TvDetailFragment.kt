@@ -77,11 +77,11 @@ class TvDetailFragment : Fragment() {
         detailViewModel.tvCreditsList.observe(viewLifecycleOwner) { tvCredits ->
             binding.rvTvCast.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvTvCast.adapter = CastAdapter(requireContext(), tvCredits.cast, getString(R.string.tv_item_category))
+            binding.rvTvCast.adapter = CastAdapter(requireContext(), tvCredits.cast.distinctBy { it.id }, getString(R.string.tv_item_category))
 
             binding.rvTvCrew.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvTvCrew.adapter = CrewAdapter(requireContext(), tvCredits.crew, getString(R.string.tv_item_category))
+            binding.rvTvCrew.adapter = CrewAdapter(requireContext(), tvCredits.crew.distinctBy { it.id }, getString(R.string.tv_item_category))
         }
 
         return binding.root
