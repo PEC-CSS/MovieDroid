@@ -44,6 +44,11 @@ class MovieDetailFragment : Fragment() {
                 Glide.with(this).load("https://image.tmdb.org/t/p/w780" + movieDetail.backdrop_path)
                     .into(binding.image)
             }
+            binding.rating.text = buildString {
+                append("Rated: ")
+                append(String.format("%.2f", movieDetail.vote_average))
+                append("/10")
+            }
             var genres = ""
             for (i in movieDetail.genres) {
                 genres += i.name + "  "
