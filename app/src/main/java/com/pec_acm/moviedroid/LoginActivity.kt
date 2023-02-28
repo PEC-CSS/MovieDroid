@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -31,12 +32,15 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // TODO: https://medium.com/@anoopg87/set-start-destination-for-navhostfragment-dynamically-b072a29bfe49
+        val navController = findNavController(R.id.login_page_fragment_container)
+
         if (FirebaseAuth.getInstance().currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-        binding.signInButton.setOnClickListener { signInToGoogle() }
+        // binding.signInButton.setOnClickListener { signInToGoogle() }
 
         configureGoogleClient()
 
@@ -50,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.signInButton.setSize(SignInButton.SIZE_WIDE)
+        // binding.signInButton.setSize(SignInButton.SIZE_WIDE)
 
         firebaseAuth = FirebaseAuth.getInstance()
     }
