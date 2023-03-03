@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="@dimen/_20sdp"
+    app:cardElevation="@dimen/_4sdp">
+
+
+    <ImageView
+        android:id="@+id/imginwa_shimmer"
+        android:contentDescription="@string/movie_poster"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:background="@color/light_grey"
+        android:scaleType="fitXY" />
+
+</com.google.android.material.card.MaterialCardView>

@@ -40,6 +40,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val topMoviesAdapter = HorizontalAdapter(requireContext())
             topMoviesAdapter.setItemList(topMovies)
+            binding.shimmerTopMovies.visibility = View.GONE
             binding.rv250movies.adapter = topMoviesAdapter
         }
         viewModel.getTopTVShows()
@@ -52,6 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val topTVShowsAdapter = HorizontalAdapter(requireContext())
             topTVShowsAdapter.setItemList(topTVShows)
+            binding.shimmerTopTvShows.visibility = View.GONE
             binding.rvTop250tvshows.adapter = topTVShowsAdapter
         }
         viewModel.getPopularMovies()
@@ -64,6 +66,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val popularMoviesAdapter = HorizontalAdapter( requireContext())
             popularMoviesAdapter.setItemList(popularMovies)
+            binding.shimmerPopularMovies.visibility = View.GONE
             binding.rvMostPopularMovies.adapter = popularMoviesAdapter
         }
 
