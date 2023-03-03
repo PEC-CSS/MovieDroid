@@ -58,6 +58,7 @@
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -120,6 +121,7 @@
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -179,6 +181,7 @@
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
                 <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
         <androidx.recyclerview.widget.RecyclerView
@@ -217,23 +220,45 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
+        android:id="@+id/rl_popular_tv_shows"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_mostPopularTVShows"
-        android:orientation="horizontal"
         android:layout_marginVertical="@dimen/_5sdp"
-        tools:listitem="@layout/image_rv"
-        app:layout_constraintTop_toBottomOf="@id/ll_mostPopularTVshows"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_mostPopularTVshows">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_popular_tv_shows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_mostPopularTVShows"
+            android:orientation="horizontal"
+            tools:listitem="@layout/image_rv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_inTheaters"
-        app:layout_constraintTop_toBottomOf="@id/rv_mostPopularTVShows"
+        app:layout_constraintTop_toBottomOf="@id/rl_popular_tv_shows"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/_20sdp"
         >
@@ -254,23 +279,46 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
+
+    <RelativeLayout
+        android:id="@+id/rl_in_theaters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_inTheaters"
-        android:orientation="horizontal"
         android:layout_marginVertical="@dimen/_5sdp"
-        tools:listitem="@layout/image_rv"
-        app:layout_constraintTop_toBottomOf="@id/ll_inTheaters"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_inTheaters">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_in_theaters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_inTheaters"
+            android:orientation="horizontal"
+            tools:listitem="@layout/image_rv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_comingSoon"
-        app:layout_constraintTop_toBottomOf="@id/rv_inTheaters"
+        app:layout_constraintTop_toBottomOf="@id/rl_in_theaters"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/_20sdp">
     <TextView
@@ -290,17 +338,39 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
+        android:id="@+id/rl_upcoming"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_comingSoon"
-        android:orientation="horizontal"
         android:layout_marginVertical="@dimen/_5sdp"
-        tools:listitem="@layout/image_rv"
-        app:layout_constraintTop_toBottomOf="@id/ll_comingSoon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_comingSoon">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_upcoming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+                <include layout="@layout/image_rv_shimmer" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_comingSoon"
+            android:orientation="horizontal"
+            tools:listitem="@layout/image_rv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

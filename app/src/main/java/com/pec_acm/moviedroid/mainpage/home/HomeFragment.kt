@@ -80,6 +80,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val mostPopularTVShows = HorizontalAdapter(requireContext())
             mostPopularTVShows.setItemList(popularTVShows)
+            binding.shimmerPopularTvShows.visibility = View.GONE
             binding.rvMostPopularTVShows.adapter = mostPopularTVShows
         }
         viewModel.getNowPlayingMovies()
@@ -92,6 +93,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val nowPlayingMoviesAdapter = HorizontalAdapter(requireContext())
             nowPlayingMoviesAdapter.setItemList(nowPlayingMovies)
+            binding.shimmerInTheaters.visibility = View.GONE
             binding.rvInTheaters.adapter = nowPlayingMoviesAdapter
         }
 
@@ -105,6 +107,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             val upcomingMoviesAdapter = HorizontalAdapter(requireContext())
             upcomingMoviesAdapter.setItemList(upcomingMovies)
+            binding.shimmerUpcoming.visibility = View.GONE
             binding.rvComingSoon.adapter = upcomingMoviesAdapter
         }
 
