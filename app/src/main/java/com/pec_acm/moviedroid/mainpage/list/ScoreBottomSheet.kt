@@ -39,7 +39,7 @@ class ScoreBottomSheet(val listViewModel: ListViewModel, val listItem: ListItem)
         statusList.adapter = arrayAdapter
         statusList.setOnItemClickListener { adapterView, view, i, id ->
             if (10 == i) {
-                listViewModel.removeItem(FirebaseAuth.getInstance().uid!!, listItem)
+                listViewModel.setItemScore(FirebaseAuth.getInstance().uid!!, listItem.id, 0)
             } else if (10 - i != listItem.personalScore) {
                 listViewModel.setItemScore(FirebaseAuth.getInstance().uid!!, listItem.id, 10 - i)
             }
