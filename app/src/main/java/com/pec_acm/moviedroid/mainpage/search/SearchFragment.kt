@@ -99,6 +99,7 @@ class SearchFragment : Fragment() {
                     {
                         if(item.id==listItem.id)
                         {
+                            item.score = resultList[i].vote_average
                             listItem=item
                             break
                         }
@@ -117,6 +118,7 @@ class SearchFragment : Fragment() {
                     var listItem = resultList[i].toListItem()
                     for (item in user.userList) {
                         if (item.id == listItem.id) {
+                            item.score = resultList[i].vote_average
                             listItem = item
                             break
                         }

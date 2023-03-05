@@ -118,4 +118,15 @@ class DetailViewModel @Inject constructor(
             }
         }
     }
+
+    fun setItemRating(uid: String, itemId: Int, rating: Double)
+    {
+        viewModelScope.launch {
+            userReference.child(uid).get().addOnCompleteListener { ref ->
+                val user = ref.result.getValue(User::class.java)
+                user?.userList?.find { it.id == itemId }?.score = rating
+                userReference.child(uid).setValue(user)
+            }
+        }
+    }
 }
