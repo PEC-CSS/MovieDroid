@@ -62,6 +62,7 @@ class TvDetailFragment : Fragment() {
                     }
                 }
             }
+            detailViewModel.setItemRating(FirebaseAuth.getInstance().uid!!, tvDetail.id, tvDetail.vote_average)
         }
 
 

@@ -7,7 +7,7 @@ data class ListItem(
     val name : String="",
     val category : String="",
     val posterUrl : String="",
-    val score : Double= 0.0,
+    var score : Double= 0.0,
     var personalScore : Int = 0,
     var status : Int = 0,
     var watchedEpisodes : Int = 0

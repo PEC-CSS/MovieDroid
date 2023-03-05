@@ -68,6 +68,7 @@ class MovieDetailFragment : Fragment() {
                     }
                 }
             }
+            detailViewModel.setItemRating(FirebaseAuth.getInstance().uid!!, movieDetail.id, movieDetail.vote_average)
         }
         binding.expandCollapse.setOnClickListener {
             expandedText = !expandedText
