@@ -52,6 +52,7 @@ class MovieDetailFragment : Fragment() {
             binding.genre.text = genres
 
             binding.overview.text = movieDetail.overview
+            binding.overview.maxLines = 4
             detailViewModel.setFavItem(FirebaseAuth.getInstance().uid!!, movieDetail.toListItem())
             detailViewModel.isFav.observe(viewLifecycleOwner) { fav ->
                 if (fav) {

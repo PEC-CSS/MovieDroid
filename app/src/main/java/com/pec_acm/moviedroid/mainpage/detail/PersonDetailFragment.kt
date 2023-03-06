@@ -68,6 +68,7 @@ class PersonDetailFragment : Fragment() {
                 }
             } else { binding.deadDay.visibility = View.GONE }
             binding.overview.text = personDetail.biography
+            binding.overview.maxLines = 4
         }
 
         binding.expandCollapse.setOnClickListener {

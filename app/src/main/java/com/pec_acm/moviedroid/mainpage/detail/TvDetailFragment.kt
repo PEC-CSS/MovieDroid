@@ -23,6 +23,8 @@ class TvDetailFragment : Fragment() {
     private val args: TvDetailFragmentArgs by navArgs()
     lateinit var binding: FragmentTvDetailBinding
 
+    var expandedText: Boolean = false
+
     @Suppress("UNREACHABLE_CODE")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,7 @@ class TvDetailFragment : Fragment() {
             }
             binding.genre.text = genres
             binding.overview.text = tvDetail.overview
+            binding.overview.maxLines = 4
             detailViewModel.setFavItem(FirebaseAuth.getInstance().uid!!, tvDetail.toListItem())
             detailViewModel.isFav.observe(viewLifecycleOwner) { fav ->
                 if (fav) {
@@ -70,6 +73,17 @@ class TvDetailFragment : Fragment() {
             binding.videoRcv.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = VideoAdapter(requireContext(),tvVideo.results)
+            }
+        }
+
+        binding.expandCollapse.setOnClickListener {
+            expandedText = !expandedText
+            if(expandedText){
+                binding.overview.maxLines = Int.MAX_VALUE
+                binding.expandCollapse.rotation = 180f
+            } else {
+                binding.overview.maxLines = 4
+                binding.expandCollapse.rotation = 0f
             }
         }
 
