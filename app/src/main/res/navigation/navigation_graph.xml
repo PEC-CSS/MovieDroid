@@ -113,5 +113,11 @@
         <argument
             android:name="itemID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_personDetailFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_personDetailFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>
