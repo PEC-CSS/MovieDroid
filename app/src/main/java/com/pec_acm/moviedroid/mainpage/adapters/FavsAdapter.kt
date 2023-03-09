@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.App
-import com.pec_acm.moviedroid.ProfileActivity
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.detail.PersonDetailFragmentDirections
@@ -51,10 +50,6 @@ class FavsAdapter(val context: Context, private val favList: MutableList<ListIte
                 itemID?.let {
                     val app = (context.applicationContext as App)
                     if (app.isOnline) {
-                        if (context is ProfileActivity)
-                        {
-                            // TODO: make fav list in profile activity clickable
-                        }
                         if (context is FragmentContextWrapper)
                         {
                             if (itemType == "movie")
