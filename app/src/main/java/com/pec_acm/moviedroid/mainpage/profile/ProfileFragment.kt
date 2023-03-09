@@ -63,7 +63,7 @@ class ProfileFragment : Fragment(), OnChartValueSelectedListener {
                 }
                 binding.favListRv.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.favListRv.adapter = FavsAdapter(requireContext(), favs)
+                binding.favListRv.adapter = FavsAdapter(requireContext(), favs, "ProfileFragment")
             }
             profileViewModel.listItemsCounts.observe(viewLifecycleOwner) {values ->
                 if (values.sum() == 0)
