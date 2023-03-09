@@ -2,12 +2,12 @@ package com.pec_acm.moviedroid.mainpage.profile
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.github.mikephil.charting.animation.Easing
@@ -150,7 +150,18 @@ class ProfileFragment : Fragment(), OnChartValueSelectedListener {
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
-        Log.v("asdf", entries[h!!.x.toInt()].label)
+        var toPageNo = 0
+        when (entries[h!!.x.toInt()].label)
+        {
+            resources.getString(R.string.watching_status) -> toPageNo = 1
+            resources.getString(R.string.completed_status) -> toPageNo = 2
+            resources.getString(R.string.on_hold_status) -> toPageNo = 3
+            resources.getString(R.string.dropped_status) -> toPageNo = 4
+            resources.getString(R.string.plan_to_watch_status) -> toPageNo = 5
+        }
+        findNavController().navigate(
+            ProfileFragmentDirections.actionProfileFragmentToListFragment(toPageNo)
+        )
     }
 
     override fun onNothingSelected() {

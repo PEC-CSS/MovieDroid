@@ -49,6 +49,10 @@
         android:name="com.pec_acm.moviedroid.mainpage.list.ListFragment"
         android:label="Your List"
         tools:layout="@layout/fragment_list">
+        <argument
+            android:name="toPageNo"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_listFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
