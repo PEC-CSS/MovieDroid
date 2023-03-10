@@ -1,67 +1,71 @@
-package com.pec_acm.moviedroid
+package com.pec_acm.moviedroid.mainpage.profile
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.firebase.auth.FirebaseAuth
-import com.pec_acm.moviedroid.databinding.ActivityProfileBinding
+import com.pec_acm.moviedroid.MainActivity
+import com.pec_acm.moviedroid.R
+import com.pec_acm.moviedroid.databinding.FragmentProfileBinding
 import com.pec_acm.moviedroid.mainpage.adapters.FavsAdapter
-import com.pec_acm.moviedroid.mainpage.profile.ProfileViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
-class ProfileActivity : AppCompatActivity() {
+class ProfileFragment : Fragment(), OnChartValueSelectedListener {
 
     private lateinit var profileViewModel: ProfileViewModel
-    private lateinit var binding: ActivityProfileBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+    lateinit var binding: FragmentProfileBinding
+    private val entries = ArrayList<PieEntry>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        (activity as MainActivity).hideBottomNavigation()
         profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        setContentView(binding.root)
 
         val user = FirebaseAuth.getInstance().currentUser
         profileViewModel.setUserRatingValues(user!!.uid)
         profileViewModel.setListItemsCounts(user!!.uid)
         profileViewModel.setFavsList(user!!.uid)
 
-        //update the info
         if (user != null) {
             binding.textName.text = user.displayName
             binding.textEmail.text = user.email
 
-             Glide.with(this)
-            .load(user.photoUrl)
-            .placeholder(R.drawable.ic_baseline_account_circle_24)
-            .into(binding.imgProfile)
+            Glide.with(this)
+                .load(user.photoUrl)
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .into(binding.imgProfile)
 
-            profileViewModel.userFavItems.observe(this) {favs ->
-                if (favs.size == 0)
-                {
+            profileViewModel.userFavItems.observe(viewLifecycleOwner) { favs ->
+                if (favs.size == 0) {
                     binding.noFavsText.visibility = View.VISIBLE
-                }
-                else
-                {
+                } else {
                     binding.noFavsText.visibility = View.INVISIBLE
                 }
                 binding.favListRv.layoutManager =
-                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                binding.favListRv.adapter = FavsAdapter(this, favs)
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.favListRv.adapter = FavsAdapter(requireContext(), favs, "ProfileFragment")
             }
-
-            profileViewModel.listItemsCounts.observe(this) {values ->
+            profileViewModel.listItemsCounts.observe(viewLifecycleOwner) {values ->
                 if (values.sum() == 0)
                 {
                     binding.pieChart.visibility = View.INVISIBLE
@@ -89,7 +93,6 @@ class ProfileActivity : AppCompatActivity() {
                 binding.pieChart.legend.textColor = binding.MovieRateText.currentTextColor
                 binding.pieChart.legend.textSize = 15f
 
-                val entries = ArrayList<PieEntry>()
                 val labelStrings = arrayOf(
                     resources.getString(R.string.watching_status),
                     resources.getString(R.string.completed_status),
@@ -105,6 +108,7 @@ class ProfileActivity : AppCompatActivity() {
                     resources.getColor(R.color.grey)
                 )
                 val colors = ArrayList<Int>()
+                entries.clear()
                 for (idx in 0..4)
                 {
                     if (values[idx] != 0)
@@ -129,21 +133,38 @@ class ProfileActivity : AppCompatActivity() {
                 binding.pieChart.data = data
                 binding.pieChart.invalidate()
                 binding.pieChart.animateY(1400, Easing.EaseInOutQuad)
+                binding.pieChart.setOnChartValueSelectedListener(this)
             }
-            profileViewModel.overallRating.observe(this) {rate ->
+            profileViewModel.overallRating.observe(viewLifecycleOwner) {rate ->
                 binding.OverallRateText.text = rate
             }
-            profileViewModel.tvRating.observe(this) {rate ->
+            profileViewModel.tvRating.observe(viewLifecycleOwner) {rate ->
                 binding.TVRateText.text = rate
             }
-            profileViewModel.movieRating.observe(this) { rate ->
+            profileViewModel.movieRating.observe(viewLifecycleOwner) { rate ->
                 binding.MovieRateText.text = rate
             }
         }
 
-        binding.backBtnProfile.setOnClickListener {
-            finish()
+        return binding.root
+    }
+
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        var toPageNo = 0
+        when (entries[h!!.x.toInt()].label)
+        {
+            resources.getString(R.string.watching_status) -> toPageNo = 1
+            resources.getString(R.string.completed_status) -> toPageNo = 2
+            resources.getString(R.string.on_hold_status) -> toPageNo = 3
+            resources.getString(R.string.dropped_status) -> toPageNo = 4
+            resources.getString(R.string.plan_to_watch_status) -> toPageNo = 5
         }
+        findNavController().navigate(
+            ProfileFragmentDirections.actionProfileFragmentToListFragment(toPageNo)
+        )
+    }
+
+    override fun onNothingSelected() {
 
     }
 }

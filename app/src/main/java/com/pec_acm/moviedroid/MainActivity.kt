@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //Implementing Bottom Navigation View
-        val navController = findNavController(R.id.main_page_fragment_container)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_page_fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
 
         binding.bottomNavBar.setupWithNavController(navController)
 
@@ -77,7 +78,9 @@ class MainActivity : AppCompatActivity() {
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .into(binding.circularImageview)
 
-        _openProfileActivity()
+        binding.circleCard.setOnClickListener {
+            navController.navigate(R.id.profileFragment)
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in bottomNavDestinations) {
@@ -96,9 +99,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.item_move_to_profile_page -> {
-                    //move to profile activity
-                    val intent = Intent(this, ProfileActivity::class.java)
-                    startActivity(intent)
+                    //move to profile fragment
+                    navController.navigate(R.id.profileFragment)
                 }
 
                 R.id.item_move_to_about_page -> {
@@ -131,13 +133,6 @@ class MainActivity : AppCompatActivity() {
         logoutObserver.observe(this) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        }
-    }
-
-    private fun _openProfileActivity() {
-        binding.circleCard.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
         }
     }
 

@@ -12,13 +12,12 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.pec_acm.moviedroid.App
-import com.pec_acm.moviedroid.ProfileActivity
 import com.pec_acm.moviedroid.R
 import com.pec_acm.moviedroid.firebase.ListItem
 import com.pec_acm.moviedroid.mainpage.detail.PersonDetailFragmentDirections
-import dagger.hilt.android.internal.managers.ViewComponentManager.FragmentContextWrapper
+import com.pec_acm.moviedroid.mainpage.profile.ProfileFragmentDirections
 
-class FavsAdapter(val context: Context, private val favList: MutableList<ListItem>) :
+class FavsAdapter(val context: Context, private val favList: MutableList<ListItem>, val from: String) :
     Adapter<FavsAdapter.FavViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavViewHolder {
@@ -43,19 +42,15 @@ class FavsAdapter(val context: Context, private val favList: MutableList<ListIte
     }
 
     inner class FavViewHolder(itemView: View, var itemID: Int? = null, var itemType: String? = null) : ViewHolder(itemView) {
-        val fNAme = itemView.findViewById<TextView>(R.id.tvCreditName)
-        val fImage = itemView.findViewById<ImageView>(R.id.imgCredit)
+        val fNAme: TextView = itemView.findViewById(R.id.tvCreditName)
+        val fImage: ImageView = itemView.findViewById(R.id.imgCredit)
 
         init {
             itemView.setOnClickListener {
                 itemID?.let {
                     val app = (context.applicationContext as App)
                     if (app.isOnline) {
-                        if (context is ProfileActivity)
-                        {
-                            // TODO: make fav list in profile activity clickable
-                        }
-                        if (context is FragmentContextWrapper)
+                        if (from == "PersonDetailFragment")
                         {
                             if (itemType == "movie")
                             {
@@ -65,6 +60,17 @@ class FavsAdapter(val context: Context, private val favList: MutableList<ListIte
                             } else if (itemType == "tv") {
                                 itemView.findNavController().navigate(
                                     PersonDetailFragmentDirections.actionPersonDetailFragmentToTvDetailFragment(it)
+                                )
+                            }
+                        } else if (from == "ProfileFragment") {
+                            if (itemType == "movie")
+                            {
+                                itemView.findNavController().navigate(
+                                    ProfileFragmentDirections.actionProfileFragmentToMovieDetailFragment(it)
+                                )
+                            } else if (itemType == "tv") {
+                                itemView.findNavController().navigate(
+                                    ProfileFragmentDirections.actionProfileFragmentToTvDetailFragment(it)
                                 )
                             }
                         }

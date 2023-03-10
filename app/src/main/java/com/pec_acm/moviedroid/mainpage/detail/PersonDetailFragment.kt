@@ -96,7 +96,7 @@ class PersonDetailFragment : Fragment() {
             knownFor.reverse()
             binding.rvPersonCredits.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvPersonCredits.adapter = FavsAdapter(requireContext(), knownFor)
+            binding.rvPersonCredits.adapter = FavsAdapter(requireContext(), knownFor, "PersonDetailFragment")
         }
         return binding.root
     }

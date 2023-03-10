@@ -49,6 +49,10 @@
         android:name="com.pec_acm.moviedroid.mainpage.list.ListFragment"
         android:label="Your List"
         tools:layout="@layout/fragment_list">
+        <argument
+            android:name="toPageNo"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_listFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
@@ -118,6 +122,22 @@
             app:destination="@id/tvDetailFragment" />
         <action
             android:id="@+id/action_personDetailFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.pec_acm.moviedroid.mainpage.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.platform.MaterialFadeThrough
@@ -13,6 +14,7 @@ import com.pec_acm.moviedroid.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
+    private val args: ListFragmentArgs by this.navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,12 @@ class ListFragment : Fragment() {
             }
             tab.text = tabText
         }.attach()
+
+        if (args.toPageNo != 0)
+        {
+            listPager.currentItem = args.toPageNo
+        }
+
         return view
     }
 }
